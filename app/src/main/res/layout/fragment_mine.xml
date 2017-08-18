@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@drawable/bg_test" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_test"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:src="@mipmap/logo_bai"
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="  乔 治 金 翰"
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="15dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/menu" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/material_white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/material_amber_A700"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EDEDED">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@mipmap/service_bg" />
+
+            <RelativeLayout
+                android:id="@+id/mine_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/bg_radius_10">
+
+                <TextView
+                    android:id="@+id/mine_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:text="Taylor Swift"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_18" />
+
+                <TextView
+                    android:id="@+id/mine_tv_idiograph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_tv_name"
+                    android:layout_centerHorizontal="true"
+                    android:padding="4dp"
+                    android:text="唯音乐与美酒不可辜负"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/mine_tv_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_tv_idiograph"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/zhanghuyue"
+                    android:text="账户余额" />
+
+                <TextView
+                    android:id="@+id/mine_tv_earnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_tv_idiograph"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/wodeshouyi"
+                    android:text="我的会员" />
+
+                <TextView
+                    android:id="@+id/mine_tv_gongyi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/mine_tv_idiograph"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="12dp"
+                    android:drawablePadding="8dp"
+                    android:drawableTop="@mipmap/gongyijin"
+                    android:text="公益金" />
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mine_rl"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_radius_10"
+                android:elevation="10dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mine_tv_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:drawableLeft="@mipmap/wodedingdan"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@mipmap/jiantou"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="我的订单"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginLeft="48dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/mine_tv_commission_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@mipmap/tichengdingdan"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@mipmap/jiantou"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="提成订单"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginLeft="48dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/mine_tv_rank"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@mipmap/paihangbang"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@mipmap/jiantou"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="排行榜"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginLeft="48dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/mine_tv_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@mipmap/wodeshoucang"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@mipmap/jiantou"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="我的收藏"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginLeft="48dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/mine_tv_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@mipmap/wodeshoucang"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@mipmap/jiantou"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="我的消息"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginLeft="48dp"
+                    android:background="@color/line" />
+
+                <TextView
+                    android:id="@+id/mine_tv_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:drawableLeft="@mipmap/shezhi"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@mipmap/jiantou"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="设置"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/mine_iv_head"
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:layout_alignTop="@id/mine_rl"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-44dp"
+                android:src="@mipmap/head" />
+
+            <ImageView
+                android:id="@+id/mine_iv_information"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignTop="@id/mine_rl"
+                android:layout_marginRight="28dp"
+                android:layout_marginTop="-26dp"
+                android:layout_toLeftOf="@id/mine_iv_head"
+                android:background="@mipmap/edit" />
+
+            <ImageView
+                android:id="@+id/mine_iv_service"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_alignTop="@id/mine_rl"
+                android:layout_marginLeft="28dp"
+                android:layout_marginTop="-26dp"
+                android:layout_toRightOf="@id/mine_iv_head"
+                android:background="@mipmap/lianxikefu" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@drawable/bg_test" />
+
+    <include layout="@layout/base_title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/material_white"
+        android:gravity="center_horizontal"
+        >
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/duigou"
+            android:layout_marginTop="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支付完成"
+            android:textSize="@dimen/text_16"
+            android:textColor="#000"
+            android:layout_marginTop="12dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="您已经购买成功，我们会尽快发货"
+            android:textSize="@dimen/text_14"
+            android:textColor="@color/material_textBlack_secondaryText"
+            android:padding="12dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        >
+        <TextView
+            android:id="@+id/activity_payfinish_back"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_wine"
+            android:gravity="center"
+            android:text="返回首页"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/activity_payfinish_again"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_btn_quit"
+            android:gravity="center"
+            android:text="再次购买"
+            android:textColor="@color/material_white"
+            android:textSize="@dimen/text_16" />
+    </LinearLayout>
+
+</LinearLayout>

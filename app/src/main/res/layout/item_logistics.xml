@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   >
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
+
+    <View
+        android:id="@+id/item_logistics_line1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="4.5dp"
+        android:background="@color/line" />
+    <ImageView
+        android:id="@+id/item_logistics_point"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/quanquan_liang" />
+    <View
+        android:id="@+id/item_logistics_line2"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="4.5dp"
+        android:background="@color/line" />
+</LinearLayout>
+
+
+    <TextView
+        android:id="@+id/item_logistics_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:autoLink="phone"
+        android:paddingTop="12dp"
+        android:text="[北京市] 在北京丰台去科技园诺德中心3号楼 派件员：李明1733162552正在为您派件"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/item_logistics_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_logistics_content"
+        android:layout_marginLeft="16dp"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:text="2017-07-17 13:50:31"
+        android:textSize="@dimen/text_14" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:background="@color/line" />
+</RelativeLayout>

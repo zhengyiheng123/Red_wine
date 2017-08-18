@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+   android:padding="12dp"
+    android:background="@mipmap/yinyingbeijing"
+   >
+
+    <ImageView
+        android:id="@+id/chateau_iv"
+        android:layout_width="118dp"
+        android:layout_height="82dp"
+        android:layout_margin="8dp"
+        android:scaleType="fitXY"
+         />
+
+
+    <TextView
+        android:id="@+id/chateau_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="拉菲古堡"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/material_amber_A700"
+        android:textSize="@dimen/text_16"
+        android:layout_toRightOf="@id/chateau_iv"
+        android:layout_alignTop="@id/chateau_iv"
+        />
+
+    <TextView
+        android:id="@+id/chateau_tv_title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chateau_tv_title"
+        android:layout_toRightOf="@id/chateau_iv"
+        android:text="Chateau Lfite Rothschild"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/material_amber_A100"
+        android:textSize="@dimen/text_14" />
+
+
+    <TextView
+        android:id="@+id/chateau_tv_introduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chateau_tv_title1"
+        android:layout_toRightOf="@id/chateau_iv"
+        android:text="拉菲古堡位于把法国波尔多上没大家看了拉菲古堡位于把法国波尔多上没大家看了"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/material_textBlack_black"
+        android:textSize="@dimen/text_14" />
+
+</RelativeLayout>

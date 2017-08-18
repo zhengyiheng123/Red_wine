@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@drawable/bg_test" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_test"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/detail_back"
+            android:layout_width="15dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@mipmap/back"
+            android:gravity="center_vertical"
+            android:text="              "
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_16" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:src="@mipmap/logo_bai" />
+
+            <TextView
+                android:id="@+id/detail_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:paddingLeft="4dp"
+                android:text="详情"
+                android:textColor="@color/material_textWhite_text"
+                android:textSize="@dimen/text_16" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/detail_collect"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/pingjia_weixuanzhong" />
+
+        <ImageView
+            android:id="@+id/detail_share"
+            android:layout_width="12dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/share" />
+    </LinearLayout>
+
+    <WebView
+        android:id="@+id/detail_wv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </WebView>
+</LinearLayout>

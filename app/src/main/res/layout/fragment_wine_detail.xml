@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <com.xyd.red_wine.view.NestedScrollWebView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/wine_detail_wv"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+
+        android:layout_height="match_parent">
+    </com.xyd.red_wine.view.NestedScrollWebView>

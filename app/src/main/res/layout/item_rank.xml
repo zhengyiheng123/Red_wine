@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/rank_bg"
+   >
+
+    <ImageView
+        android:id="@+id/rank_iv"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="6dp"
+        android:src="@mipmap/head" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/rank_iv">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rank_tv_name"
+            android:text="Taylor Swift"
+            android:textSize="@dimen/text_16"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rank_tv_pay"
+            android:text="公益捐助20000元"
+            android:paddingTop="4dp"
+            android:textSize="@dimen/text_16"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/rank_tv_ranking"
+        android:layout_width="26dp"
+        android:layout_height="32dp"
+        android:text="1"
+        android:textSize="@dimen/text_14"
+        android:paddingTop="2dp"
+        android:textColor="@color/material_textWhite_black"
+        android:gravity="center_horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="24dp"
+        android:background="@mipmap/rank_rank"
+         />
+
+</RelativeLayout>

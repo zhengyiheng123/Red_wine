@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_test"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@drawable/bg_test" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_test"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:src="@mipmap/logo_bai"
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="  乔 治 金 翰"
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_14" />
+
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="15dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="12dp"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/menu" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:scaleType="matrix"
+                android:background="@mipmap/baiseguangyun" />
+
+            <ImageView
+                android:id="@+id/service_iv_steward"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-12dp"
+                android:scaleType="matrix"
+                android:background="@mipmap/hongjiuguanjia" />
+
+            <ImageView
+                android:id="@+id/service_iv_generalize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-12dp"
+                android:scaleType="matrix"
+                android:background="@mipmap/tuiguang" />
+
+            <ImageView
+                android:id="@+id/service_iv_market"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-12dp"
+                android:scaleType="matrix"
+                android:background="@mipmap/shangchang" />
+
+            <ImageView
+                android:id="@+id/service_iv_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="matrix"
+                android:layout_marginTop="-12dp"
+                android:background="@mipmap/zixun" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-6dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/service_iv_primeur"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="matrix"
+                    android:background="@mipmap/qijiu" />
+
+                <ImageView
+                    android:id="@+id/service_iv_activity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="matrix"
+
+                    android:background="@mipmap/huodong" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

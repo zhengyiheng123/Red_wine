@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingRight="2dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/pop_tv_order"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:drawableLeft="@mipmap/wodedingdan"
+        android:drawablePadding="15dp"
+        android:drawableRight="@mipmap/jiantou"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:background="#fff"
+        android:paddingRight="20dp"
+        android:text="我的订单"
+        android:textColor="@color/material_textBlack_black"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/pop_tv_order1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#fff"
+        android:drawableLeft="@mipmap/tichengdingdan"
+        android:drawablePadding="15dp"
+        android:drawableRight="@mipmap/jiantou"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="提成订单"
+        android:textColor="@color/material_textBlack_black"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/pop_tv_rank"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:drawableLeft="@mipmap/paihangbang"
+        android:drawablePadding="12dp"
+        android:drawableRight="@mipmap/jiantou"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="#fff"
+        android:text="排行榜"
+        android:textColor="@color/material_textBlack_black"
+        android:textSize="@dimen/text_14" />
+    <TextView
+        android:id="@+id/pop_tv_collection"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:drawableLeft="@mipmap/wodeshoucang"
+        android:drawablePadding="13dp"
+        android:drawableRight="@mipmap/jiantou"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="#fff"
+        android:text="我的收藏"
+        android:textColor="@color/material_textBlack_black"
+        android:textSize="@dimen/text_14" />
+</LinearLayout>

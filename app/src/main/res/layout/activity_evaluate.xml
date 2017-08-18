@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/fake_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/statusbar_view_height"
+        android:background="@drawable/bg_test" />
+
+    <include layout="@layout/base_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_radius_10"
+        android:elevation="5dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/evaluate_iv"
+                android:layout_width="118dp"
+                android:layout_height="82dp"
+                android:layout_margin="8dp"
+                android:scaleType="fitXY"
+               />
+
+            <TextView
+                android:id="@+id/evaluate_nums"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/evaluate_iv"
+                android:layout_marginRight="12dp"
+                android:text="x1" />
+
+            <TextView
+                android:id="@+id/evaluate_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/evaluate_iv"
+                android:layout_toLeftOf="@id/evaluate_nums"
+                android:layout_toRightOf="@id/evaluate_iv"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="法国波尔兰葡萄酒 750ml"
+                android:textColor="@color/material_amber_A700"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/evaluate_tv_title1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/evaluate_tv_title"
+                android:layout_toRightOf="@id/evaluate_iv"
+                android:text="WINE BOTTLE MOCKUP"
+                android:textColor="@color/material_amber_A100"
+                android:textSize="@dimen/text_14" />
+
+
+            <TextView
+                android:id="@+id/evaluate_item_tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/evaluate_tv_title1"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/evaluate_iv"
+                android:text="￥200.00"
+                android:textColor="@color/material_textBlack_black"
+                android:textSize="@dimen/text_14" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/line" />
+
+        <RadioGroup
+            android:id="@+id/evaluate_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/evaluate_good"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/check_good"
+                android:gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="好评"
+                android:textColor="@color/check_good" />
+
+            <RadioButton
+                android:id="@+id/evaluate_middle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/check_middle"
+                android:gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="中评"
+                android:textColor="@color/check_good" />
+
+            <RadioButton
+                android:id="@+id/evaluate_bad"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawablePadding="4dp"
+                android:drawableTop="@drawable/check_bad"
+                android:gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="差评"
+                android:textColor="@color/check_good" />
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/line" />
+
+        <EditText
+            android:id="@+id/evaluate_edt"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="#00000000"
+            android:gravity="start"
+            android:hint="说说你的期待吧！说说你的体验，分享一下吧！"
+            android:maxLength="120"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="12dp"
+            android:textColor="@color/material_textBlack_black"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/evaluate_add_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/shangchuantupian"
+            android:drawablePadding="4dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:text="添加照片"
+            android:textColor="@color/material_textBlack_black"
+            android:textSize="@dimen/text_14" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="16dp"
+            android:paddingTop="6dp"
+            android:id="@+id/evaluate_rv_image"
+            >
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/evaluate_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_btn_quit"
+        android:paddingBottom="8dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:paddingTop="8dp"
+        android:text="发布"
+        android:textColor="@color/material_textWhite_black" />
+</LinearLayout>

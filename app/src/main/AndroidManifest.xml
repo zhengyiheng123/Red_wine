@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xyd.red_wine">
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+
+    <!--用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <!--用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!--获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <!--用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    <!--这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <!--用于访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <!--用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+    <!--写入扩展存储，向扩展卡写入数据，用于写入缓存定位数据-->
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--短信权限-->
+    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <!--电话权限-->
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+
+
+    <uses-permission android:name="xyd.com.car.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- ⽤于开启 debug 版本的应⽤在6.0 系统上 层叠窗⼝权限 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_LOGS" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/logoooo"
+        android:label="酒瀚"
+        android:roundIcon="@mipmap/logoooo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.xyd.red_wine"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".login.StartupPageActivity"
+            android:theme="@style/start">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login.LoginActivity"/>
+        <activity android:name=".main.MainActivity" />
+        <service android:name=".version.VersionUpdateService"/>
+        <!--注册界面-->
+        <activity android:name=".register.RegisterActivity" />
+        <!--设置界面-->
+        <activity android:name=".setting.SettingActivity" />
+        <!--忘记密码-->
+        <activity android:name=".forgetpassword.ForgetPasswordActivity" />
+        <!--公益金-->
+        <activity android:name=".payments.PaymentsActivity" />
+        <!--服务——红酒管家-->
+        <activity android:name=".winesteward.StewardActivity" />
+        <!--服务——活动-->
+        <activity android:name=".activity.ActivityActivity" />
+        <!--服务——期酒-->
+        <activity android:name=".primeur.PrimeurActivity" />
+        <!--服务——商城-->
+        <activity android:name=".store.StoreActivity" />
+        <!--服务——资讯-->
+        <activity android:name=".suggest.SuggestActivity" />
+        <!--排行榜-->
+        <activity android:name=".rank.RankActivity" />
+        <!--收益-->
+        <activity android:name=".member.EarningActivity" />
+        <!--提成订单-->
+        <activity android:name=".commissionorder.CommissionOrderActivity" />
+        <!--推广-->
+        <activity android:name=".generalize.GeneralizeActivity" />
+        <!--我的订单-->
+        <activity android:name=".order.OrderActivity" />
+        <!--收藏-->
+        <activity android:name=".collect.CollectActivity" />
+        <!--账户余额-->
+        <activity android:name=".balance.BalanceActivity" />
+        <!--个人信息-->
+        <activity
+            android:name=".personinformation.InfromationActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <!--新闻详情-->
+        <activity android:name=".newsdetail.DetailActivity" />
+        <!--小酒-->
+        <activity
+            android:name=".winedetail.WineDetailActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <!--确认订单-->
+        <activity
+            android:name=".commitorder.CommitOrderActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <!--视频播放-->
+        <activity
+            android:name=".video.VideoActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true" />
+        <!--物流-->
+        <activity android:name=".logistics.LogisticsActivity" />
+        <!--评价-->
+        <activity android:name=".evaluate.EvaluateActivity" />
+
+        <!--收货地址-->
+        <activity android:name=".address.AddressActivity" />
+        <!--收货地址-->
+        <activity android:name=".address.AddressEditActivity" />
+        <!--加载网页-->
+        <activity android:name=".main.home.WebViewActivity" />
+        <!--微信支付回掉界面-->
+        <activity android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+        <activity android:name=".kefu.ChatActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|navigation"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <!--支付完成界面-->
+        <activity android:name=".commitorder.PayFinishActivity" />
+        <!--充值提现page-->
+        <activity android:name=".balance.ChongzhiActivity" />
+        <!--充值提现page-->
+        <activity android:name=".balance.TixianActivity" />
+        <!--充值提现记录-->
+        <activity android:name=".balance.RecordActivity" />
+        <!--我的消息-->
+        <activity android:name=".message.MessageActivity" />
+        <!--我的消息-->
+        <activity android:name=".message.MessageDetailActivity" />
+        <!--站内信-->
+        <activity android:name=".member.MemberActivity" />
+
+        <!--第三方登录  分享-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="597698107f2c744279002719"></meta-data>
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--           支付宝支付       -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"></activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1106221519" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.umeng.socialize.editorpage.ShareActivity"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.UMDefault" />
+    </application>
+
+</manifest>

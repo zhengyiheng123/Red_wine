@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff">
+    <RadioGroup
+        android:id="@+id/wine_evaluate_rg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginLeft="12dp"
+        android:background="@drawable/bg_bottom_line"
+        android:paddingTop="8dp">
+
+        <RadioButton
+            android:id="@+id/wine_evaluate_rg_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/check_suggest"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="全部"
+            android:textColor="@color/check_suggest"
+            android:textSize="@dimen/text_14" />
+
+        <RadioButton
+            android:id="@+id/wine_evaluate_rg_hao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/check_suggest"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="好评"
+            android:textColor="@color/check_suggest"
+            android:textSize="@dimen/text_14" />
+
+        <RadioButton
+            android:id="@+id/wine_evaluate_rg_zhong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="24dp"
+            android:layout_weight="1"
+            android:background="@drawable/check_suggest"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="中评"
+            android:textColor="@color/check_suggest"
+            android:textSize="@dimen/text_14" />
+
+        <RadioButton
+            android:id="@+id/wine_evaluate_rg_cha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/check_suggest"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:text="差评"
+            android:textColor="@color/check_suggest"
+            android:textSize="@dimen/text_14" />
+    </RadioGroup>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/wine_evaluate_rv"
+        android:layout_height="match_parent">
+
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>
