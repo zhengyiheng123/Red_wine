@@ -103,7 +103,7 @@ public class RecordActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         adapter = new RecordAdapter(list, this);
         adapter.setOnLoadMoreListener(this, recordRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         recordRv.setAdapter(adapter);
 
     }

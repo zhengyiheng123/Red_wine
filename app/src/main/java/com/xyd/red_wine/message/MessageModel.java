@@ -37,7 +37,7 @@ public class MessageModel {
          * give_time : 1502774223
          * message : 会员【靓仔】的订单15027742083186171支付金额【0.01】，支付方式【支付宝APP支付】,支付时间【2017-07-12 17:42:20】
          */
-
+        private int is_reply;
         private int r_id;
         private int u_id;
         private int r_type;
@@ -50,6 +50,14 @@ public class MessageModel {
         private String pay_type;
         private long give_time;
         private String message;
+
+        public int getIs_reply() {
+            return is_reply;
+        }
+
+        public void setIs_reply(int is_reply) {
+            this.is_reply = is_reply;
+        }
 
         public int getR_id() {
             return r_id;

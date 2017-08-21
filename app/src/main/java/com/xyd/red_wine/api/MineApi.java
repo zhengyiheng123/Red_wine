@@ -6,6 +6,7 @@ import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.commitorder.AliModel;
 import com.xyd.red_wine.commitorder.WxModel;
+import com.xyd.red_wine.main.mine.MineFragment;
 import com.xyd.red_wine.member.EarningModel;
 import com.xyd.red_wine.payments.PaymentsModel;
 import com.xyd.red_wine.personinformation.InfromationModel;
@@ -114,5 +115,21 @@ public interface MineApi {
     Observable<BaseModel<CashValueModel>> cash_value(@Query("page") int page,
                                                      @Query("num")int num);
 
+    /**
+     * 发送站内信
+     */
+    @POST("remind/add")
+    Observable<BaseModel> sendMessage(@Query("pid")int pid,@Query("r_con")String r_con);
 
+    /**
+     * 回复站内信
+     */
+    @POST("remind/reply")
+    Observable<BaseModel> replyMessage(@Query("r_id")int r_id,@Query("r_con")String r_con);
+
+    /**
+     * 是否有未读消息
+     */
+    @POST("user/s_index")
+    Observable<BaseModel<MineFragment.Is_Read>> s_index();
 }

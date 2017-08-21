@@ -3,14 +3,20 @@ package com.xyd.red_wine.main.mine;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
 import com.xyd.red_wine.R;
+import com.xyd.red_wine.api.MineApi;
 import com.xyd.red_wine.balance.BalanceActivity;
+import com.xyd.red_wine.base.BaseApi;
 import com.xyd.red_wine.base.BaseFragment;
+import com.xyd.red_wine.base.BaseModel;
+import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.PublicStaticData;
+import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.collect.CollectActivity;
 import com.xyd.red_wine.commissionorder.CommissionOrderActivity;
 import com.xyd.red_wine.member.EarningActivity;
@@ -22,9 +28,11 @@ import com.xyd.red_wine.payments.PaymentsActivity;
 import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.personinformation.InformationMessage;
 import com.xyd.red_wine.personinformation.InfromationActivity;
+import com.xyd.red_wine.personinformation.InfromationModel;
 import com.xyd.red_wine.rank.RankActivity;
 import com.xyd.red_wine.setting.SettingActivity;
 import com.xyd.red_wine.utils.LogUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -68,8 +76,10 @@ public class MineFragment extends BaseFragment {
     TextView mineTvBalance;
     @Bind(R.id.mine_tv_earnings)
     TextView mineTvEarnings;
+    @Bind(R.id.view_circle)
+    View view_circle;
     @Bind(R.id.mine_tv_message)
-    TextView mineTvMessage;
+    RelativeLayout mineTvMessage;
 
     @Override
     protected int getLayoutId() {
@@ -84,6 +94,12 @@ public class MineFragment extends BaseFragment {
                 .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
         mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
         mineTvIdiograph.setText(PublicStaticData.sharedPreferences.getString("signature", ""));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        queryMessage();
     }
 
     @Override
@@ -165,6 +181,13 @@ public class MineFragment extends BaseFragment {
         }
 
     }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            queryMessage();
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -194,5 +217,37 @@ public class MineFragment extends BaseFragment {
               //  loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
             }
         });
+    }
+    //查询是否有未读消息
+    private void queryMessage(){
+        BaseApi.getRetrofit().create(MineApi.class)
+                .s_index()
+                .compose(RxSchedulers.<BaseModel<Is_Read>>compose())
+                .subscribe(new BaseObserver<Is_Read>() {
+                    @Override
+                    protected void onHandleSuccess(Is_Read is_read, String msg, int code) {
+                        if (is_read.getIs_read() == 0){
+                            view_circle.setVisibility(View.VISIBLE);
+                        }else {
+                            view_circle.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+
+                    }
+                });
+    }
+    public class Is_Read{
+        private int is_read;
+
+        public int getIs_read() {
+            return is_read;
+        }
+
+        public void setIs_read(int is_read) {
+            this.is_read = is_read;
+        }
     }
 }

@@ -74,7 +74,7 @@ public class EarningFragment extends BaseFragment implements SwipeRefreshLayout.
 
         list = new ArrayList<>();
         adapter = new EarningAdapter(list, getActivity());
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);
     }

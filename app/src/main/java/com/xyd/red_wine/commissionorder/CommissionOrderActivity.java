@@ -110,7 +110,7 @@ public class CommissionOrderActivity extends BaseActivity implements SwipeRefres
         list = new ArrayList<>();
         adapter = new CommissionOrderAdapter(list, this);
         adapter.setOnLoadMoreListener(this, commissionRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         commissionRv.setAdapter(adapter);
     }
 

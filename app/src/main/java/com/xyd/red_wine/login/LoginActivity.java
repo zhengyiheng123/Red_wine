@@ -211,7 +211,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void success() {
         finish();
         startActivity(MainActivity.class);
-
     }
 
     @Override

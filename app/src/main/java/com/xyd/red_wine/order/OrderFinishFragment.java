@@ -99,7 +99,7 @@ public class OrderFinishFragment extends BaseFragment implements SwipeRefreshLay
 
         adapter = new OrderAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, orderRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         orderRv.setAdapter(adapter);
         adapter.setOnItemChildClickListener(this);
         adapter.setEnableLoadMore(true);

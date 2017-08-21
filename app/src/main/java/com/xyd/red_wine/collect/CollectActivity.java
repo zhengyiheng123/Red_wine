@@ -100,7 +100,7 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
         list = new ArrayList<>();
         adapter = new CollectAdapter(list, this);
         adapter.setOnLoadMoreListener(this, newsRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemClickListener(this);
         newsRv.setAdapter(adapter);
 

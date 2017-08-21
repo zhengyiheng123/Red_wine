@@ -93,7 +93,7 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
         adapter = new ImageAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, baseRv);
         adapter.setOnItemClickListener(this);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);
 

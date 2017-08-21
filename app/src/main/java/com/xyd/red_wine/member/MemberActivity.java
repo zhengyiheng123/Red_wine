@@ -80,7 +80,7 @@ public class MemberActivity extends BaseActivity implements BaseQuickAdapter.Req
         list = new ArrayList<>();
         adapter = new MemberAdapter(list);
         adapter.setOnLoadMoreListener(this, memberRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         memberRv.setAdapter(adapter);
 
 

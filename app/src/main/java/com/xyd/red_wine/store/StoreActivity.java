@@ -68,7 +68,7 @@ public class StoreActivity extends BaseActivity implements SwipeRefreshLayout.On
         list = new ArrayList<>();
         adapter = new StoreAdapter(list,this);
         adapter.setOnLoadMoreListener(this,storeRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         storeRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
         adapter.setEnableLoadMore(true);

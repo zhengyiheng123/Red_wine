@@ -99,7 +99,7 @@ public class WineEvaluateFragment extends BaseFragment implements RadioGroup.OnC
         list = new ArrayList<>();
         adapter = new EvaluateAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, wineEvaluateRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         wineEvaluateRv.setAdapter(adapter);
     }
 

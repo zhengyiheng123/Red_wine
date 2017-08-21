@@ -159,7 +159,7 @@
                 android:layout_below="@id/wine_name"
                 android:layout_marginRight="12dp"
                 android:gravity="center_vertical"
-                android:text="免运费"
+                android:text=""
                 android:textColor="@color/material_textBlack_secondaryText"
                 android:textSize="@dimen/text_14" />
 
@@ -173,7 +173,7 @@
                 android:layout_marginRight="2dp"
                 android:layout_toLeftOf="@id/wine_state"
                 android:gravity="center_vertical"
-                android:text="750ml"
+                android:text="0ml"
                 android:textColor="@color/material_amber_A200"
                 android:textSize="@dimen/text_14" />
             <TextView

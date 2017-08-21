@@ -23,7 +23,6 @@ public interface EarningContract {
         void loadMoreData(EarningModel model, int type);
         void error(String msg);
 
-
     }
 
 

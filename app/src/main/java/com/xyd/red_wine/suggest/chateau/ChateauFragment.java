@@ -149,7 +149,7 @@ public class ChateauFragment extends BaseFragment implements SwipeRefreshLayout.
         list = new ArrayList<>();
         adapter = new ChateauAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, baseRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemClickListener(this);
         baseRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);

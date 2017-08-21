@@ -26,6 +26,7 @@ import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.commitorder.CommitOrderActivity;
 import com.xyd.red_wine.glide.GlideUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import butterknife.Bind;
 
@@ -190,6 +191,20 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
             case R.id.wine_add:
                 if (num < 9) {
                     num++;
+                    if (num>model.getGood().getG_num()){
+                        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                        builder.setTitle("温馨提示");
+                        builder.setMessage("当前商品库存"+model.getGood().getG_num()+"件");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.create().show();
+
+                        return;
+                    }
                     wineEdtNum.setText(num + "");
                     wineCost.setText("￥" + (price * num + Double.valueOf(model.getGood().getG_freight())));
                 }

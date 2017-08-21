@@ -48,6 +48,7 @@ public class YiduFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         return R.layout.base_srl_rv;
     }
 
+
     @Override
     protected void initView() {
         EventBus.getDefault().register(this);
@@ -55,7 +56,6 @@ public class YiduFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         baseRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         initAdapter();
         getData();
-
     }
 
     private void initAdapter() {
@@ -63,7 +63,7 @@ public class YiduFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         list = new ArrayList<>();
         adapter = new MessageAdapter(list);
         adapter.setOnLoadMoreListener(this, baseRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }
@@ -77,6 +77,7 @@ public class YiduFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     public void widgetClick(View v) {
 
     }
+
 
     /**
      * SwipeRefreshLayout
@@ -130,9 +131,14 @@ public class YiduFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Override
     public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
         Bundle b = new Bundle();
-        b.putString(MessageDetailActivity.TIME, TimeUtils.millis2String( adapter.getData().get(position).getCreate_time()*1000,"yyyy-MM-dd HH:mm"));
+        b.putString(MessageDetailActivity.TIME, TimeUtils.stampToDateSdemand( adapter.getData().get(position).getCreate_time()+"","yyyy.MM.dd HH:mm"));
         b.putString(MessageDetailActivity.CONTENT,  adapter.getData().get(position).getMessage());
-        b.putInt(MessageDetailActivity.ID,  -1);
+        b.putInt(MessageDetailActivity.ID,  adapter.getData().get(position).getR_id());
+        b.putInt(MessageDetailActivity.USER_ID,adapter.getData().get(position).getU_id());
+        b.putInt(MessageDetailActivity.R_TYPE,adapter.getData().get(position).getR_type());
+        b.putInt(MessageDetailActivity.IS_REPLY,adapter.getData().get(position).getIs_reply());
+        b.putString(MessageDetailActivity.FROM,adapter.getData().get(position).getNickname());
+
         startActivity(MessageDetailActivity.class, b);
 
     }

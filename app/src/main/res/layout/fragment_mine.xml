@@ -234,20 +234,40 @@
                     android:layout_height="@dimen/line_height"
                     android:layout_marginLeft="48dp"
                     android:background="@color/line" />
-
-                <TextView
+                <RelativeLayout
                     android:id="@+id/mine_tv_message"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:drawableLeft="@mipmap/wodeshoucang"
-                    android:drawablePadding="15dp"
-                    android:drawableRight="@mipmap/jiantou"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="我的消息"
-                    android:textColor="@color/material_textBlack_black"
-                    android:textSize="@dimen/text_14" />
+                    android:layout_height="40dp">
+                    <TextView
+                        android:id="@+id/mine_tv_messages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:drawableLeft="@mipmap/wodexiaoxi"
+                        android:drawablePadding="15dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="20dp"
+                        android:text="我的消息"
+                        android:textColor="@color/material_textBlack_black"
+                        android:textSize="@dimen/text_14" />
+                    <View
+                        android:visibility="gone"
+                        android:id="@+id/view_circle"
+                        android:layout_marginLeft="4dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mine_tv_messages"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:background="@drawable/shape_circle_red"
+                        />
+                    <ImageView
+                        android:layout_marginRight="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@mipmap/jiantou"
+                        />
+                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"

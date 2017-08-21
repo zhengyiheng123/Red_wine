@@ -15,6 +15,7 @@ import com.xyd.red_wine.activity.BenefitAdapter;
 import com.xyd.red_wine.activity.BenefitModel;
 import com.xyd.red_wine.api.ActivityApi;
 import com.xyd.red_wine.api.MessageApi;
+import com.xyd.red_wine.api.MineApi;
 import com.xyd.red_wine.base.BaseApi;
 import com.xyd.red_wine.base.BaseFragment;
 import com.xyd.red_wine.base.BaseModel;
@@ -22,6 +23,7 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.main.home.WebViewActivity;
 import com.xyd.red_wine.utils.TimeUtils;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -54,6 +56,7 @@ public class WeiduFragment extends BaseFragment implements SwipeRefreshLayout.On
         return R.layout.base_srl_rv;
     }
 
+
     @Override
     protected void initView() {
         EventBus.getDefault().register(this);
@@ -69,7 +72,7 @@ public class WeiduFragment extends BaseFragment implements SwipeRefreshLayout.On
         list = new ArrayList<>();
         adapter = new MessageAdapter(list);
         adapter.setOnLoadMoreListener(this, baseRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }
@@ -83,6 +86,7 @@ public class WeiduFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void widgetClick(View v) {
 
     }
+
 
     /**
      * SwipeRefreshLayout
@@ -137,9 +141,13 @@ public class WeiduFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
 
         Bundle b = new Bundle();
-        b.putString(MessageDetailActivity.TIME, TimeUtils.millis2String( adapter.getData().get(position).getCreate_time()*1000,"yyyy-MM-dd HH:mm"));
+        b.putString(MessageDetailActivity.TIME, TimeUtils.stampToDateSdemand( adapter.getData().get(position).getCreate_time()+"","yyyy.MM.dd HH:mm"));
         b.putString(MessageDetailActivity.CONTENT,  adapter.getData().get(position).getMessage());
         b.putInt(MessageDetailActivity.ID,  adapter.getData().get(position).getR_id());
+        b.putInt(MessageDetailActivity.USER_ID,adapter.getData().get(position).getU_id());
+        b.putInt(MessageDetailActivity.R_TYPE,adapter.getData().get(position).getR_type());
+        b.putInt(MessageDetailActivity.IS_REPLY,adapter.getData().get(position).getIs_reply());
+        b.putString(MessageDetailActivity.FROM,adapter.getData().get(position).getNickname());
         startActivity(MessageDetailActivity.class, b);
 
     }
@@ -153,5 +161,27 @@ public  void onEvent(MessageEvent  event){
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+    //发送站内信
+    public void sentMessage(int pid,String r_con){
+        BaseApi.getRetrofit()
+                .create(MineApi.class)
+                .sendMessage(pid,r_con)
+                .compose(RxSchedulers.<BaseModel>compose())
+                .subscribe(new BaseObserver() {
+                    @Override
+                    protected void onHandleSuccess(Object o, String msg, int code) {
+                        if(code == 1){
+                            ToastUtils.show("发送成功");
+                        }else {
+                            ToastUtils.show(msg);
+                        }
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        ToastUtils.show(msg);
+                    }
+                });
     }
 }

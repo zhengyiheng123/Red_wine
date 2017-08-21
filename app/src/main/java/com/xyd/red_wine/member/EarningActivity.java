@@ -1,17 +1,28 @@
 package com.xyd.red_wine.member;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.base.BaseActivity;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +53,7 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
     private EarningAdapter adapter;
     private EarningPresenter presenter;
     private int page=1,num=10;
+    private InputDialog.Builder dialogBuilder;
 
     @Override
     protected int getLayoutId() {
@@ -64,7 +76,7 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
         list = new ArrayList<>();
         adapter = new EarningAdapter(list, this);
         adapter.setOnLoadMoreListener(this, earningsRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         earningsRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);
     }
@@ -140,11 +152,37 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
 
     }
 
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
-        Bundle b=new Bundle();
-        b.putInt(MemberActivity.ID,adapter.getData().get(position).getUserid());
-        startActivity(MemberActivity.class,b);
 
+    @Override
+    public void onItemClick(final BaseQuickAdapter adapter1, View view, final int position) {
+//        Bundle b=new Bundle();
+//        b.putInt(MemberActivity.ID,adapter.getData().get(position).getUserid());
+//        startActivity(MemberActivity.class,b);
+
+        // TODO
+//                        ToastUtils.show(inputText);
+// TODO
+        dialogBuilder = new InputDialog.Builder(EarningActivity.this)
+                .setTitle("留言")
+                .setInputHint("请输入留言")
+                .setPositiveButton("确定", new InputDialog.ButtonActionListener() {
+                    @Override
+                    public void onClick(CharSequence inputText) {
+                        // TODO
+//                        ToastUtils.show(inputText);
+                        if (TextUtils.isEmpty(inputText.toString())){
+                            ToastUtils.show("请输入内容");
+                            return;
+                        }
+                        presenter.sentMessage(adapter.getData().get(position).getUserid(),inputText.toString());
+                    }
+                })
+                .setNegativeButton("取消", new InputDialog.ButtonActionListener() {
+                    @Override
+                    public void onClick(CharSequence inputText) {
+                        // TODO
+                    }
+                });
+        dialogBuilder.show();
     }
 }

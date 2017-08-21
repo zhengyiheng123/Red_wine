@@ -98,7 +98,7 @@ public class StewardActivity extends BaseActivity implements SwipeRefreshLayout.
         list = new ArrayList<>();
         adapter = new StewardAdapter(list, this);
         adapter.setOnLoadMoreListener(this, newsRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemClickListener(this);
         adapter.setOnItemChildClickListener(this);
         newsRv.setAdapter(adapter);

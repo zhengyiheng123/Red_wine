@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/material_white"
     android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
@@ -8,17 +10,43 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:padding="12dp"
-        android:text="今天离开地方撒熬过来骄傲了可能flag加快链接发来看见过啦埃及古拉加两个卡价格家里感觉啊看了感觉案件嘎啦果捡垃圾"
+        android:text=""
         android:id="@+id/item_message_content"
         android:textColor="#666666"/>
-    <TextView
+    <RelativeLayout
+        android:paddingLeft="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:id="@+id/item_message_time"
-        android:paddingRight="12dp"
-        android:textColor="@color/material_textBlack_secondaryText"
-        android:text="来自系统管理员 07-10 17:34:34"/>
+        >
+        <TextView
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:id="@+id/item_message_time"
+            android:paddingRight="12dp"
+            android:textColor="@color/material_textBlack_secondaryText"
+            android:text="来自系统管理员 07-10 17:34:34"/>
+        <TextView
+            android:visibility="gone"
+            android:textSize="12sp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textColor="#f6ba62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未回复"
+            android:gravity="right"
+            android:id="@+id/tv_reply"
+            />
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

@@ -32,7 +32,7 @@ public class BenefitAdapter extends BaseQuickAdapter<RankModel.ChestBean, BaseVi
     @Override
     protected void convert(BaseViewHolder helper, RankModel.ChestBean item) {
         GlideUtil.getInstance().loadCircleImage(context, (ImageView) helper.getView(R.id.rank_iv), PublicStaticData.baseUrl+item.getHead_img());
-        helper.setText(R.id.rank_tv_pay,"总收益"+item.getChest()+"元");
+        helper.setText(R.id.rank_tv_pay,"公益捐助"+item.getChest()+"元");
         helper.setText(R.id.rank_tv_name,item.getNickname());
         Log.e("rank_tv_ranking", getParentPosition(item) +
                 "");

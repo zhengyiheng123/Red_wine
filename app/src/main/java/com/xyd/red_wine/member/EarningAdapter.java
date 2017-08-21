@@ -2,6 +2,7 @@ package com.xyd.red_wine.member;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -31,12 +32,14 @@ public class EarningAdapter extends BaseQuickAdapter<EarningModel.DeductBean, Ba
 
     @Override
     protected void convert(BaseViewHolder helper, EarningModel.DeductBean item) {
-        GlideUtil.getInstance()
-                .loadCircleImage(context, (ImageView) helper.getView(R.id.earnings_iv), PublicStaticData.baseUrl + item.getHead_img());
+        if (item!=null) {
+            GlideUtil.getInstance()
+                    .loadCircleImage(context, (ImageView) helper.getView(R.id.earnings_iv), PublicStaticData.baseUrl + item.getHead_img());
+
         helper.setText(R.id.earnings_tv_name, item.getNickname());
 
         helper.setText(R.id.earnings_tv_level, strings[item.getPid_status()]);
         helper.setText(R.id.earnings_tv_sign, item.getSignature());
-
+        }
     }
 }

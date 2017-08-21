@@ -5,6 +5,7 @@ import com.xyd.red_wine.base.BaseApi;
 import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.RxSchedulers;
+import com.xyd.red_wine.utils.ToastUtils;
 
 /**
  * @author: zhaoxiaolei
@@ -32,6 +33,28 @@ public class EarningPresenter implements EarningContract.Presenter {
 
     }
 
+    //发送站内信
+    public void sentMessage(int pid,String r_con){
+        BaseApi.getRetrofit()
+                .create(MineApi.class)
+                .sendMessage(pid,r_con)
+                .compose(RxSchedulers.<BaseModel>compose())
+                .subscribe(new BaseObserver() {
+                    @Override
+                    protected void onHandleSuccess(Object o, String msg, int code) {
+                        if(code == 1){
+                            ToastUtils.show("发送成功");
+                        }else {
+                            ToastUtils.show(msg);
+                        }
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        ToastUtils.show(msg);
+                    }
+                });
+    }
     @Override
     public void getData(final int page, int num) {
         BaseApi.getRetrofit()

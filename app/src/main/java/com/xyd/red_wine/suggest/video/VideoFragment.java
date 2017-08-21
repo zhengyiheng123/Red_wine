@@ -90,7 +90,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         list = new ArrayList<>();
         adapter = new VideoAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, videoRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         videoRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);
         adapter.setOnItemClickListener(this);

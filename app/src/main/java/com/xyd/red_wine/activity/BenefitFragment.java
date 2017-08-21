@@ -63,7 +63,7 @@ public class BenefitFragment extends BaseFragment implements SwipeRefreshLayout.
 
         adapter = new BenefitAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, baseRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }

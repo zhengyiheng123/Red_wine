@@ -1153,4 +1153,16 @@ public class TimeUtils {
                 ? month - 1
                 : (month + 10) % 12];
     }
+
+    /*
+* 将时间戳转换为时间
+*/
+    public static String stampToDateSdemand(String s,String parten){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(parten);
+        long lt = new Long(s);
+        Date date = new Date(lt*1000L);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
 }
