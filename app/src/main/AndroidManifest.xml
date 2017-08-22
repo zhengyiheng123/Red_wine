@@ -206,6 +206,8 @@
             android:name="com.umeng.socialize.editorpage.ShareActivity"
             android:excludeFromRecents="true"
             android:theme="@style/Theme.UMDefault" />
+        <activity android:name=".personinformation.BindActivity" />
+        <activity android:name=".personinformation.ChangePhoneActivity" />
     </application>
 
 </manifest>

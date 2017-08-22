@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.api.AddressApi;
@@ -17,6 +18,7 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.promptdialog.PromptDialog;
+import com.yby.areaselector.SelectAreaDialog;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,6 +55,8 @@ public class AddressEditActivity extends BaseActivity {
     TextView addressEditDel;
     @Bind(R.id.address_edit_save)
     TextView addressEditSave;
+    @Bind(R.id.address_edit_area)
+    TextView address_edit_area;
     private PromptDialog dialog;
     private String a_id;
 
@@ -89,7 +93,7 @@ public class AddressEditActivity extends BaseActivity {
         addressEditMoren.setOnClickListener(this);
         addressEditDel.setOnClickListener(this);
         addressEditSave.setOnClickListener(this);
-
+        address_edit_area.setOnClickListener(this);
     }
 
     @Override
@@ -114,16 +118,29 @@ public class AddressEditActivity extends BaseActivity {
                     showToast("请填写收货人电话");
                 else if (TextUtils.isEmpty(addressEditJie.getText().toString()))
                     showToast("请填写收货人详细地址");
+                else if (TextUtils.isEmpty(address_edit_area.getText().toString()))
+                    showToast("请选择地区");
                 else if (TextUtils.isEmpty(a_id))
                     addAddress(addressEditName.getText().toString(),
                             addressEditQu.getText().toString(),
-                            addressEditJie.getText().toString(),
+                            address_edit_area.getText().toString()+" "+addressEditJie.getText().toString(),
                             addressEditPhone.getText().toString());
                 else
                     editAddress(addressEditName.getText().toString(),
                             addressEditQu.getText().toString(),
-                            addressEditJie.getText().toString(),
+                            address_edit_area.getText().toString()+" "+addressEditJie.getText().toString(),
                             addressEditPhone.getText().toString());
+                break;
+            case R.id.address_edit_area:
+                SelectAreaDialog selectAreaDialog = new SelectAreaDialog(this);
+                selectAreaDialog.setOnConfirmListener(new SelectAreaDialog.OnConfirmListener() {
+                    @Override
+                    public void getData(String provice, String city, String district) {
+//                        Toast.makeText(getApplicationContext(), provice + city + district, Toast.LENGTH_SHORT).show();
+                            address_edit_area.setText(provice +" "+ city +" "+ district);
+                    }
+                });
+                selectAreaDialog.show();
                 break;
         }
 

@@ -19,8 +19,9 @@ public class InfromationModel {
      * wechat_id :微信号
      * alipay_id :支付宝账号
      * signature :个性签名
+     * s_nickname :推荐人
      */
-
+    private String s_nickname;
     private int userid;
     private String phone;
     private String nickname;
@@ -29,6 +30,14 @@ public class InfromationModel {
     private String wechat_id;
     private String alipay_id;
     private String signature;
+
+    public String getS_nickname() {
+        return s_nickname;
+    }
+
+    public void setS_nickname(String s_nickname) {
+        this.s_nickname = s_nickname;
+    }
 
     public int getUserid() {
         return userid;

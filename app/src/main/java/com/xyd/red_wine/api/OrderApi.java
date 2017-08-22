@@ -5,6 +5,7 @@ import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.commissionorder.CommissionOrderModel;
 import com.xyd.red_wine.commitorder.AliModel;
+import com.xyd.red_wine.commitorder.PayFinishActivity;
 import com.xyd.red_wine.commitorder.WxModel;
 import com.xyd.red_wine.logistics.LogisticsModel;
 import com.xyd.red_wine.order.OrderModel;
@@ -82,4 +83,9 @@ public interface OrderApi {
     @POST("orders/deduct_order")
     Observable<BaseModel<CommissionOrderModel>> deduct_order(@Query("page") int page,
                                                              @Query("num") int num);
+    /**
+     * 支付成功回调信息
+     */
+    @POST("sundry/pay_msg")
+    Observable<BaseModel<PayFinishActivity.PayMsg>> payMsg();
 }

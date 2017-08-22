@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logistics_tv"
                 android:layout_toRightOf="@id/logistics_iv"
-                android:text="承运来源：圆通快递"
+                android:text="承运来源："
                 android:paddingTop="4dp"
                 android:textColor="@color/material_textBlack_secondaryText"
                 android:textSize="@dimen/text_14" />
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/logistics_tv_source"
                 android:layout_toRightOf="@id/logistics_iv"
-                android:text="运单编号：123456789"
+                android:text="运单编号："
                 android:paddingTop="4dp"
                 android:textColor="@color/material_textBlack_secondaryText"
                 android:textSize="@dimen/text_14" />
@@ -124,6 +124,14 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:background="@color/line"/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_empty"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="没有物流信息！！"
+            />
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

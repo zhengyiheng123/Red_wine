@@ -99,6 +99,7 @@ public class SettingActivity extends BaseActivity {
                 // showTestToast("退出登陆");
                 PersistentCookieStore store = new PersistentCookieStore(this);
                 store.removeAll();
+                closeApp();
                 startActivity(LoginActivity.class);
                 break;
         }

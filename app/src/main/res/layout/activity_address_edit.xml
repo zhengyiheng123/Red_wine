@@ -71,7 +71,8 @@
         android:layout_height="40dp"
         android:background="@drawable/bg_bottom_line"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="gone"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -90,7 +91,32 @@
             android:textSize="@dimen/text_14" />
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_bottom_line"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:text="地区选择" />
+
+        <TextView
+            android:drawablePadding="8dp"
+            android:text=""
+            android:layout_marginRight="16dp"
+            android:drawableRight="@mipmap/youjiantou"
+            android:id="@+id/address_edit_area"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:gravity="right|center_vertical"
+            android:paddingLeft="8dp"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"

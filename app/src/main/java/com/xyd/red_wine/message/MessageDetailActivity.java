@@ -80,11 +80,11 @@ public class MessageDetailActivity extends BaseActivity {
         id = getIntent().getIntExtra(ID, -1);
         if (id != -1)
             edit();
-        if (getIntent().getIntExtra(IS_REPLY,-1) == 0){
-            tvReply.setVisibility(View.VISIBLE);
-        }
         if (getIntent().getIntExtra(R_TYPE,-1) == 4){
             tvFrom.setText("来自："+getIntent().getStringExtra(FROM));
+            if (getIntent().getIntExtra(IS_REPLY,-1) == 0){
+                tvReply.setVisibility(View.VISIBLE);
+            }
         }
 
     }

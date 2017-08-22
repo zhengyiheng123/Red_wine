@@ -83,4 +83,6 @@ dependencies {
     compile files('libs/SocialSDK_WeiXin_Full.jar')
     compile files('libs/alipaySdk-20161222.jar')
     compile project(':kefu-easeui')
+    //省市区三级联动
+    compile project(':areaselector')
 }

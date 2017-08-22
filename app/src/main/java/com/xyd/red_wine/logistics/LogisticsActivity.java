@@ -66,6 +66,9 @@ public class LogisticsActivity extends BaseActivity {
     RecyclerView logisticsRv;
     @Bind(R.id.logistics_rl)
     RelativeLayout logisticsRl;
+
+    @Bind(R.id.tv_empty)
+    TextView tv_empty;
     private List<LogisticsModel.CheckBean> logisticsLists;
     private OrderModel.MyOrderBean orderBean;
     private LogisticsAdapter adapter;
@@ -104,7 +107,13 @@ public class LogisticsActivity extends BaseActivity {
                         logisticsTvState.setText(logisticsModel.getState());
                         logisticsTvSource.setText(logisticsModel.getOrders().getPostcom());
                         logisticsTvNums.setText(logisticsModel.getOrders().getExpress());
-                        logisticsLists.addAll(logisticsModel.getCheck());
+                        if (logisticsModel.getCheck().size()==0){
+                            tv_empty.setVisibility(View.VISIBLE);
+                        }else {
+                            tv_empty.setVisibility(View.GONE);
+                            logisticsLists.addAll(logisticsModel.getCheck());
+                        }
+
                         adapter.notifyDataSetChanged();
                     }
 

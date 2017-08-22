@@ -132,4 +132,16 @@ public interface MineApi {
      */
     @POST("user/s_index")
     Observable<BaseModel<MineFragment.Is_Read>> s_index();
+
+    /**
+     * 绑定手机号
+     */
+    @POST("user/edit_phone")
+    Observable<BaseModel> bind(@Query("phone")String phone,@Query("code")String code,@Query("password")String password,@Query("repassword")String repassword);
+
+    /**
+     * 修改手机号
+     */
+    @POST("user/change_phone")
+    Observable<BaseModel> edit_phone(@Query("phone")String phone,@Query("code")String code);
 }

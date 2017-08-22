@@ -151,10 +151,10 @@
 
 
             <TextView
+                android:layout_marginLeft="8dp"
                 android:id="@+id/wine_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/wine_name"
                 android:layout_marginRight="12dp"
@@ -167,7 +167,6 @@
                 android:id="@+id/wine_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
 
                 android:layout_below="@id/wine_name"
                 android:layout_marginRight="2dp"
@@ -236,11 +235,10 @@
 
         </android.support.v4.view.ViewPager>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:orientation="horizontal">
-
-        </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+    </LinearLayout>
     </com.xyd.red_wine.view.StickyNavLayout>
 
 </RelativeLayout>

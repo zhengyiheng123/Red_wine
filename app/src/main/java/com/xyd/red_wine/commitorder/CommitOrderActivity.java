@@ -9,9 +9,12 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.address.AddressActivity;
 import com.xyd.red_wine.address.AddressModel;
@@ -29,6 +32,7 @@ import com.xyd.red_wine.commissionorder.CommissionOrderModel;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.utils.LogUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 import com.xyd.red_wine.winedetail.WineDetailActivity;
 import com.xyd.red_wine.winedetail.WineModel;
 import com.xyd.red_wine.wxapi.WXPay;
@@ -47,7 +51,7 @@ import butterknife.ButterKnife;
  * @description:
  */
 
-public class CommitOrderActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener {
+public class CommitOrderActivity extends BaseActivity {
     @Bind(R.id.base_title_back)
     TextView baseTitleBack;
     @Bind(R.id.base_title_title)
@@ -94,10 +98,19 @@ public class CommitOrderActivity extends BaseActivity implements CompoundButton.
     TextView commitTvNum1;
     @Bind(R.id.commit_address_none)
     TextView commitTvAddressNone;
-    @Bind(R.id.commit_cb_wx)
-    CheckBox commitCbWx;
-    @Bind(R.id.commit_cb_alipay)
-    CheckBox commitCbAlipay;
+//    @Bind(R.id.commit_cb_wx)
+//    CheckBox commitCbWx;
+//    @Bind(R.id.commit_cb_alipay)
+//    CheckBox commitCbAlipay;
+    @Bind(R.id.rl_webchat)
+    RelativeLayout rl_webchat;
+    @Bind(R.id.rl_alipay)
+    RelativeLayout rl_alipay;
+
+    @Bind(R.id.rb_alipay)
+    CheckBox rb_alipay;
+    @Bind(R.id.cb_webchat)
+    CheckBox cb_webchat;
     private WineModel model;
     private int num = 1;
     private int a_id = -1;
@@ -199,8 +212,10 @@ public class CommitOrderActivity extends BaseActivity implements CompoundButton.
         commitFreight.setOnClickListener(this);
         commitLlAddress.setOnClickListener(this);
         commitTvAddressNone.setOnClickListener(this);
-        commitCbWx.setOnCheckedChangeListener(this);
-        commitCbAlipay.setOnCheckedChangeListener(this);
+//        commitCbWx.setOnCheckedChangeListener(this);
+//        commitCbAlipay.setOnCheckedChangeListener(this);
+        rl_alipay.setOnClickListener(this);
+        rl_webchat.setOnClickListener(this);
     }
 
     @Override
@@ -232,10 +247,20 @@ public class CommitOrderActivity extends BaseActivity implements CompoundButton.
             case R.id.commit_buy:
                 if (a_id == -1)
                     showToast("请选择您的收货地址");
-                else if (commitCbWx.isChecked())
+                else if (cb_webchat.isChecked()){
+                    if (!UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN)){
+                        ToastUtils.show("微信未安装");
+                        return;
+                    }
                     commitWxBuy();
-                else
+                }
+                else if (rb_alipay.isChecked()){
+                    if (!UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.ALIPAY)){
+                        ToastUtils.show("支付宝未安装");
+                        return;
+                    }
                     commitAlipay();
+                }
                 break;
             case R.id.commit_type:
                 showTestToast("配送方式");
@@ -248,6 +273,14 @@ public class CommitOrderActivity extends BaseActivity implements CompoundButton.
                 break;
             case R.id.commit_address_none:
                 startActivity(AddressActivity.class);
+                break;
+            case R.id.rl_alipay:
+                rb_alipay.setChecked(true);
+                cb_webchat.setChecked(false);
+                break;
+            case R.id.rl_webchat:
+                rb_alipay.setChecked(false);
+                cb_webchat.setChecked(true);
                 break;
         }
     }
@@ -272,10 +305,6 @@ public class CommitOrderActivity extends BaseActivity implements CompoundButton.
     }
 
     private void commitWxBuy() {
-//        Context context, String appID,
-//                String partnerID, String prepayId,
-//                String packageValue, String nonceStr,
-//                String timeStamp, String sign
         BaseApi.getRetrofit()
                 .create(OrderApi.class)
                 .buy(a_id + "", model.getGood().getG_id() + "", num + "", num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight()) + "", commitEdtMessage.getText().toString())
@@ -304,22 +333,22 @@ public class CommitOrderActivity extends BaseActivity implements CompoundButton.
     }
 
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        switch (buttonView.getId()) {
-            case R.id.commit_cb_wx:
-                if (isChecked)
-                    commitCbAlipay.setChecked(false);
-                else
-                    commitCbAlipay.setChecked(true);
-                break;
-            case R.id.commit_cb_alipay:
-                if (isChecked)
-                    commitCbWx.setChecked(false);
-                else
-                    commitCbWx.setChecked(true);
-                break;
-        }
-
-    }
+//    @Override
+//    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//        switch (buttonView.getId()) {
+//            case R.id.commit_cb_wx:
+//                if (isChecked)
+//                    commitCbAlipay.setChecked(false);
+//                else
+//                    commitCbAlipay.setChecked(true);
+//                break;
+//            case R.id.commit_cb_alipay:
+//                if (isChecked)
+//                    commitCbWx.setChecked(false);
+//                else
+//                    commitCbWx.setChecked(true);
+//                break;
+//        }
+//
+//    }
 }

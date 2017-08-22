@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,10 +34,13 @@ import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.glide.GlideCircleTransform;
 import com.xyd.red_wine.glide.GlideUtil;
+import com.xyd.red_wine.member.EarningActivity;
+import com.xyd.red_wine.member.InputDialog;
 import com.xyd.red_wine.permissions.PermissionUtils;
 import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.utils.FileUtils;
 import com.xyd.red_wine.utils.GetImagePath;
+import com.xyd.red_wine.utils.ToastUtils;
 import com.xyd.red_wine.view.CustomDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -73,7 +77,9 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     @Bind(R.id.information_cb_men)
     CheckBox informationCbMen;
     @Bind(R.id.information_edt_phone)
-    EditText informationEdtPhone;
+    TextView informationEdtPhone;
+    @Bind(R.id.information_edt_tuijianren)
+    TextView information_edt_tuijianren;
     @Bind(R.id.information_edt_wx)
     EditText informationEdtWx;
     @Bind(R.id.information_edt_alipay)
@@ -88,8 +94,14 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     TextView informationTvId;
     @Bind(R.id.information_btn_save)
     Button informationBtnSave;
+    @Bind(R.id.tv_bangding)
+    TextView tv_bangding;
     private File outputFile;
     private File file;
+    private InputDialog.Builder dialogBuilder;
+    //手机号
+    private String phoneNum;
+    private InfromationModel model;
 
     @Override
     protected int getLayoutId() {
@@ -101,7 +113,6 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
         baseTitleMenu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("个人信息");
         EventBus.getDefault().register(this);
-        getData();
 
     }
 
@@ -116,7 +127,12 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                 .subscribe(new BaseObserver<InfromationModel>() {
                     @Override
                     protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
-
+                        model = infromationModel;
+                        if (TextUtils.isEmpty(infromationModel.getS_nickname())){
+                            information_edt_tuijianren.setText("无推荐人");
+                        }else {
+                            information_edt_tuijianren.setText(infromationModel.getS_nickname());
+                        }
                         PublicStaticData.sharedPreferences.edit().putString("signature",infromationModel.getSignature()).commit();
                         PublicStaticData.sharedPreferences.edit().putString("nickname",infromationModel.getNickname()).commit();
                         PublicStaticData.sharedPreferences.edit().putString("head",infromationModel.getHead_img()).commit();
@@ -131,6 +147,11 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                             informationCbWomen.setChecked(true);
                         else
                             informationCbMen.setChecked(true);
+                        if (TextUtils.isEmpty(infromationModel.getPhone())){
+                            tv_bangding.setText("绑定");
+                        }else {
+                            tv_bangding.setText("更换手机号");
+                        }
                         EventBus.getDefault().post(new InformationMessage());
                     }
 
@@ -154,6 +175,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
         informationBtnSave.setOnClickListener(this);
         informationCbWomen.setOnCheckedChangeListener(this);
         informationCbMen.setOnCheckedChangeListener(this);
+        tv_bangding.setOnClickListener(this);
     }
 
     @Override
@@ -173,7 +195,15 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                startActivity(AddressActivity.class);
                 break;
             case R.id.information_btn_save:
+                phoneNum=informationEdtPhone.getText().toString();
                 commitData();
+                break;
+            case R.id.tv_bangding:
+                if (TextUtils.isEmpty(model.getPhone())){
+                    startActivity(new Intent(getApplicationContext(),BindActivity.class));
+                }else {
+                    startActivity(new Intent(getApplicationContext(),ChangePhoneActivity.class));
+                }
                 break;
         }
 
@@ -182,12 +212,40 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     /**
      * 提交修改的信息
      */
+    private void commitDataPhone() {
+        //构建body
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+        builder.addFormDataPart("phone", phoneNum);
+
+        BaseApi.getRetrofit()
+                .create(MineApi.class)
+                .user_edit(builder.build())
+                .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
+                .subscribe(new BaseObserver<EmptyModel>() {
+                    @Override
+                    protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
+                        showToast(msg);
+                        getData();
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        showTestToast(msg);
+                    }
+                });
+
+
+    }
+    /**
+     * 提交修改的信息
+     */
     private void commitData() {
         //构建body
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
         builder.addFormDataPart("nickname", informationEdtNickname.getText().toString());
-        builder.addFormDataPart("phone", informationEdtPhone.getText().toString());
+        builder.addFormDataPart("phone", phoneNum);
 
         builder.addFormDataPart("signature", informationEdtSignature.getText().toString());
         builder.addFormDataPart("wechat_id", informationEdtWx.getText().toString());
@@ -242,6 +300,11 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+    }
 
     private void showPictureDialog() {
         final CustomDialog dialog = new CustomDialog(this, R.layout.dialog_choose_picture, true);

@@ -145,7 +145,7 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
                         if (wineModel.getGood().getG_freight().equals("0.00"))
                             wineState.setText("免运费");
                         else
-                            wineState.setText("￥" + wineModel.getGood().getG_freight());
+                            wineState.setText("运费：￥" + wineModel.getGood().getG_freight());
 
                         wineNameBottom.setText(wineModel.getGood().getG_sname());
                         wineDetailFragment.setWebView(wineModel.getG_con());
