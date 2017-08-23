@@ -48,8 +48,6 @@ public class MessageDetailActivity extends BaseActivity {
 
     //来自
     public static String FROM="from";
-    @Bind(R.id.base_title_back)
-    TextView baseTitleBack;
     @Bind(R.id.base_title_title)
     TextView baseTitleTitle;
     @Bind(R.id.base_title_menu)
@@ -62,6 +60,8 @@ public class MessageDetailActivity extends BaseActivity {
     TextView messageDetailContent;
     @Bind(R.id.tv_reply)
     TextView tvReply;
+    @Bind(R.id.base_title_back)
+    TextView base_title_back;
     private int id;
     private InputDialog.Builder dialogBuilder;
 
@@ -110,8 +110,8 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
-        baseTitleBack.setOnClickListener(this);
         tvReply.setOnClickListener(this);
+        base_title_back.setOnClickListener(this);
     }
 
     @Override
@@ -146,6 +146,9 @@ public class MessageDetailActivity extends BaseActivity {
                             }
                         });
                 dialogBuilder.show();
+                break;
+            case R.id.base_title_back:
+                onBackPressed();
                 break;
         }
     }

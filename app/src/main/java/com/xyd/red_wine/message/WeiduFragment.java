@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xyd.red_wine.R;
@@ -47,6 +48,7 @@ public class WeiduFragment extends BaseFragment implements SwipeRefreshLayout.On
     RecyclerView baseRv;
     @Bind(R.id.base_srl)
     SwipeRefreshLayout baseSrl;
+
     private int page = 1;
     private int num = 10;
     private List<MessageModel.RemindBean> list;

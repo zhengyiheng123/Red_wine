@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="公益活动"
+                    android:text="商业活动"
 
                     android:textColor="@color/material_textWhite_text"
                     android:textSize="@dimen/text_16" />

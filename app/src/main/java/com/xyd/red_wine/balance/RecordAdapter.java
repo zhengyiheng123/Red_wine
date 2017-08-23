@@ -44,7 +44,7 @@ public class RecordAdapter extends BaseQuickAdapter<CashValueModel.CashValueBean
             helper.setText(R.id.item_record_time, "时间：" + TimeUtils.millis2String(item.getCreate_time() * 1000, "yyyy-MM-dd HH:mm"));
             if (item.getRl_state() == 1)
 
-                helper.setText(R.id.item_record_type, "状态：待支付");
+                helper.setText(R.id.item_record_type, "状态：支付取消");
             else
                 helper.setText(R.id.item_record_type, "状态：已支付");
 

@@ -52,8 +52,8 @@ public class MineFragment extends BaseFragment {
     ImageView menu;
     @Bind(R.id.mine_tv_name)
     TextView mineTvName;
-    @Bind(R.id.mine_tv_idiograph)
-    TextView mineTvIdiograph;
+    @Bind(R.id.mine_tv_id)
+    TextView mintv_id;
     @Bind(R.id.mine_tv_order)
     TextView mineTvOrder;
     @Bind(R.id.mine_tv_commission_order)
@@ -93,7 +93,7 @@ public class MineFragment extends BaseFragment {
         GlideUtil.getInstance()
                 .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
         mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
-        mineTvIdiograph.setText(PublicStaticData.sharedPreferences.getString("signature", ""));
+        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
     }
 
     @Override
@@ -125,7 +125,7 @@ public class MineFragment extends BaseFragment {
         GlideUtil.getInstance()
                 .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
         mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
-        mineTvIdiograph.setText(PublicStaticData.sharedPreferences.getString("signature", ""));
+        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
     }
 
     @Override

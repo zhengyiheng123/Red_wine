@@ -42,7 +42,7 @@
             android:textColor="#f6ba62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="未回复"
+            android:text=""
             android:gravity="right"
             android:id="@+id/tv_reply"
             />

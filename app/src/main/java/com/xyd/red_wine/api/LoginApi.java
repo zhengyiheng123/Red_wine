@@ -5,6 +5,8 @@ import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.login.LoginModel;
 
 import io.reactivex.Observable;
+import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -77,4 +79,9 @@ public interface LoginApi {
                                             @Query("repassword") String repassword
 
     );
+    /**
+     * 乔治金瀚注册协议
+     */
+    @GET("user_agreement/index")
+    Observable<BaseModel> xieyi();
 }

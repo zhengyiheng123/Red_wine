@@ -255,10 +255,10 @@ public class CommitOrderActivity extends BaseActivity {
                     commitWxBuy();
                 }
                 else if (rb_alipay.isChecked()){
-                    if (!UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.ALIPAY)){
-                        ToastUtils.show("支付宝未安装");
-                        return;
-                    }
+//                    if (!UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.ALIPAY)){
+//                        ToastUtils.show("支付宝未安装");
+//                        return;
+//                    }
                     commitAlipay();
                 }
                 break;

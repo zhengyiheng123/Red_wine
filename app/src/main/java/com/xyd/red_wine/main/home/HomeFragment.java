@@ -1,5 +1,6 @@
 package com.xyd.red_wine.main.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hyphenate.chat.ChatClient;
+import com.hyphenate.helpdesk.callback.Callback;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.api.HomeApi;
 import com.xyd.red_wine.base.BaseApi;
@@ -21,8 +24,10 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.glide.GlideUtil;
+import com.xyd.red_wine.kefu.ChatActivity;
 import com.xyd.red_wine.newsdetail.DetailActivity;
 import com.xyd.red_wine.promptdialog.PromptDialog;
+import com.xyd.red_wine.utils.LogUtil;
 import com.xyd.red_wine.view.MenuPopWindow;
 import com.xyd.red_wine.view.NoticeView;
 import com.xyd.red_wine.view.banner.Banner;
@@ -66,6 +71,8 @@ public class HomeFragment extends BaseFragment {
     NoticeView homeNewsNotice;
     @Bind(R.id.home_srl)
     SwipeRefreshLayout homeSrl;
+    @Bind(R.id.iv_service)
+    ImageView iv_service;
     @Bind(R.id.home_frame)
     FrameLayout homeFrame;
     private List<HomeModel.CarouselBean> banner;
@@ -145,6 +152,7 @@ public class HomeFragment extends BaseFragment {
         homeIvRecommend.setOnClickListener(this);
         ivBanner.setOnClickListener(this);
         homeNewsLl.setOnClickListener(this);
+        iv_service.setOnClickListener(this);
 
         homeFrame.setOnClickListener(this);
         homeNewsNotice.setOnItemClickListener(new NoticeView.OnItemClickListener() {
@@ -211,10 +219,40 @@ public class HomeFragment extends BaseFragment {
                // b.putString(WebViewActivity.URL, "http://m.wine-world.com/culture/pj/20170728114754742");
                 startActivity(WebViewActivity.class, b);
                 break;
+            case R.id.iv_service:
+                if (ChatClient.getInstance().isLoggedInBefore())
+                    startActivity(ChatActivity.class);
+                else
+                    loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
 
+                break;
 
         }
 
+    }
+    //登录环信
+    private void loginHx(final String uname, final String upwd) {
+
+
+        // login huanxin server
+        ChatClient.getInstance().login(uname, upwd, new Callback() {
+            @Override
+            public void onSuccess() {
+                startActivity(ChatActivity.class);
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                LogUtil.e(code+error);
+                // loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+                LogUtil.e(progress+status);
+                //  loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
+            }
+        });
     }
 
     @Override

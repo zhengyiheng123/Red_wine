@@ -155,13 +155,6 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
 
     @Override
     public void onItemClick(final BaseQuickAdapter adapter1, View view, final int position) {
-//        Bundle b=new Bundle();
-//        b.putInt(MemberActivity.ID,adapter.getData().get(position).getUserid());
-//        startActivity(MemberActivity.class,b);
-
-        // TODO
-//                        ToastUtils.show(inputText);
-// TODO
         dialogBuilder = new InputDialog.Builder(EarningActivity.this)
                 .setTitle("留言")
                 .setInputHint("请输入留言")

@@ -67,7 +67,7 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
         chateauFragment = new ChateauFragment();
         imageFragment = new ImageFragment();
         videoFragment = new VideoFragment();
-        fragments = new Fragment[]{introductionFragment, chateauFragment, imageFragment, videoFragment};
+        fragments = new Fragment[]{introductionFragment,imageFragment,videoFragment, chateauFragment};
         suggestRg.check(R.id.suggest_rg_introduction);
 
         MyViewPagerAdapter adapter=new MyViewPagerAdapter(getSupportFragmentManager());
@@ -120,13 +120,13 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
                 suggestRg.check(R.id.suggest_rg_introduction);
                 break;
             case 1:
-                suggestRg.check(R.id.suggest_rg_chateau);
-                break;
-            case 2:
                 suggestRg.check(R.id.suggest_rg_image);
                 break;
-            case 3:
+            case 2:
                 suggestRg.check(R.id.suggest_rg_video);
+                break;
+            case 3:
+                suggestRg.check(R.id.suggest_rg_chateau);
                 break;
         }
 
@@ -155,13 +155,13 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
                 index=0;
                 break;
             case R.id.suggest_rg_chateau:
-                index=1;
+                index=3;
                 break;
             case R.id.suggest_rg_image:
-                index=2;
+                index=1;
                 break;
             case R.id.suggest_rg_video:
-                index=3;
+                index=2;
                 break;
         }
         suggestVp.setCurrentItem(index,true);

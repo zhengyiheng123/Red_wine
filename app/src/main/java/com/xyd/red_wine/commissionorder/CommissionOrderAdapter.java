@@ -36,17 +36,18 @@ public class CommissionOrderAdapter extends BaseQuickAdapter<CommissionOrderMode
         GlideUtil.getInstance()
                 .loadImage(context, (ImageView) helper.getView(R.id.commission_iv), PublicStaticData.baseUrl + item.getG_img(), true);
         helper.setText(R.id.commission_tv_name, item.getNickname());
-        if (item.getLev() == 1)
-
+        if (item.getLev() == 1) {
             helper.setText(R.id.commission_tv_level, "一级");
-        else if (item.getLev() == 2)
+        }
+        else if (item.getLev() == 2) {
             helper.setText(R.id.commission_tv_level, "二级");
+        }else  if (item.getLev() == 3){
+            helper.setText(R.id.commission_tv_level, "三级");
+        }
         helper.setText(R.id.commission_tv_money, item.getGive_money());
         helper.setText(R.id.commission_tv_title, item.getG_name());
         helper.setText(R.id.commission_tv_title1, item.getG_sname());
         helper.setText(R.id.commission_item_tv_price, item.getG_price() + "x" + item.getG_num());
-        helper.setText(R.id.commission_tv_time, TimeUtils.millis2String(item.getAddtime() * 1000, "yyyy-MM-dd"));
-
-
+        helper.setText(R.id.commission_tv_time, TimeUtils.stampToDateSdemand(item.getAddtime() +"", "yyyy-MM-dd"));
     }
 }

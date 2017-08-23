@@ -91,21 +91,21 @@
                     android:textSize="@dimen/text_18" />
 
                 <TextView
-                    android:id="@+id/mine_tv_idiograph"
+                    android:id="@+id/mine_tv_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/mine_tv_name"
                     android:layout_centerHorizontal="true"
                     android:padding="4dp"
-                    android:text="唯音乐与美酒不可辜负"
-                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:text=""
+                    android:textColor="@color/material_textBlack_black"
                     android:textSize="@dimen/text_14" />
 
                 <TextView
                     android:id="@+id/mine_tv_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/mine_tv_idiograph"
+                    android:layout_below="@id/mine_tv_id"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="12dp"
@@ -117,7 +117,7 @@
                     android:id="@+id/mine_tv_earnings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/mine_tv_idiograph"
+                    android:layout_below="@id/mine_tv_id"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="30dp"
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@id/mine_tv_idiograph"
+                    android:layout_below="@id/mine_tv_id"
                     android:layout_marginBottom="16dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="12dp"

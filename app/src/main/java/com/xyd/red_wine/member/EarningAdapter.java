@@ -27,7 +27,7 @@ public class EarningAdapter extends BaseQuickAdapter<EarningModel.DeductBean, Ba
     public EarningAdapter(@Nullable List<EarningModel.DeductBean> data, Context context) {
         super(R.layout.item_earnings, data);
         this.context = context;
-        strings = new String[]{"上级","二级","三级","四级","五级","六级","七级","八级","九级","十级",};
+        strings = new String[]{"上级","一级","二级","三级","四级","五级","六级","七级","八级","九级","十级",};
     }
 
     @Override

@@ -12,473 +12,482 @@
         android:background="@drawable/bg_test" />
 
     <include layout="@layout/base_title" />
-
-    <TextView
-        android:id="@+id/commit_address_none"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@mipmap/jiantou"
-        android:padding="12dp"
-        android:text="请选择收货地址"
-        android:textColor="@color/material_textBlack_black"
-        android:textSize="@dimen/text_14"
-        android:visibility="visible" />
-
-    <LinearLayout
-        android:id="@+id/commit_ll_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="12dp"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/commit_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="24dp"
-            android:text=""
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
-
-        <TextView
-            android:id="@+id/commit_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
-            android:paddingRight="12dp"
-            android:text=""
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/commit_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@mipmap/dizhi"
-        android:drawablePadding="4dp"
-        android:visibility="gone"
-        android:paddingLeft="12dp"
-        android:paddingTop="4dp"
-        android:text=""
-        android:textColor="@color/material_textBlack_black"
-        android:textSize="@dimen/text_14" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:layout_margin="12dp"
-        android:background="@color/line" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp">
-
-        <ImageView
-            android:id="@+id/commit_iv"
-            android:layout_width="118dp"
-            android:layout_height="82dp"
-            android:layout_margin="8dp"
-            android:scaleType="fitXY"
-            />
-
-        <TextView
-            android:id="@+id/commit_tv_title"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@id/commit_iv"
-            android:layout_toRightOf="@id/commit_iv"
-            android:text="法国波尔兰葡萄酒 750ml"
-            android:textColor="@color/material_amber_A700"
-            android:textSize="@dimen/text_16" />
-
-        <TextView
-            android:id="@+id/commit_tv_title1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/commit_tv_title"
-            android:layout_toRightOf="@id/commit_iv"
-            android:text="WINE BOTTLE MOCKUP"
-            android:textColor="@color/material_amber_A100"
-            android:textSize="@dimen/text_14" />
-
-        <TextView
-            android:id="@+id/commit_tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/commit_tv_title1"
-            android:layout_toRightOf="@id/commit_iv"
-            android:paddingTop="16dp"
-            android:text="￥200.00"
-            android:textColor="@color/material_red_500"
-            android:textSize="@dimen/text_16" />
-
-        <TextView
-            android:id="@+id/commit_tv_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/commit_tv_title1"
-            android:paddingLeft="12dp"
-            android:paddingTop="16dp"
-            android:text="x1"
-            android:textColor="@color/material_textBlack_secondaryText"
-            android:textSize="@dimen/text_14" />
-
-    </RelativeLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:layout_margin="12dp"
-        android:background="@color/line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="12dp"
-            android:text="购买数量"
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
-
-        <ImageView
-            android:id="@+id/commit_jian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:src="@mipmap/jian" />
-
-        <EditText
-            android:id="@+id/commit_edt_num"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:cursorVisible="false"
-            android:gravity="center"
-            android:inputType="number" />
-
-        <ImageView
-            android:id="@+id/commit_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="12dp"
-            android:src="@mipmap/add" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:layout_margin="12dp"
-        android:background="@color/line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="12dp"
-            android:text="配送方式"
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
-
-        <TextView
-            android:id="@+id/commit_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
-            android:paddingRight="12dp"
-            android:text="快速发货"
-            android:textColor="@color/material_textBlack_secondaryText"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:layout_margin="12dp"
-        android:background="@color/line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="12dp"
-            android:text="运费"
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
-
-        <TextView
-            android:id="@+id/commit_freight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="24dp"
-            android:paddingRight="12dp"
-            android:text="￥0.00"
-            android:textColor="@color/material_textBlack_secondaryText"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:layout_marginRight="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/line" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:paddingLeft="12dp"
-            android:text="支付方式"
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
-        <!--<CheckBox-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="12dp"-->
-            <!--android:id="@+id/commit_cb_wx"-->
-            <!--android:checked="true"-->
-            <!--android:layout_weight="1"-->
-
-            <!--android:text="微信支付" />-->
-        <!--<ImageView-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:src="@drawable/umeng_socialize_wechat"/>-->
-
-        <!--<CheckBox-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="1"-->
-            <!--android:id="@+id/commit_cb_alipay"-->
-            <!--android:text="支付宝支付" />-->
-
-        <!--<ImageView-->
-            <!--android:layout_width="50dp"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:layout_marginRight="12dp"-->
-            <!--android:src="@drawable/umeng_socialize_alipay"/>-->
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <View
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/line" />
-        <RelativeLayout
-            android:paddingLeft="16dp"
-            android:id="@+id/rl_webchat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/tv_weixin"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/umeng_socialize_wechat"
-                />
+            android:layout_height="match_parent">
             <TextView
-                android:textColor="@color/material_grey_800"
-                android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/tv_weixin"
-                android:layout_width="wrap_content"
+                android:id="@+id/commit_address_none"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="微信支付"
-                />
-            <CheckBox
-                android:id="@+id/cb_webchat"
-                android:enabled="false"
-                android:layout_marginRight="16dp"
-                android:button="@null"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/checkbox"
-                />
-        </RelativeLayout>
-        <View
+                android:drawableRight="@mipmap/jiantou"
+                android:padding="12dp"
+                android:text="请选择收货地址"
+                android:textColor="@color/material_textBlack_black"
+                android:textSize="@dimen/text_14"
+                android:visibility="visible" />
 
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/line" />
-        <RelativeLayout
-            android:paddingLeft="16dp"
-            android:id="@+id/rl_alipay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/tv_zhifubao"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/umeng_socialize_alipay"
-                />
+            <LinearLayout
+                android:id="@+id/commit_ll_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="12dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/commit_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="24dp"
+                    android:text=""
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/commit_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="12dp"
+                    android:text=""
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
             <TextView
-                android:textColor="@color/material_grey_800"
-                android:textSize="17sp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/tv_zhifubao"
+                android:id="@+id/commit_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="支付宝支付"
-                />
-            <CheckBox
-                android:id="@+id/rb_alipay"
-                android:enabled="false"
-                android:layout_marginRight="16dp"
-                android:button="@null"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
+                android:drawableLeft="@mipmap/dizhi"
+                android:drawablePadding="4dp"
+                android:visibility="gone"
+                android:paddingLeft="12dp"
+                android:paddingTop="4dp"
+                android:text=""
+                android:textColor="@color/material_textBlack_black"
+                android:textSize="@dimen/text_14" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_margin="12dp"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/checkbox"
-                />
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_marginBottom="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:background="@color/line" />
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/commit_iv"
+                    android:layout_width="118dp"
+                    android:layout_height="82dp"
+                    android:layout_margin="8dp"
+                    android:scaleType="fitXY"
+                    />
 
-        <TextView
+                <TextView
+                    android:id="@+id/commit_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/commit_iv"
+                    android:layout_toRightOf="@id/commit_iv"
+                    android:text="法国波尔兰葡萄酒 750ml"
+                    android:textColor="@color/material_amber_A700"
+                    android:textSize="@dimen/text_16" />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="12dp"
-            android:text="买家留言："
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14" />
+                <TextView
+                    android:id="@+id/commit_tv_title1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/commit_tv_title"
+                    android:layout_toRightOf="@id/commit_iv"
+                    android:text="WINE BOTTLE MOCKUP"
+                    android:textColor="@color/material_amber_A100"
+                    android:textSize="@dimen/text_14" />
 
-        <EditText
-            android:id="@+id/commit_edt_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:maxLength="60"
-            android:paddingRight="12dp"
-            android:hint="对本次的交易的说明"
-            android:textColor="@color/material_textBlack_secondaryText"
-            android:textSize="@dimen/text_14" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/commit_tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/commit_tv_title1"
+                    android:layout_toRightOf="@id/commit_iv"
+                    android:paddingTop="16dp"
+                    android:text="￥200.00"
+                    android:textColor="@color/material_red_500"
+                    android:textSize="@dimen/text_16" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:layout_margin="12dp"
-        android:background="@color/line" />
+                <TextView
+                    android:id="@+id/commit_tv_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/commit_tv_title1"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="16dp"
+                    android:text="x1"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+            </RelativeLayout>
 
-        <TextView
 
-            android:id="@+id/commit_tv_num1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:paddingLeft="12dp"
-            android:text="共1件商品 小计："
-            android:textColor="@color/material_textBlack_secondaryText"
-            android:textSize="@dimen/text_14" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_margin="12dp"
+                android:background="@color/line" />
 
-        <TextView
-            android:id="@+id/commit_tv_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="12dp"
-            android:text="￥200.00"
-            android:textColor="@color/material_red_500"
-            android:textSize="@dimen/text_16" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:background="@color/line" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="12dp"
+                    android:text="购买数量"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/commit_jian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:src="@mipmap/jian" />
 
-        <TextView
-            android:id="@+id/commit_tv_money_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingLeft="12dp"
-            android:text="合计：￥200.00"
-            android:textColor="@color/material_textBlack_black"
-            android:textSize="@dimen/text_14"
+                <EditText
+                    android:id="@+id/commit_edt_num"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="number" />
 
-            />
+                <ImageView
+                    android:id="@+id/commit_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:src="@mipmap/add" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/commit_buy"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginBottom="6dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/bg_btn_quit"
-            android:gravity="center"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:text="立即购买"
-            android:textColor="@color/material_textWhite_black"
-            android:textSize="@dimen/text_16" />
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_margin="12dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="12dp"
+                    android:text="配送方式"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/commit_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="12dp"
+                    android:text="快速发货"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_margin="12dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="12dp"
+                    android:text="运费"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/commit_freight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="12dp"
+                    android:text="￥0.00"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_marginRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:paddingLeft="12dp"
+                    android:text="支付方式"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+                <!--<CheckBox-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--android:id="@+id/commit_cb_wx"-->
+                <!--android:checked="true"-->
+                <!--android:layout_weight="1"-->
+
+                <!--android:text="微信支付" />-->
+                <!--<ImageView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:src="@drawable/umeng_socialize_wechat"/>-->
+
+                <!--<CheckBox-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/commit_cb_alipay"-->
+                <!--android:text="支付宝支付" />-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_marginRight="12dp"-->
+                <!--android:src="@drawable/umeng_socialize_alipay"/>-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <View
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/line" />
+                <RelativeLayout
+                    android:paddingLeft="16dp"
+                    android:id="@+id/rl_webchat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/tv_weixin"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/umeng_socialize_wechat"
+                        />
+                    <TextView
+                        android:textColor="@color/material_grey_800"
+                        android:textSize="17sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_weixin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="微信支付"
+                        />
+                    <CheckBox
+                        android:id="@+id/cb_webchat"
+                        android:enabled="false"
+                        android:layout_marginRight="16dp"
+                        android:button="@null"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/checkbox"
+                        />
+                </RelativeLayout>
+                <View
+
+                    android:layout_marginRight="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/line" />
+                <RelativeLayout
+                    android:paddingLeft="16dp"
+                    android:id="@+id/rl_alipay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/tv_zhifubao"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/umeng_socialize_alipay"
+                        />
+                    <TextView
+                        android:textColor="@color/material_grey_800"
+                        android:textSize="17sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_zhifubao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="支付宝支付"
+                        />
+                    <CheckBox
+                        android:id="@+id/rb_alipay"
+                        android:enabled="false"
+                        android:layout_marginRight="16dp"
+                        android:button="@null"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/checkbox"
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <View
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="12dp"
+                    android:text="买家留言："
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14" />
+
+                <EditText
+                    android:id="@+id/commit_edt_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:maxLength="60"
+                    android:paddingRight="12dp"
+                    android:hint="对本次的交易的说明"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_margin="12dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:id="@+id/commit_tv_num1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:paddingLeft="12dp"
+                    android:text="共1件商品 小计："
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/commit_tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="12dp"
+                    android:text="￥200.00"
+                    android:textColor="@color/material_red_500"
+                    android:textSize="@dimen/text_16" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/commit_tv_money_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="12dp"
+                    android:text="合计：￥200.00"
+                    android:textColor="@color/material_textBlack_black"
+                    android:textSize="@dimen/text_14"
+
+                    />
+
+                <TextView
+                    android:id="@+id/commit_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/bg_btn_quit"
+                    android:gravity="center"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:text="立即购买"
+                    android:textColor="@color/material_textWhite_black"
+                    android:textSize="@dimen/text_16" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

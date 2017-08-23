@@ -111,7 +111,8 @@ public class RegisterActivity extends BaseActivity implements RegisterContract.V
                     presenter.getCode(registerEdtUser.getText().toString());
                 break;
             case R.id.register_tv_protocol:
-                showTestToast("协议");
+//                showTestToast("协议");
+                startActivity(new Intent(getApplicationContext(),ProtocolActivity.class));
                 break;
         }
 

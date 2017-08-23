@@ -208,6 +208,7 @@
             android:theme="@style/Theme.UMDefault" />
         <activity android:name=".personinformation.BindActivity" />
         <activity android:name=".personinformation.ChangePhoneActivity" />
+        <activity android:name=".register.ProtocolActivity" />
     </application>
 
 </manifest>
