@@ -45,12 +45,17 @@ public class TixianActivity extends BaseActivity {
     EditText tixianEdt;
     @Bind(R.id.tixian_alipay)
     CheckBox tixianAlipay;
+    @Bind(R.id.tv_available_money)
+    TextView tv_available_money;
     @Bind(R.id.tixian_edt_user)
     EditText tixianEdtUser;
     @Bind(R.id.chongzhi_num)
     TextView chongzhiNum;
     @Bind(R.id.tixian_btn)
     TextView tixianBtn;
+
+    public static String AVAILAVLE_MONEY="available_money";
+    private Double available;
 
     @Override
     protected int getLayoutId() {
@@ -59,11 +64,12 @@ public class TixianActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        available=getIntent().getDoubleExtra(AVAILAVLE_MONEY,0);
         baseTitleTitle.setText("提现");
         baseTitleMenu.setVisibility(View.INVISIBLE);
         InputFilter[] is = {new CashierInputFilter(1)};
         tixianEdt.setFilters(is);
-
+        tv_available_money.setText("可用余额："+available);
 
     }
 
@@ -105,7 +111,11 @@ public class TixianActivity extends BaseActivity {
 
                 } else if (TextUtils.isEmpty(tixianEdtUser.getText().toString())) {
                     showToast("请输入提现账号");
-                } else {
+                }else if (Double.parseDouble(tixianEdt.getText().toString()) <10.00){
+                    showToast("提现金额最少应大于10元");
+                }
+
+                else {
                     showTixianDialog();
 
 

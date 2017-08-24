@@ -50,7 +50,13 @@
 
 
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tv_available_money"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="可用余额："
+        />
 
 
     <LinearLayout

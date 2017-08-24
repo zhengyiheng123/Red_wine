@@ -33,8 +33,9 @@ public class CashValueModel {
          * create_time : 1502096430
          * update_time : 1502157833
          * pay_account :
+         * rl_type
          */
-
+        private int rl_type;
         private int rl_id;
         private int u_id;
         private String recharge_num;
@@ -45,6 +46,14 @@ public class CashValueModel {
         private long create_time;
         private long update_time;
         private String pay_account;
+
+        public int getRl_type() {
+            return rl_type;
+        }
+
+        public void setRl_type(int rl_type) {
+            this.rl_type = rl_type;
+        }
 
         public int getRl_id() {
             return rl_id;

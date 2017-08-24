@@ -58,6 +58,7 @@ public class BalanceActivity extends BaseActivity {
     ImageView balanceIvHead;
     @Bind(R.id.balance_iv_money)
     DrawImageView balanceIvMoney;
+    private BalanceModel model;
 
     @Override
     protected int getLayoutId() {
@@ -88,6 +89,7 @@ public class BalanceActivity extends BaseActivity {
                 .subscribe(new BaseObserver<BalanceModel>() {
                     @Override
                     protected void onHandleSuccess(BalanceModel balanceModel, String msg, int code) {
+                        model = balanceModel;
                         balanceTvName.setText(balanceModel.getNickname());
                         GlideUtil.getInstance().loadCircleImage(BalanceActivity.this, balanceIvHead, PublicStaticData.baseUrl + balanceModel.getHead_img());
                         balanceTvMoney.setText(balanceModel.getTotal() + "");
@@ -128,7 +130,9 @@ public class BalanceActivity extends BaseActivity {
 //                balanceIvMoney.setAngel(random.nextInt(360));
                 break;
             case R.id.balance_tv_withdraw:
-                startActivity(TixianActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putDouble(TixianActivity.AVAILAVLE_MONEY,model.getAccount_balance());
+                startActivity(TixianActivity.class,bundle);
 
                 break;
             case R.id.balance_tv_top_up:

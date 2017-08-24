@@ -29,18 +29,19 @@ public class RecordAdapter extends BaseQuickAdapter<CashValueModel.CashValueBean
 
     @Override
     protected void convert(BaseViewHolder helper, CashValueModel.CashValueBean item) {
-        if (item.getWe_price().contains("-")) {
+//        item.getRl_type() == 1 充值  2提现
+        if (item.getRl_type() == 1) {
             helper.setVisible(R.id.item_record_user, true);
             helper.setText(R.id.item_record_num, "订单号：" + item.getRecharge_num());
-            helper.setText(R.id.item_record_money, "提现金额：" + item.getWe_price().replace("-", ""));
+            helper.setText(R.id.item_record_money, "充值金额：" + item.getWe_price().replace("-", ""));
             helper.setText(R.id.item_record_time, "时间：" + TimeUtils.millis2String(item.getCreate_time() * 1000, "yyyy-MM-dd HH:mm"));
-            helper.setText(R.id.item_record_user, "提现账号：" + item.getPay_account());
-            String s = item.getRl_state() == 1 ? "待支付" : "已支付";
+            helper.setText(R.id.item_record_user, "充值账号：" + item.getPay_account());
+            String s = item.getRl_state() == 1 ? "支付取消" : "已支付";
             helper.setText(R.id.item_record_type, "状态：" + s);
         } else {
             helper.setVisible(R.id.item_record_user, false);
             helper.setText(R.id.item_record_num, "订单号：" + item.getRecharge_num());
-            helper.setText(R.id.item_record_money, "充值金额：" + item.getWe_price().replace("-", ""));
+            helper.setText(R.id.item_record_money, "提现金额：" + item.getWe_price().replace("-", ""));
             helper.setText(R.id.item_record_time, "时间：" + TimeUtils.millis2String(item.getCreate_time() * 1000, "yyyy-MM-dd HH:mm"));
             if (item.getRl_state() == 1)
 

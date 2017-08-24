@@ -29,7 +29,7 @@
             android:textColor="@color/material_textBlack_secondaryText"
             android:text="来自系统管理员 07-10 17:34:34"/>
         <TextView
-            android:visibility="gone"
+            android:visibility="visible"
             android:textSize="12sp"
             android:layout_centerVertical="true"
             android:layout_gravity="right"
