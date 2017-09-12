@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class EvaluateActivity extends BaseActivity implements RadioGroup.OnCheck
     @Bind(R.id.evaluate_edt)
     EditText evaluateEdt;
     @Bind(R.id.evaluate_add_image)
-    TextView evaluateAddImage;
+    LinearLayout evaluateAddImage;
     @Bind(R.id.evaluate_send)
     TextView evaluateSend;
     @Bind(R.id.evaluate_rv_image)

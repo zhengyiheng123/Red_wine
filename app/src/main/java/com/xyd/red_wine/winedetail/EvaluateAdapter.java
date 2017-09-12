@@ -66,7 +66,7 @@ public class EvaluateAdapter extends BaseQuickAdapter<EvaluateModel.CommentsBean
         helper.setText(R.id.evaluate_content,item.getContent());
         helper.setText(R.id.evaluate_name,item.getNickname());
          long  time= Long.parseLong(item.getPubtime());
-        helper.setText(R.id.evaluate_time, TimeUtils.millis2String(time*1000,"yyyy-MM-dd")+"\u3000\u3000"+item.getG_name()+"*"+item.getNum());
+        helper.setText(R.id.evaluate_time, TimeUtils.millis2String(time*1000,"yyyy-MM-dd")+"\u3000\u3000");
 
         //    酒名+数量
 
