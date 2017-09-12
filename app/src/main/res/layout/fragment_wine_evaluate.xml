@@ -29,7 +29,7 @@
             android:paddingTop="4dp"
             android:text="全部"
             android:textColor="@color/check_suggest"
-            android:textSize="@dimen/text_14" />
+            android:textSize="13sp" />
 
         <RadioButton
             android:id="@+id/wine_evaluate_rg_hao"
@@ -45,7 +45,7 @@
             android:paddingTop="4dp"
             android:text="好评"
             android:textColor="@color/check_suggest"
-            android:textSize="@dimen/text_14" />
+            android:textSize="13sp" />
 
         <RadioButton
             android:id="@+id/wine_evaluate_rg_zhong"
@@ -61,7 +61,7 @@
             android:paddingTop="4dp"
             android:text="中评"
             android:textColor="@color/check_suggest"
-            android:textSize="@dimen/text_14" />
+            android:textSize="13sp" />
 
         <RadioButton
             android:id="@+id/wine_evaluate_rg_cha"
@@ -76,7 +76,7 @@
             android:paddingTop="4dp"
             android:text="差评"
             android:textColor="@color/check_suggest"
-            android:textSize="@dimen/text_14" />
+            android:textSize="13sp" />
     </RadioGroup>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

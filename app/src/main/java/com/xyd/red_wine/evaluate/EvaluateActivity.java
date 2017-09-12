@@ -94,6 +94,9 @@ public class EvaluateActivity extends BaseActivity implements RadioGroup.OnCheck
     TextView evaluateSend;
     @Bind(R.id.evaluate_rv_image)
     RecyclerView evaluateRvImage;
+
+    @Bind(R.id.base_title_right)
+    TextView mTitleRight;
     private List<File> images;
     private EvaluateAdapter adapter;
     private int type = 3;
@@ -106,6 +109,8 @@ public class EvaluateActivity extends BaseActivity implements RadioGroup.OnCheck
 
     @Override
     protected void initView() {
+        mTitleRight.setText("发布");
+        mTitleRight.setVisibility(View.VISIBLE);
         OrderModel.MyOrderBean bean= (OrderModel.MyOrderBean) getIntent().getSerializableExtra(EVALUATE);
         g_id=bean.getG_id()+"";
         order_num=bean.getOrder_num();
@@ -130,7 +135,7 @@ public class EvaluateActivity extends BaseActivity implements RadioGroup.OnCheck
         evaluateRg.setOnCheckedChangeListener(this);
         evaluateAddImage.setOnClickListener(this);
         evaluateSend.setOnClickListener(this);
-
+        mTitleRight.setOnClickListener(this);
 
     }
 
@@ -140,17 +145,15 @@ public class EvaluateActivity extends BaseActivity implements RadioGroup.OnCheck
             case R.id.base_title_back:
                 finish();
                 break;
-            case R.id.evaluate_send:
-                sendEvaluate();
-
-
-                break;
             case R.id.evaluate_add_image:
                 if (images.size() == 2) {
                     showToast("最多选择两张图片");
                 } else {
                     showPictureDialog();
                 }
+                break;
+            case R.id.base_title_right:
+                sendEvaluate();
                 break;
         }
 

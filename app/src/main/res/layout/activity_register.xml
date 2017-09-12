@@ -99,24 +99,24 @@
             android:background="@drawable/bg_login"
             android:drawableLeft="@mipmap/security_verification"
             android:drawablePadding="@dimen/padding_12"
-            android:hint="请输入手机验证码"
+            android:hint="验证码"
             android:paddingLeft="@dimen/padding_12"
             android:textSize="@dimen/text_14" />
 
         <TextView
             android:id="@+id/register_tv_code"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_32"
+            android:layout_height="25dp"
             android:layout_alignRight="@id/register_edt_code"
             android:layout_alignTop="@id/register_edt_code"
-            android:layout_marginRight="@dimen/margin_12"
-            android:layout_marginTop="5dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bg_login"
             android:gravity="center"
             android:hint="获取验证码"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:textSize="@dimen/text_14" />
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:drawablePadding="@dimen/padding_8"
-                android:text="《乔治金翰注册协议》"
+                android:text="《乔治金瀚注册协议》"
                 android:textColor="@color/material_textBlack_text"
                 android:textSize="@dimen/text_14" />
         </LinearLayout>

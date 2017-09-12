@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -102,6 +103,8 @@ public class RecordActivity extends BaseActivity implements SwipeRefreshLayout.O
         list = new ArrayList<>();
 
         adapter = new RecordAdapter(list, this);
+        View view= LayoutInflater.from(this).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
         adapter.setOnLoadMoreListener(this, recordRv);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         recordRv.setAdapter(adapter);

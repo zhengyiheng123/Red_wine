@@ -58,17 +58,17 @@
 
         <ImageView
             android:id="@+id/detail_collect"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="12dp"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/pingjia_weixuanzhong" />
+            />
 
         <ImageView
             android:id="@+id/detail_share"
-            android:layout_width="12dp"
-            android:layout_height="16dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center_vertical"
             android:layout_marginRight="12dp"
             android:layout_marginTop="10dp"

@@ -1,20 +1,36 @@
 package com.xyd.red_wine.main.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.AbsoluteLayout;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
+import com.recker.flybanner.FlyBanner;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.api.HomeApi;
 import com.xyd.red_wine.base.BaseApi;
@@ -25,13 +41,19 @@ import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.kefu.ChatActivity;
+import com.xyd.red_wine.main.home.infiniteViewPager.InfinitePagerAdapter;
+import com.xyd.red_wine.main.home.infiniteViewPager.InfiniteViewPager;
 import com.xyd.red_wine.newsdetail.DetailActivity;
 import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.utils.LogUtil;
+import com.xyd.red_wine.view.DragFloatActionButton;
+import com.xyd.red_wine.view.FloatTouchListener;
 import com.xyd.red_wine.view.MenuPopWindow;
+import com.xyd.red_wine.view.MyListView;
 import com.xyd.red_wine.view.NoticeView;
 import com.xyd.red_wine.view.banner.Banner;
 import com.xyd.red_wine.view.banner.OnBannerListener;
+import com.xyd.red_wine.winedetail.WineDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +70,10 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment {
 
-
     @Bind(R.id.menu)
     ImageView menu;
     @Bind(R.id.banner)
-    ImageView ivBanner;
+    FlyBanner ivBanner;
     @Bind(R.id.home_iv_introduce)
     ImageView homeIvIntroduce;
     @Bind(R.id.home_iv_recommend)
@@ -72,13 +93,23 @@ public class HomeFragment extends BaseFragment {
     @Bind(R.id.home_srl)
     SwipeRefreshLayout homeSrl;
     @Bind(R.id.iv_service)
-    ImageView iv_service;
+    DragFloatActionButton iv_service;
     @Bind(R.id.home_frame)
     FrameLayout homeFrame;
+    @Bind(R.id.home_rv)
+    RecyclerView mHomeLV;
+//    @Bind(R.id.id_viewpager)
+//    InfiniteViewPager minfinatePager;
+
+    private HomeMyAdapter homeMyAdapter;
+
     private List<HomeModel.CarouselBean> banner;
     private HomeModel model;
     private List<HomeModel.PhotoMsgBean> newsList;
     private PromptDialog dialog;
+    private ArrayList<HomeModel.GoodsBean> goodsBeen;
+    //轮播图
+    List<String> bannerList=new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -87,11 +118,14 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+//        addFloatBtn();
+//        setTouchListener();
         dialog=new PromptDialog(getActivity());
         dialog.showLoading("");
         getData();
         banner = new ArrayList<>();
-        homeBanner.setImages(banner).start();
+        homeBanner.isAutoPlay(false);
+        homeBanner.setImages(banner);
         newsList = new ArrayList<>();
         homeBanner.setOnBannerListener(new OnBannerListener() {
             @Override
@@ -99,12 +133,21 @@ public class HomeFragment extends BaseFragment {
                 Bundle b = new Bundle();
                 b.putString(WebViewActivity.TITLE, "活动");
                  b.putString(WebViewActivity.URL, model.getCarousel().get(position).getAdv_url());
-                //b.putString(WebViewActivity.URL, "http://m.wine-world.com/culture/pj/20170728114754742");
                 startActivity(WebViewActivity.class, b);
             }
         });
+        initAdapter();
     }
 
+    private void initAdapter() {
+        goodsBeen = new ArrayList<>();
+        FullyLinearLayoutManager fullyManager=new FullyLinearLayoutManager(getActivity());
+        fullyManager.setScrollEnabled(false);
+        mHomeLV.setLayoutManager(fullyManager);
+        mHomeLV.setNestedScrollingEnabled(true);
+        homeMyAdapter=new HomeMyAdapter(goodsBeen,getContext());
+        mHomeLV.setAdapter(homeMyAdapter);
+    }
     /**
      * 网络获取首页数据
      */
@@ -121,8 +164,8 @@ public class HomeFragment extends BaseFragment {
                         banner.clear();
                         banner.addAll(homeModel.getCarousel());
                         homeBanner.update(homeModel.getCarousel());
-                        GlideUtil.getInstance()
-                                .loadImage(getActivity(), ivBanner, PublicStaticData.baseUrl + homeModel.getBanner().getAdv_imgs(), true);
+//                        GlideUtil.getInstance()
+//                                .loadImage(getActivity(), ivBanner, PublicStaticData.baseUrl + homeModel.getBanner().getAdv_imgs(), true);
                         newsList.clear();
                         newsList.addAll(homeModel.getPhoto_msg());
                         List<String> strings = new ArrayList<String>();
@@ -134,6 +177,9 @@ public class HomeFragment extends BaseFragment {
                         homeNewsNotice.setNoticeList(strings);
                         dialog.dismissImmediately();
                         homeSrl.setRefreshing(false);
+                        homeMyAdapter.setNewData(homeModel.getGoods());
+//                        setInificatepager();
+                        initBanner();
                     }
 
                     @Override
@@ -144,13 +190,22 @@ public class HomeFragment extends BaseFragment {
                     }
                 });
     }
+    //  初始化首页轮播图
+    private void initBanner() {
+        bannerList.clear();
+        for (int i =0 ;i<model.getCarousel().size();i++){
+            bannerList.add(PublicStaticData.baseUrl+model.getCarousel().get(i).getAdv_imgs());
+        }
+        ivBanner.setImagesUrl(bannerList);
+        ivBanner.startAutoPlay();
+    }
 
     @Override
     protected void initEvent() {
         homeIvIntroduce.setOnClickListener(this);
         homeIvManage.setOnClickListener(this);
         homeIvRecommend.setOnClickListener(this);
-        ivBanner.setOnClickListener(this);
+//        ivBanner.setOnClickListener(this);
         homeNewsLl.setOnClickListener(this);
         iv_service.setOnClickListener(this);
 
@@ -176,6 +231,26 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+        homeMyAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Bundle bundle=new Bundle();
+                bundle.putString(WineDetailActivity.G_ID,homeMyAdapter.getData().get(position).getG_id()+"");
+                Log.e("position",position+"");
+//                Log.e("g_id",adapter.getData().get(position).getG_id()+"");
+                startActivity(WineDetailActivity.class,bundle);
+            }
+        });
+        //轮播图点击事件
+        ivBanner.setOnItemClickListener(new FlyBanner.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Bundle b = new Bundle();
+                b.putString(WebViewActivity.TITLE, "活动");
+                b.putString(WebViewActivity.URL, model.getCarousel().get(position).getAdv_url());
+                startActivity(WebViewActivity.class, b);
+            }
+        });
     }
 
     @Override
@@ -259,6 +334,7 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         homeNewsNotice.start();
+
     }
 
     @Override
@@ -280,4 +356,10 @@ public class HomeFragment extends BaseFragment {
         super.onDestroy();
 
     }
+    public int px2dip(float pxValue){
+        final float scale = getActivity().getResources().getDisplayMetrics().density;
+        return (int) (pxValue/scale+0.5f);
+    }
+
+
 }

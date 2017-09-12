@@ -12,10 +12,6 @@
 
     <include layout="@layout/base_title" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:background="@color/line" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="公益排行榜"
+                    android:text="收益排行榜"
 
                     android:textColor="@color/material_textWhite_black"
                     android:textSize="@dimen/text_16" />
@@ -84,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="公益活动"
+                    android:text="公益排行榜"
 
                     android:textColor="@color/material_textWhite_text"
                     android:textSize="@dimen/text_16" />

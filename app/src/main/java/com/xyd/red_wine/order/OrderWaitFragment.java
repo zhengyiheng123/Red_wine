@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -21,6 +22,7 @@ import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.evaluate.EvaluateActivity;
 import com.xyd.red_wine.logistics.LogisticsActivity;
+import com.xyd.red_wine.orderdetail.OrderDetailActivity;
 import com.xyd.red_wine.winedetail.WineDetailActivity;
 
 import java.util.ArrayList;
@@ -36,7 +38,8 @@ import butterknife.Bind;
  */
 
 public class OrderWaitFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener,
+BaseQuickAdapter.OnItemClickListener{
     @Bind(R.id.order_rv)
     RecyclerView orderRv;
     @Bind(R.id.order_srl)
@@ -50,6 +53,11 @@ public class OrderWaitFragment extends BaseFragment implements SwipeRefreshLayou
         return R.layout.fragment_order;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
+    }
     @Override
     protected void initView() {
 
@@ -99,8 +107,11 @@ public class OrderWaitFragment extends BaseFragment implements SwipeRefreshLayou
 
         adapter = new OrderAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, orderRv);
+        View view= LayoutInflater.from(getActivity()).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         orderRv.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
         adapter.setOnItemChildClickListener(this);
         adapter.setEnableLoadMore(true);
     }
@@ -134,7 +145,9 @@ public class OrderWaitFragment extends BaseFragment implements SwipeRefreshLayou
         switch (view.getId()) {
             case R.id.order_tv_left:
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(LogisticsActivity.ORDER_DATA, adapter.getData().get(position));
+                bundle.putString(LogisticsActivity.ORDER_NUM,adapter.getData().get(position).getOrder_num());
+                bundle.putString(LogisticsActivity.ORDER_URL,adapter.getData().get(position).getG_img());
+                bundle.putInt(LogisticsActivity.ORDER_STATUS,adapter.getData().get(position).getOrder_status());
                 startActivity(LogisticsActivity.class, bundle);
                 break;
             case R.id.order_tv_right:
@@ -206,5 +219,12 @@ public class OrderWaitFragment extends BaseFragment implements SwipeRefreshLayou
                     }
                 });
 
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+        Bundle bundle=new Bundle();
+        bundle.putString(OrderDetailActivity.ORDER_NUM,adapter.getData().get(position).getOrder_num());
+        startActivity(OrderDetailActivity.class,bundle);
     }
 }

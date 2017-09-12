@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="6dp"
+    android:id="@+id/ll_root"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="12dp">
+    <android.support.v7.widget.CardView
+        android:elevation="10dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.xyd.red_wine.view.SmartImageveiw
+            android:id="@+id/home_my_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/home_my_buy_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_radius_5_theme_color"
+        android:padding="@dimen/dp_4"
+        android:text="立即购买"
+        android:textColor="@color/material_white"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

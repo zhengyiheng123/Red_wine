@@ -57,7 +57,7 @@ public class PrimeurActivity extends BaseActivity implements SwipeRefreshLayout.
     @Override
     protected void initView() {
         baseTitleBack.setText("");
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("期酒");
         newsSrl.setOnRefreshListener(this);
         newsSrl.setColorSchemeColors(Color.rgb(241, 173, 74));

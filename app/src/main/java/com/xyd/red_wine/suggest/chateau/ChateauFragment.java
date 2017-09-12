@@ -258,7 +258,7 @@ public class ChateauFragment extends BaseFragment implements SwipeRefreshLayout.
                 if (showAll)
                     return chateauStrings.size();
                 else
-                    return 4;
+                    return chateauStrings.size();
             } else {
                 return chateauStrings.size();
             }

@@ -42,6 +42,8 @@ public class PaymentsActivity extends BaseActivity implements SwipeRefreshLayout
     RecyclerView paymentsRv;
     @Bind(R.id.payments_srl)
     SwipeRefreshLayout paymentsSrl;
+    @Bind(R.id.base_title_headline)
+    ImageView mHaedLine;
     private PaymentsAdapter adapter;
     private List<PaymentsModel.WelfareListBean> list;
     private TextView money;
@@ -55,6 +57,7 @@ public class PaymentsActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     protected void initView() {
+        mHaedLine.setVisibility(View.GONE);
         presenter = new PaymentsPresenter(this);
         baseTitleTitle.setText("公益金");
         baseTitleMenu.setVisibility(View.GONE);

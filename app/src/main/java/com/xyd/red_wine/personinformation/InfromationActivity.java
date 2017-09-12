@@ -96,6 +96,8 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     Button informationBtnSave;
     @Bind(R.id.tv_bangding)
     TextView tv_bangding;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLine;
     private File outputFile;
     private File file;
     private InputDialog.Builder dialogBuilder;
@@ -110,6 +112,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
 
     @Override
     protected void initView() {
+        mHeadLine.setVisibility(View.GONE);
         baseTitleMenu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("个人信息");
         EventBus.getDefault().register(this);
@@ -147,11 +150,11 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                             informationCbWomen.setChecked(true);
                         else
                             informationCbMen.setChecked(true);
-                        if (TextUtils.isEmpty(infromationModel.getPhone())){
-                            tv_bangding.setText("绑定");
-                        }else {
-                            tv_bangding.setText("更换手机号");
-                        }
+//                        if (TextUtils.isEmpty(infromationModel.getPhone())){
+//                            tv_bangding.setText("绑定");
+//                        }else {
+//                            tv_bangding.setText("更换手机号");
+//                        }
                         EventBus.getDefault().post(new InformationMessage());
                     }
 

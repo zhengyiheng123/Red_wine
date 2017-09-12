@@ -94,7 +94,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
     @Override
     protected void initView() {
         baseTitleTitle.setText("推广");
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         getData();
         videos = new ArrayList<>();
         images = new ArrayList<>();
@@ -213,9 +213,9 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                 break;
             case R.id.generalize_share:
                 new ShareAction(this)
-                        .withText("乔治金翰")
+                        .withText("酒瀚")
                         .withMedia(new UMImage(GeneralizeActivity.this,qr_code))
-                        .setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE)
+                        .setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
@@ -268,10 +268,14 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
 
                 break;
             case R.id.generalize_image_more:
-                startActivity(SuggestActivity.class);
+                Bundle bundle1= new Bundle();
+                bundle1.putInt(SuggestActivity.CURRENT_PAGE,0);
+                startActivity(SuggestActivity.class,bundle1);
                 break;
             case R.id.generalize_video_more:
-                startActivity(SuggestActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putInt(SuggestActivity.CURRENT_PAGE,1);
+                startActivity(SuggestActivity.class,bundle);
                 break;
         }
 

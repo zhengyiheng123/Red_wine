@@ -52,7 +52,8 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="4dp"
         android:id="@+id/chateau_iv_arrows"
-        android:src="@mipmap/shuangjiantou" />
+        android:src="@mipmap/shuangjiantou"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"

@@ -28,6 +28,7 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.generalize.GeneralizeActivity;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -147,14 +148,16 @@ public class DetailActivity extends BaseActivity {
 //                shareIntent.putExtra(Intent.EXTRA_TEXT, content);
 //                //自定义选择框的标题
 //                startActivity(Intent.createChooser(shareIntent, "资讯"));
-                UMImage thumb =  new UMImage(this, R.mipmap.dddddd);
+//                UMImage thumb =  new UMImage(this, R.mipmap.logo000);
                 UMWeb  web = new UMWeb(content);
-                web.setTitle("乔治金翰");//标题
-                web.setThumb(thumb);  //缩略图
+                web.setTitle("酒瀚");//标题
+//                web.setThumb(thumb);  //缩略图
                 web.setDescription("红酒资讯");//描述
                 new ShareAction(this)
                         .withMedia(web)
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE)
+                        .withText("乔治金瀚资讯")
+//                        .withMedia(thumb)
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
@@ -194,6 +197,14 @@ public class DetailActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
+        detailWv.destroy();
+
+    }
+
     private void addCollect() {
         BaseApi.getRetrofit()
                 .create(CollectApi.class)
@@ -204,6 +215,7 @@ public class DetailActivity extends BaseActivity {
                     protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
                         isCollect = 1;
                         detailCollect.setImageResource(R.mipmap.pingjia_xuanzhong);
+                        ToastUtils.show(msg);
                     }
 
                     @Override
@@ -225,6 +237,7 @@ public class DetailActivity extends BaseActivity {
                     protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
                         isCollect = 0;
                         detailCollect.setImageResource(R.mipmap.pingjia_weixuanzhong);
+                        ToastUtils.show(msg);
                     }
 
                     @Override

@@ -26,7 +26,7 @@ public interface LoginContract {
 
    interface Presenter extends BasePresenter{
 
-    void login(String phone,String password);
+    void login(String phone, String password);
        void loginQQ(Activity context);
        void loginWx(Activity context);
        void loginWb(Activity context);

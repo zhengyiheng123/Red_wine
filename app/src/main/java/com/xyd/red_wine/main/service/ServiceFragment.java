@@ -1,7 +1,9 @@
 package com.xyd.red_wine.main.service;
 
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.activity.ActivityActivity;
@@ -47,6 +49,7 @@ public class ServiceFragment extends BaseFragment {
     @Bind(R.id.service_iv_activity)
     ImageView serviceIvActivity;
     private PromptDialog dialog;
+    private int screenWidth;
 
     @Override
     protected int getLayoutId() {
@@ -56,7 +59,19 @@ public class ServiceFragment extends BaseFragment {
     @Override
     protected void initView() {
         menu.setVisibility(View.INVISIBLE);
-        dialog=new PromptDialog(getActivity());
+        dialog = new PromptDialog(getActivity());
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        screenWidth = dm.widthPixels;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(screenWidth, (int) (screenWidth * 0.32219251));
+        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(screenWidth / 2, (int) (screenWidth * 0.32219251));
+        params.topMargin = -24;
+        serviceIvSteward.setLayoutParams(params);
+        serviceIvGeneralize.setLayoutParams(params);
+        serviceIvMarket.setLayoutParams(params);
+        serviceIvService.setLayoutParams(params);
+        serviceIvActivity.setLayoutParams(params1);
+        serviceIvPrimeur.setLayoutParams(params1);
+
 
     }
 
@@ -86,13 +101,13 @@ public class ServiceFragment extends BaseFragment {
                 break;
             case R.id.service_iv_market:
 
-              startActivity(StoreActivity.class);
+                startActivity(StoreActivity.class);
                 break;
             case R.id.service_iv_service:
                 startActivity(SuggestActivity.class);
                 break;
             case R.id.service_iv_primeur:
-               startActivity(PrimeurActivity.class);
+                startActivity(PrimeurActivity.class);
                 break;
             case R.id.service_iv_activity:
                 startActivity(ActivityActivity.class);
@@ -119,7 +134,7 @@ public class ServiceFragment extends BaseFragment {
                     @Override
                     protected void onHandleError(String msg) {
                         dialog.dismissImmediately();
-                        showToast(msg);
+                        showToast("您需购买商品后才能拥有分享二维码！");
                     }
                 });
     }

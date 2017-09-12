@@ -37,7 +37,9 @@ import butterknife.ButterKnife;
  */
 
 public class LogisticsActivity extends BaseActivity {
-    public static final String ORDER_DATA = "order_data";
+    public static final String ORDER_URL = "order_url";
+    public static final String ORDER_STATUS = "order_status";
+    public static final String ORDER_NUM = "order_num";
     @Bind(R.id.base_title_back)
     TextView baseTitleBack;
     @Bind(R.id.base_title_title)
@@ -70,7 +72,7 @@ public class LogisticsActivity extends BaseActivity {
     @Bind(R.id.tv_empty)
     TextView tv_empty;
     private List<LogisticsModel.CheckBean> logisticsLists;
-    private OrderModel.MyOrderBean orderBean;
+
     private LogisticsAdapter adapter;
 
     @Override
@@ -80,16 +82,16 @@ public class LogisticsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        orderBean = (OrderModel.MyOrderBean) getIntent().getSerializableExtra(ORDER_DATA);
+
         GlideUtil.getInstance()
-                .loadImage(this, logisticsIv, PublicStaticData.baseUrl + orderBean.getG_img(), true);
+                .loadImage(this, logisticsIv, PublicStaticData.baseUrl + getIntent().getStringExtra(ORDER_URL), true);
         baseTitleTitle.setText("查看物流");
         baseTitleMenu.setVisibility(View.INVISIBLE);
         logisticsLists = new ArrayList<>();
         logisticsRv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new LogisticsAdapter();
         logisticsRv.setAdapter(adapter);
-        if (orderBean.getOrder_status() == 2)
+        if (getIntent().getIntExtra(ORDER_STATUS,0) == 2)
             logisticsTvState.setText("商家未发货");
         else
             getLogisticsData();
@@ -99,7 +101,7 @@ public class LogisticsActivity extends BaseActivity {
     private void getLogisticsData() {
         BaseApi.getRetrofit()
                 .create(OrderApi.class)
-                .logistics(orderBean.getOrder_num())
+                .logistics(getIntent().getStringExtra(ORDER_NUM))
                 .compose(RxSchedulers.<BaseModel<LogisticsModel>>compose())
                 .subscribe(new BaseObserver<LogisticsModel>() {
                     @Override

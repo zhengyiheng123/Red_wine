@@ -12,25 +12,18 @@ import java.util.List;
 public class HomeModel {
 
     /**
-     * banner : {"adv_imgs":"/uploads/20170726/c49f078d7a371187c2207bc9f71ad0be.jpg","adv_url":"http://www.baidu.com"}
-     * carousel : [{"adv_imgs":"/uploads/20170726/bb97e42c7d052f9a758b919c8dbc6c5a.jpg","adv_url":"http://www.baidu.com"},{"adv_imgs":"/uploads/20170726/36cc719c7a623899aac1fcaa15681bf7.jpg","adv_url":"http://www.baidu.com"},{"adv_imgs":"/uploads/20170726/f6163d77493b6024d7facce8b655e194.jpg","adv_url":"http://www.baidu.com"}]
-     * list : {"wine_introduce":"http://hj.jiangliping.com/index/detail/wine_introduce","recommend_rule":"http://hj.jiangliping.com/index/detail/recommend_rule","manage_rule":"http://hj.jiangliping.com/index/detail/manage_rule"}
-     * photo_msg : {"a_id":11,"a_title":"意大利最好的十八款酒，大家有听过吗？","a_content":"http://hj.jiangliping.com/index/detail/message/a_id/11","a_img":["/uploads/20170726/ee92c2b7c87e668a8686e30529bd3a64.jpg"],"a_con":"顺序从左到右第一组：一级园VOSNE ROMANEE LES CHAUMES1 GROS F&S LES CHAUMES:橡木味比较明显，果味以红醋栗和李子为主。酒体比较柔和，回味略短。酸度，果味，酒"}
+     * banner : {"adv_imgs":"/uploads/20170728/aaeb709634152833ea93ad75a67402ee.jpg","adv_url":"http://www.baidu.com"}
+     * carousel : [{"adv_imgs":"/uploads/20170728/8f983245dcf3c007d064a3f465543996.jpg","adv_url":"http://www.baidu.com"},{"adv_imgs":"/uploads/20170726/36cc719c7a623899aac1fcaa15681bf7.jpg","adv_url":"http://www.baidu.com"},{"adv_imgs":"/uploads/20170728/9c42e6458ddfb18d1fdf129095909332.jpg","adv_url":"http://www.baidu.com"}]
+     * list : {"wine_introduce":"http://hj.jiangliping.com/index/detail/sundry/s_id/1","recommend_rule":"http://hj.jiangliping.com/index/detail/sundry/s_id/2","manage_rule":"http://hj.jiangliping.com/index/detail/sundry/s_id/3"}
+     * photo_msg : [{"a_id":23,"a_title":"意大利顶级名酒\u201c四雅\u201d外传","a_content":"http://hj.jiangliping.com/index/detail/message/a_id/23","collect":0},{"a_id":20,"a_title":"奔富换塞诊所香港站为400瓶稀世珍酿诊断","a_content":"http://hj.jiangliping.com/index/detail/message/a_id/20","collect":0},{"a_id":18,"a_title":"中国前10大葡萄酒进口国，你知道哪些？","a_content":"http://hj.jiangliping.com/index/detail/message/a_id/18","collect":0}]
+     * goods : [{"g_id":13,"g_name":"玛歌酒庄红葡萄酒","g_sname":"Chateau Margaux, Margaux, France","g_price":"299.00","g_num":9999,"g_store":0,"g_img":"/uploads/20170801/6f30d59d2b4cbef8454dcd78d36e4168.jpg","g_kind":"750ml","g_freight":"0.00"},{"g_id":14,"g_name":"干露羊驼莫斯卡托甜白葡萄酒","g_sname":"Vicuna Moscato, Itata Valley, Chile","g_price":"399.00","g_num":998,"g_store":1,"g_img":"/uploads/20170801/4f689af0f2445811022202a1570c3210.jpg","g_kind":"750ml","g_freight":"0.00"}]
      */
 
     private BannerBean banner;
     private ListBean list;
-
-    public List<PhotoMsgBean> getPhoto_msg() {
-        return photo_msg;
-    }
-
-    public void setPhoto_msg(List<PhotoMsgBean> photo_msg) {
-        this.photo_msg = photo_msg;
-    }
-
-    private List<PhotoMsgBean> photo_msg;
     private List<CarouselBean> carousel;
+    private List<PhotoMsgBean> photo_msg;
+    private List<GoodsBean> goods;
 
     public BannerBean getBanner() {
         return banner;
@@ -48,7 +41,6 @@ public class HomeModel {
         this.list = list;
     }
 
-
     public List<CarouselBean> getCarousel() {
         return carousel;
     }
@@ -57,9 +49,25 @@ public class HomeModel {
         this.carousel = carousel;
     }
 
+    public List<PhotoMsgBean> getPhoto_msg() {
+        return photo_msg;
+    }
+
+    public void setPhoto_msg(List<PhotoMsgBean> photo_msg) {
+        this.photo_msg = photo_msg;
+    }
+
+    public List<GoodsBean> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<GoodsBean> goods) {
+        this.goods = goods;
+    }
+
     public static class BannerBean {
         /**
-         * adv_imgs : /uploads/20170726/c49f078d7a371187c2207bc9f71ad0be.jpg
+         * adv_imgs : /uploads/20170728/aaeb709634152833ea93ad75a67402ee.jpg
          * adv_url : http://www.baidu.com
          */
 
@@ -85,9 +93,9 @@ public class HomeModel {
 
     public static class ListBean {
         /**
-         * wine_introduce : http://hj.jiangliping.com/index/detail/wine_introduce
-         * recommend_rule : http://hj.jiangliping.com/index/detail/recommend_rule
-         * manage_rule : http://hj.jiangliping.com/index/detail/manage_rule
+         * wine_introduce : http://hj.jiangliping.com/index/detail/sundry/s_id/1
+         * recommend_rule : http://hj.jiangliping.com/index/detail/sundry/s_id/2
+         * manage_rule : http://hj.jiangliping.com/index/detail/sundry/s_id/3
          */
 
         private String wine_introduce;
@@ -119,29 +127,43 @@ public class HomeModel {
         }
     }
 
+    public static class CarouselBean {
+        /**
+         * adv_imgs : /uploads/20170728/8f983245dcf3c007d064a3f465543996.jpg
+         * adv_url : http://www.baidu.com
+         */
+
+        private String adv_imgs;
+        private String adv_url;
+
+        public String getAdv_imgs() {
+            return adv_imgs;
+        }
+
+        public void setAdv_imgs(String adv_imgs) {
+            this.adv_imgs = adv_imgs;
+        }
+
+        public String getAdv_url() {
+            return adv_url;
+        }
+
+        public void setAdv_url(String adv_url) {
+            this.adv_url = adv_url;
+        }
+    }
+
     public static class PhotoMsgBean {
         /**
-         * a_id : 11
-         * a_title : 意大利最好的十八款酒，大家有听过吗？
-         * a_content : http://hj.jiangliping.com/index/detail/message/a_id/11
-         * a_img : ["/uploads/20170726/ee92c2b7c87e668a8686e30529bd3a64.jpg"]
-         * a_con : 顺序从左到右第一组：一级园VOSNE ROMANEE LES CHAUMES1 GROS F&S LES CHAUMES:橡木味比较明显，果味以红醋栗和李子为主。酒体比较柔和，回味略短。酸度，果味，酒
+         * a_id : 23
+         * a_title : 意大利顶级名酒“四雅”外传
+         * a_content : http://hj.jiangliping.com/index/detail/message/a_id/23
+         * collect : 0
          */
 
         private int a_id;
         private String a_title;
         private String a_content;
-
-
-
-        public int getCollect() {
-            return collect;
-        }
-
-        public void setCollect(int collect) {
-            this.collect = collect;
-        }
-
         private int collect;
 
         public int getA_id() {
@@ -168,32 +190,108 @@ public class HomeModel {
             this.a_content = a_content;
         }
 
+        public int getCollect() {
+            return collect;
+        }
 
+        public void setCollect(int collect) {
+            this.collect = collect;
+        }
     }
 
-    public static class CarouselBean {
+    public static class GoodsBean {
         /**
-         * adv_imgs : /uploads/20170726/bb97e42c7d052f9a758b919c8dbc6c5a.jpg
-         * adv_url : http://www.baidu.com
+         * g_id : 13
+         * g_name : 玛歌酒庄红葡萄酒
+         * g_sname : Chateau Margaux, Margaux, France
+         * g_price : 299.00
+         * g_num : 9999
+         * g_store : 0
+         * g_img : /uploads/20170801/6f30d59d2b4cbef8454dcd78d36e4168.jpg
+         * g_kind : 750ml
+         * g_freight : 0.00
          */
 
-        private String adv_imgs;
-        private String adv_url;
+        private int g_id;
+        private String g_name;
+        private String g_sname;
+        private String g_price;
+        private int g_num;
+        private int g_store;
+        private String g_img;
+        private String g_kind;
+        private String g_freight;
 
-        public String getAdv_imgs() {
-            return adv_imgs;
+        public int getG_id() {
+            return g_id;
         }
 
-        public void setAdv_imgs(String adv_imgs) {
-            this.adv_imgs = adv_imgs;
+        public void setG_id(int g_id) {
+            this.g_id = g_id;
         }
 
-        public String getAdv_url() {
-            return adv_url;
+        public String getG_name() {
+            return g_name;
         }
 
-        public void setAdv_url(String adv_url) {
-            this.adv_url = adv_url;
+        public void setG_name(String g_name) {
+            this.g_name = g_name;
+        }
+
+        public String getG_sname() {
+            return g_sname;
+        }
+
+        public void setG_sname(String g_sname) {
+            this.g_sname = g_sname;
+        }
+
+        public String getG_price() {
+            return g_price;
+        }
+
+        public void setG_price(String g_price) {
+            this.g_price = g_price;
+        }
+
+        public int getG_num() {
+            return g_num;
+        }
+
+        public void setG_num(int g_num) {
+            this.g_num = g_num;
+        }
+
+        public int getG_store() {
+            return g_store;
+        }
+
+        public void setG_store(int g_store) {
+            this.g_store = g_store;
+        }
+
+        public String getG_img() {
+            return g_img;
+        }
+
+        public void setG_img(String g_img) {
+            this.g_img = g_img;
+        }
+
+        public String getG_kind() {
+            return g_kind;
+        }
+
+        public void setG_kind(String g_kind) {
+            this.g_kind = g_kind;
+        }
+
+        public String getG_freight() {
+            return g_freight;
+        }
+
+        public void setG_freight(String g_freight) {
+            this.g_freight = g_freight;
         }
     }
 }

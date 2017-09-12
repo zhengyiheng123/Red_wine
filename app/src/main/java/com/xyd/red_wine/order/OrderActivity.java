@@ -37,6 +37,8 @@ public class OrderActivity extends BaseActivity {
     TextView orderFinish;
     @Bind(R.id.order_fl)
     FrameLayout orderFl;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLine;
 
     private Fragment[] fragments;
     private int index = 0, currentTabIndex = -1;
@@ -49,8 +51,9 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        baseTitleTitle.setText("订单");
-        baseTitleMenu.setVisibility(View.GONE);
+        mHeadLine.setVisibility(View.GONE);
+        baseTitleTitle.setText("我的订单");
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         OrderAllFragment orderAllFragment = new OrderAllFragment();
         OrderWaitFragment orderWaitFragment = new OrderWaitFragment();
         OrderFinishFragment orderFinishFragment = new OrderFinishFragment();

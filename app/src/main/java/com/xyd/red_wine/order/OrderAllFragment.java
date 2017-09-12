@@ -23,6 +23,7 @@ import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.evaluate.EvaluateActivity;
 import com.xyd.red_wine.logistics.LogisticsActivity;
+import com.xyd.red_wine.orderdetail.OrderDetailActivity;
 import com.xyd.red_wine.winedetail.WineDetailActivity;
 
 import java.util.ArrayList;
@@ -39,7 +40,8 @@ import butterknife.ButterKnife;
  */
 
 public class OrderAllFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener,BaseQuickAdapter.OnItemChildClickListener {
+        BaseQuickAdapter.RequestLoadMoreListener,BaseQuickAdapter.OnItemChildClickListener ,
+BaseQuickAdapter.OnItemClickListener{
     @Bind(R.id.order_rv)
     RecyclerView orderRv;
     @Bind(R.id.order_srl)
@@ -59,8 +61,12 @@ public class OrderAllFragment extends BaseFragment implements SwipeRefreshLayout
         orderSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         orderRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         initAdapter();
-        getData();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
     }
 
     /**
@@ -101,10 +107,13 @@ public class OrderAllFragment extends BaseFragment implements SwipeRefreshLayout
         list = new ArrayList<>();
 
         adapter = new OrderAdapter(list, getActivity());
+        View view= LayoutInflater.from(getActivity()).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
         adapter.setOnLoadMoreListener(this, orderRv);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         orderRv.setAdapter(adapter);
         adapter.setOnItemChildClickListener(this);
+        adapter.setOnItemClickListener(this);
         adapter.setEnableLoadMore(true);
     }
 
@@ -141,7 +150,9 @@ public class OrderAllFragment extends BaseFragment implements SwipeRefreshLayout
                     startActivity(EvaluateActivity.class,bundle);
                 }else if(adapter.getData().get(position).getOrder_status()==2||adapter.getData().get(position).getOrder_status()==3){
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(LogisticsActivity.ORDER_DATA, adapter.getData().get(position));
+                    bundle.putString(LogisticsActivity.ORDER_NUM,adapter.getData().get(position).getOrder_num());
+                    bundle.putString(LogisticsActivity.ORDER_URL,adapter.getData().get(position).getG_img());
+                    bundle.putInt(LogisticsActivity.ORDER_STATUS,adapter.getData().get(position).getOrder_status());
                     startActivity(LogisticsActivity.class, bundle);
                 }
 
@@ -221,4 +232,10 @@ public class OrderAllFragment extends BaseFragment implements SwipeRefreshLayout
 
     }
 
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+        Bundle bundle=new Bundle();
+        bundle.putString(OrderDetailActivity.ORDER_NUM,adapter.getData().get(position).getOrder_num());
+        startActivity(OrderDetailActivity.class,bundle);
+    }
 }

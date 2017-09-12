@@ -1,5 +1,7 @@
 package com.xyd.red_wine.base;
 
+import java.util.List;
+
 /**
  * @author: zhaoxiaolei
  * @date: 2017/7/19
@@ -8,4 +10,5 @@ package com.xyd.red_wine.base;
  */
 
 public class EmptyModel {
+
 }

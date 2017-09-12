@@ -2,6 +2,7 @@ package com.xyd.red_wine.api;
 
 import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.EmptyModel;
+import com.xyd.red_wine.login.ChangePasswodModel;
 import com.xyd.red_wine.login.LoginModel;
 
 import io.reactivex.Observable;
@@ -84,4 +85,10 @@ public interface LoginApi {
      */
     @GET("user_agreement/index")
     Observable<BaseModel> xieyi();
+
+    /*
+    * 修改密码
+    * */
+    @POST("user/update_key")
+    Observable<BaseModel<ChangePasswodModel>> getModification(@Query("old_password") String old_password, @Query("password") String password, @Query("repassword") String repassword);
 }

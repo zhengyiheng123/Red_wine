@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
 import com.xyd.red_wine.R;
+import com.xyd.red_wine.api.GeneralizeApi;
 import com.xyd.red_wine.api.MineApi;
 import com.xyd.red_wine.balance.BalanceActivity;
 import com.xyd.red_wine.base.BaseApi;
@@ -19,6 +20,8 @@ import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.collect.CollectActivity;
 import com.xyd.red_wine.commissionorder.CommissionOrderActivity;
+import com.xyd.red_wine.generalize.GeneralizeActivity;
+import com.xyd.red_wine.generalize.GeneralizeModel;
 import com.xyd.red_wine.member.EarningActivity;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.kefu.ChatActivity;
@@ -76,6 +79,8 @@ public class MineFragment extends BaseFragment {
     TextView mineTvBalance;
     @Bind(R.id.mine_tv_earnings)
     TextView mineTvEarnings;
+    @Bind(R.id.mine_tv_code)
+    TextView mineTvCode;
     @Bind(R.id.view_circle)
     View view_circle;
     @Bind(R.id.mine_tv_message)
@@ -115,7 +120,7 @@ public class MineFragment extends BaseFragment {
         mineTvGongyi.setOnClickListener(this);
         mineTvBalance.setOnClickListener(this);
         mineTvEarnings.setOnClickListener(this);
-
+        mineTvCode.setOnClickListener(this);
         mineTvMessage.setOnClickListener(this);
 
     }
@@ -177,10 +182,34 @@ public class MineFragment extends BaseFragment {
             case R.id.mine_tv_message:
                startActivity(MessageActivity.class);
                 break;
+            case R.id.mine_tv_code:
+                goGeneralize();
+                break;
 
         }
 
     }
+    /**
+     * 购买商品后才能分享
+     */
+    private void goGeneralize() {
+        BaseApi.getRetrofit()
+                .create(GeneralizeApi.class)
+                .generalize()
+                .compose(RxSchedulers.<BaseModel<GeneralizeModel>>compose())
+                .subscribe(new BaseObserver<GeneralizeModel>() {
+                    @Override
+                    protected void onHandleSuccess(GeneralizeModel generalizeModel, String msg, int code) {
+                        startActivity(GeneralizeActivity.class);
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        showToast("您需购买商品后才能拥有分享二维码！");
+                    }
+                });
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);

@@ -76,7 +76,7 @@ public class ChatActivity extends FragmentActivity {
     public AgentIdentityInfo createAgentIdentityInfo(){
 
         AgentIdentityInfo info =ContentFactory.createAgentIdentityInfo(null);
-        info.agentName("乔治金翰");
+        info.agentName("乔治金瀚");
         return info;
     }
 

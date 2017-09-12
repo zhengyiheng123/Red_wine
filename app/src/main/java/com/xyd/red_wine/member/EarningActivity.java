@@ -49,6 +49,8 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
     RecyclerView earningsRv;
     @Bind(R.id.earnings_srl)
     SwipeRefreshLayout earningsSrl;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLine;
     private List<EarningModel.DeductBean> list;
     private EarningAdapter adapter;
     private EarningPresenter presenter;
@@ -62,8 +64,9 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
 
     @Override
     protected void initView() {
+        mHeadLine.setVisibility(View.GONE);
         presenter = new EarningPresenter(this);
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("我的会员");
         earningsSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         earningsRv.setLayoutManager(new LinearLayoutManager(this));

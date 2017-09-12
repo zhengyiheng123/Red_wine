@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/home_fl"
     android:orientation="vertical">
-
     <View
         android:id="@+id/fake_status_bar"
         android:layout_width="match_parent"
@@ -12,30 +12,31 @@
         android:background="@drawable/bg_test" />
 
     <LinearLayout
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/bg_test"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="80dp"
+            android:layout_height="10dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:src="@mipmap/logo_bai"
-            android:textColor="@color/material_textWhite_text"
-            android:textSize="@dimen/text_16" />
+            android:scaleType="matrix"
+            android:background="@mipmap/logo_bai"
+            />
 
         <TextView
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="  乔 治 金 翰"
+            android:text="  乔 治 金 瀚"
             android:textColor="@color/material_textWhite_text"
-            android:textSize="@dimen/text_14" />
+            android:textSize="10sp" />
 <FrameLayout
     android:layout_width="50dp"
     android:id="@+id/home_frame"
@@ -67,20 +68,19 @@
         android:background="#fff">
 
         <RelativeLayout
+            android:paddingBottom="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
+            <com.recker.flybanner.FlyBanner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-
                 android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:id="@+id/home_ll_news"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_below="@id/banner"
                 android:layout_marginRight="62dp"
                 android:gravity="center_vertical"
@@ -88,8 +88,8 @@
 
                 <ImageView
                     android:id="@+id/home_news_iv"
-                    android:layout_width="84dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="15dp"
                     android:layout_marginBottom="12dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="12dp"
@@ -99,10 +99,9 @@
                 <com.xyd.red_wine.view.NoticeView
                     android:id="@+id/home_news_notice"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="20dp"
                     android:layout_marginLeft="4dp"
-
-                    app:textColor="@color/material_textBlack_secondaryText"
+                    app:textColor="@color/material_textBlack_black"
                     app:textSize="@dimen/text_14"></com.xyd.red_wine.view.NoticeView>
 
                 <TextView
@@ -137,7 +136,6 @@
                 android:layout_below="@id/home_ll_news"
                 android:layout_marginLeft="6dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -162,27 +160,38 @@
                     android:background="@mipmap/qiyejieshao" />
 
             </LinearLayout>
-
+                <android.support.v7.widget.RecyclerView
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_below="@+id/home_ll"
+                    android:id="@+id/home_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
             <com.xyd.red_wine.view.banner.Banner
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
                 android:id="@+id/home_banner"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_below="@id/home_ll"
+                android:layout_height="200dp"
+                android:layout_below="@id/home_rv"
                 android:layout_marginTop="16dp">
-
             </com.xyd.red_wine.view.banner.Banner>
-
         </RelativeLayout>
     </ScrollView>
 </android.support.v4.widget.SwipeRefreshLayout>
 
 
-<ImageView
+<com.xyd.red_wine.view.DragFloatActionButton
     android:id="@+id/iv_service"
     android:layout_margin="32dp"
     android:layout_gravity="bottom|right"
-    android:layout_width="56dp"
-    android:layout_height="56dp"
-    android:background="@mipmap/icon_service"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:fabSize="normal"
+    android:src="@mipmap/kefu0000"
+    android:background="#FFFFFF"
+    app:backgroundTint="#FFFFFF"
+    android:alpha="0.9"
     />
 </FrameLayout>

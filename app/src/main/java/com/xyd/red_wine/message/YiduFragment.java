@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -63,6 +64,8 @@ public class YiduFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         list = new ArrayList<>();
         adapter = new MessageAdapter(list);
         adapter.setOnLoadMoreListener(this, baseRv);
+        View view= LayoutInflater.from(getActivity()).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);

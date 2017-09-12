@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_test"
     android:orientation="vertical">
 
     <View
@@ -12,87 +11,90 @@
         android:background="@drawable/bg_test" />
 
     <LinearLayout
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/bg_test"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="80dp"
+            android:layout_height="10dp"
             android:layout_marginLeft="12dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical"
-            android:src="@mipmap/logo_bai"
-            android:textColor="@color/material_textWhite_text"
-            android:textSize="@dimen/text_16" />
+            android:scaleType="matrix"
+            android:background="@mipmap/logo_bai"
+            />
 
         <TextView
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="  乔 治 金 翰"
+            android:text="  乔 治 金 瀚"
             android:textColor="@color/material_textWhite_text"
-            android:textSize="@dimen/text_14" />
+            android:textSize="10sp" />
+        <FrameLayout
+            android:layout_width="50dp"
+            android:id="@+id/home_frame"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/menu"
+                android:layout_width="15dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center_vertical|right"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/menu" />
+        </FrameLayout>
 
-        <ImageView
-            android:id="@+id/menu"
-            android:layout_width="15dp"
-            android:layout_height="12dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="12dp"
-            android:layout_marginTop="10dp"
-            android:background="@mipmap/menu" />
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@mipmap/service_background">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="18dp">
+
             <ImageView
                 android:id="@+id/service_iv_generalize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-12dp"
-                android:scaleType="matrix"
                 android:background="@mipmap/tuiguang" />
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                 android:scaleType="matrix"
-                android:background="@mipmap/baiseguangyun" />
+
             <ImageView
                 android:id="@+id/service_iv_market"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-12dp"
-                android:scaleType="matrix"
                 android:background="@mipmap/shangchang" />
+
             <ImageView
                 android:id="@+id/service_iv_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="matrix"
                 android:layout_marginTop="-12dp"
                 android:background="@mipmap/zixun" />
+
             <ImageView
                 android:id="@+id/service_iv_steward"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-12dp"
-                android:scaleType="matrix"
                 android:background="@mipmap/hongjiuguanjia" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-6dp"
+                android:layout_marginTop="-12dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -100,7 +102,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:scaleType="matrix"
                     android:background="@mipmap/qijiu" />
 
                 <ImageView
@@ -108,8 +109,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:scaleType="matrix"
-
                     android:background="@mipmap/huodong" />
             </LinearLayout>
         </LinearLayout>

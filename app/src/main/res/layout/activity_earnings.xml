@@ -12,10 +12,6 @@
 
     <include layout="@layout/base_title" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:background="@color/line" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/earnings_srl"

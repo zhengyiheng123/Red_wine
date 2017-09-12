@@ -23,6 +23,22 @@ public class EarningModel {
     }
 
     public static class DeductBean {
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public long getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(long create_time) {
+            this.create_time = create_time;
+        }
+
         /**
          * userid : 2
          * nickname : cW5I9q
@@ -30,7 +46,8 @@ public class EarningModel {
          * signature :
          * pid_status : 1
          */
-
+private String phone;
+        private long create_time;
         private int userid;
         private String nickname;
         private String head_img;

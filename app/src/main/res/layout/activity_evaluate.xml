@@ -194,5 +194,6 @@
         android:paddingRight="40dp"
         android:paddingTop="8dp"
         android:text="发布"
+        android:visibility="gone"
         android:textColor="@color/material_textWhite_black" />
 </LinearLayout>

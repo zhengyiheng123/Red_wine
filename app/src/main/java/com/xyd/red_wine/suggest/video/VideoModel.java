@@ -35,6 +35,15 @@ public class VideoModel {
         private String a_content;
         private String create_time;
         private List<String> a_img;
+        private int collect;
+
+        public int getCollect() {
+            return collect;
+        }
+
+        public void setCollect(int collect) {
+            this.collect = collect;
+        }
 
         public int getA_id() {
             return a_id;

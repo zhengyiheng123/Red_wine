@@ -46,6 +46,8 @@ public class CommissionOrderActivity extends BaseActivity implements SwipeRefres
     RecyclerView commissionRv;
     @Bind(R.id.commission_srl)
     SwipeRefreshLayout commissionSrl;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLlne;
     private CommissionOrderAdapter adapter;
     private List<CommissionOrderModel.DeductBean> list;
     private TextView money;
@@ -58,8 +60,9 @@ public class CommissionOrderActivity extends BaseActivity implements SwipeRefres
 
     @Override
     protected void initView() {
-        baseTitleTitle.setText("提成订单");
-        baseTitleMenu.setVisibility(View.GONE);
+        mHeadLlne.setVisibility(View.GONE);
+        baseTitleTitle.setText("我的提成订单");
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         commissionSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         commissionSrl.setOnRefreshListener(this);
         commissionRv.setLayoutManager(new LinearLayoutManager(this));

@@ -29,7 +29,8 @@ import butterknife.ButterKnife;
  * @description: 注册界面
  */
 
-public class RegisterActivity extends BaseActivity implements RegisterContract.View {
+public class
+RegisterActivity extends BaseActivity implements RegisterContract.View {
     @Bind(R.id.register_edt_user)
     EditText registerEdtUser;
     @Bind(R.id.register_edt_password)

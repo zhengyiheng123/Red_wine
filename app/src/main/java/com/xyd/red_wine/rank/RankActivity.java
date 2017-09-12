@@ -45,6 +45,8 @@ public class RankActivity extends BaseActivity {
     LinearLayout rankLl;
     @Bind(R.id.rank_fl)
     FrameLayout rankFl;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLine;
     private Fragment[] fragments;
     private int index = 0, currentTabIndex = -1;
 
@@ -55,8 +57,9 @@ public class RankActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mHeadLine.setVisibility(View.GONE);
         baseTitleTitle.setText("排行榜");
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         EarningFragment earningFragment = new EarningFragment();
         BenefitFragment benefitFragment = new BenefitFragment();
         fragments = new Fragment[]{benefitFragment, earningFragment};

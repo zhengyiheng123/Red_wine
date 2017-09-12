@@ -49,10 +49,10 @@ public class ActivityActivity extends BaseActivity {
     @Override
     protected void initView() {
         baseTitleTitle.setText("活动");
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         BusinessFragment businessFragment = new BusinessFragment();
         BenefitFragment benefitFragment = new BenefitFragment();
-        fragments = new Fragment[]{benefitFragment, businessFragment};
+        fragments = new Fragment[]{businessFragment,benefitFragment};
         onTextClicked();
     }
 
@@ -75,7 +75,7 @@ public class ActivityActivity extends BaseActivity {
                 activityBenefitLine.setBackgroundResource(R.color.material_white);
                 activityBusiness.setTextColor(getResources().getColor(R.color.material_textWhite_text));
                 activityBusinessLine.setBackgroundResource(R.color.touming);
-                index = 0;
+                index = 1;
                 onTextClicked();
                 break;
             case R.id.activity_business:
@@ -83,7 +83,7 @@ public class ActivityActivity extends BaseActivity {
                 activityBenefitLine.setBackgroundResource(R.color.touming);
                 activityBusiness.setTextColor(getResources().getColor(R.color.material_textWhite_black));
                 activityBusinessLine.setBackgroundResource(R.color.material_white);
-                index = 1;
+                index = 0;
                 onTextClicked();
                 break;
         }

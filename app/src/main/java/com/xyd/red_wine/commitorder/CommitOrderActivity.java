@@ -1,8 +1,10 @@
 package com.xyd.red_wine.commitorder;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -126,7 +128,7 @@ public class CommitOrderActivity extends BaseActivity {
         EventBus.getDefault().register(this);
         waitDialog = new PromptDialog(this);
         baseTitleTitle.setText("小酒");
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         model = (WineModel) getIntent().getSerializableExtra(WineDetailActivity.G_DATA);
         num = getIntent().getIntExtra(WineDetailActivity.G_NUM, 1);
         GlideUtil.getInstance()
@@ -225,7 +227,21 @@ public class CommitOrderActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.commit_add:
-                if (num < 9) {
+                if (num < 99) {
+                    if (num==model.getGood().getG_num()){
+                        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+                        builder.setTitle("温馨提示");
+                        builder.setMessage("当前商品库存"+model.getGood().getG_num()+"件");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.create().show();
+
+                        return;
+                    }
                     num++;
                     commitTvNum.setText("x" + num);
                     commitTvNum1.setText("共" + num + "件商品\u3000小计");
@@ -263,10 +279,10 @@ public class CommitOrderActivity extends BaseActivity {
                 }
                 break;
             case R.id.commit_type:
-                showTestToast("配送方式");
+               // showTestToast("配送方式");
                 break;
             case R.id.commit_freight:
-                showTestToast("运费");
+                //showTestToast("运费");
                 break;
             case R.id.commit_ll_address:
                 startActivity(AddressActivity.class);

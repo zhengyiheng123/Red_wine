@@ -96,6 +96,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:paddingBottom="4dp"
             android:id="@+id/id_stickynavlayout_topview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -103,13 +104,13 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="158dp"
+                android:layout_height="wrap_content"
                 android:background="@mipmap/store" />
 
-            <ImageView
+            <com.xyd.red_wine.view.SmartImageveiw
                 android:id="@+id/wine_iv"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="30dp"
@@ -151,7 +152,6 @@
 
 
             <TextView
-                android:layout_marginLeft="8dp"
                 android:id="@+id/wine_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,27 +164,28 @@
                 android:textSize="@dimen/text_14" />
 
             <TextView
-                android:id="@+id/wine_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_below="@id/wine_name"
-                android:layout_marginRight="2dp"
-                android:layout_toLeftOf="@id/wine_state"
-                android:gravity="center_vertical"
-                android:text="0ml"
-                android:textColor="@color/material_amber_A200"
-                android:textSize="@dimen/text_14" />
-            <TextView
+                android:layout_marginRight="12dp"
                 android:id="@+id/wine_name_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/wine_name"
                 android:layout_marginLeft="12dp"
-                android:layout_toLeftOf="@+id/wine_type"
                 android:gravity="center_vertical"
-                android:text="WINE BOTTLE MOCKUP"
-                android:textColor="@color/material_amber_A200"
+                android:text=""
+                android:textColor="@color/material_amber_A700"
+                android:textSize="@dimen/text_14" />
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="@dimen/margin_12"
+                android:id="@+id/wine_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wine_name_bottom"
+                android:layout_marginRight="2dp"
+                android:gravity="center_vertical"
+                android:text="0ml"
+                android:textColor="@color/material_grey_700"
                 android:textSize="@dimen/text_14" />
         </RelativeLayout>
 
@@ -223,7 +224,7 @@
                 android:gravity="center"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:text="好评"
+                android:text="评价"
                 android:textColor="@color/check_suggest"
                 android:textSize="@dimen/text_14" />
         </RadioGroup>

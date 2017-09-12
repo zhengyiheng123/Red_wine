@@ -47,7 +47,7 @@
                 android:layout_marginRight="24dp"
                 android:visibility="gone"
                 android:layout_toLeftOf="@id/generalize_qr_code"
-                android:background="@mipmap/erweima" />
+                android:background="@mipmap/erweima111" />
 
             <ImageView
                 android:layout_width="35dp"

@@ -55,7 +55,12 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
         baseSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         baseRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         initAdapter();
-        getData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
     }
 
     private void getData() {

@@ -23,6 +23,9 @@ import com.xyd.red_wine.utils.RegexUtils;
 
 import java.util.Map;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * @author: zhaoxiaolei
  * @date: 2017/7/19
@@ -73,6 +76,9 @@ public class LoginPresenter implements LoginContract.Presenter {
         UMShareAPI.get(context).doOauthVerify(context, SHARE_MEDIA.SINA, umAuthListener);
     }
 
+    public void loginTest(String phone, String password){
+
+    }
     private void login_(String phone, String password) {
         loginView.showDialog();
         BaseApi.getRetrofit()

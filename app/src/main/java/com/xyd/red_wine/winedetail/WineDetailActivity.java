@@ -27,6 +27,7 @@ import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.commitorder.CommitOrderActivity;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.utils.ToastUtils;
+import com.xyd.red_wine.view.SmartImageveiw;
 
 import butterknife.Bind;
 
@@ -53,7 +54,7 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
     @Bind(R.id.wine_buy)
     TextView wineBuy;
     @Bind(R.id.wine_iv)
-    ImageView wineIv;
+    SmartImageveiw wineIv;
     @Bind(R.id.wine_name)
     TextView wineName;
     @Bind(R.id.wine_price)
@@ -94,6 +95,7 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
 
     @Override
     protected void initView() {
+        wineIv.setRatio(2.0f);
         g_id = getIntent().getStringExtra(G_ID);
         Log.e("aaaaaa", g_id);
         baseTitleMenu.setVisibility(View.INVISIBLE);
@@ -141,11 +143,11 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
                         price = wineModel.getGood().getG_price();
                         winePrice.setText("￥" + price);
                         wineCost.setText("￥" + (price * num + Double.valueOf(wineModel.getGood().getG_freight())));
-                        wineType.setText(wineModel.getGood().getG_kind());
-                        if (wineModel.getGood().getG_freight().equals("0.00"))
-                            wineState.setText("免运费");
-                        else
-                            wineState.setText("运费：￥" + wineModel.getGood().getG_freight());
+                        wineType.setText("规格："+wineModel.getGood().getG_kind());
+//                        if (wineModel.getGood().getG_freight().equals("0.00"))
+//                            wineState.setText("免运费");
+//                        else
+//                            wineState.setText("运费：￥" + wineModel.getGood().getG_freight());
 
                         wineNameBottom.setText(wineModel.getGood().getG_sname());
                         wineDetailFragment.setWebView(wineModel.getG_con());
@@ -189,7 +191,7 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
 
                 break;
             case R.id.wine_add:
-                if (num < 9) {
+                if (num < 99) {
                     num++;
                     if (num>model.getGood().getG_num()){
                         AlertDialog.Builder builder=new AlertDialog.Builder(this);

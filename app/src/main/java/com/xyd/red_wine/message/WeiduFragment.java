@@ -74,6 +74,8 @@ public class WeiduFragment extends BaseFragment implements SwipeRefreshLayout.On
         list = new ArrayList<>();
         adapter = new MessageAdapter(list);
         adapter.setOnLoadMoreListener(this, baseRv);
+        View view= LayoutInflater.from(getActivity()).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);

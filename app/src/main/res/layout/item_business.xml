@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/item_activity_iv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/item_activity_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/item_activity_iv"
+            android:padding="8dp"
+            android:text=""
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/item_activity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/item_activity_content"
+            android:paddingLeft="8dp"
+            android:text=""
+            android:textColor="@color/material_textWhite_text"
+            android:textSize="@dimen/text_18" />
+
+        <LinearLayout
+            android:id="@+id/item_activity_ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_activity_iv"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_activity_tv_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="目前筹集2000"
+                android:textColor="@color/material_textBlack_secondaryText"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/item_activity_tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:padding="8dp"
+                android:text="成功"
+                android:textColor="@color/material_textBlack_secondaryText"
+                android:textSize="@dimen/text_14" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/item_activity_ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_activity_ll1"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <com.xyd.red_wine.view.ProgressView
+                android:visibility="gone"
+                android:id="@+id/item_activity_progress"
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/item_activity_ll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_activity_ll2"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="已支持"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/item_activity_tv_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000人"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="关注者"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+
+                    android:id="@+id/item_activity_tv_num1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000人"
+                    android:textColor="@color/material_textBlack_secondaryText"
+                    android:textSize="@dimen/text_14" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

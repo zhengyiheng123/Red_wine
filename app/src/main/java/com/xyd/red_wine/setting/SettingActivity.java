@@ -16,6 +16,7 @@ import com.xyd.red_wine.R;
 import com.xyd.red_wine.base.BaseActivity;
 import com.xyd.red_wine.cookie.PersistentCookieStore;
 import com.xyd.red_wine.login.LoginActivity;
+import com.xyd.red_wine.modification.ModificationActivity;
 import com.xyd.red_wine.permissions.PermissionUtils;
 import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.utils.AppUtils;
@@ -54,7 +55,10 @@ public class SettingActivity extends BaseActivity {
     TextView settingTvQuit;
     @Bind(R.id.setting_tv_code)
     TextView settingTvCode;
-
+    @Bind(R.id.setting_tv_modification)
+    TextView settingTvModificaation;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLine;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_setting;
@@ -62,6 +66,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mHeadLine.setVisibility(View.GONE);
         menu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("设置");
         AppUtils.getAppVersionCode(this);
@@ -74,6 +79,7 @@ public class SettingActivity extends BaseActivity {
         baseTitleBack.setOnClickListener(this);
         settingTvUpdata.setOnClickListener(this);
         settingTvQuit.setOnClickListener(this);
+        settingTvModificaation.setOnClickListener(this);
     }
 
     @Override
@@ -101,6 +107,9 @@ public class SettingActivity extends BaseActivity {
                 store.removeAll();
                 closeApp();
                 startActivity(LoginActivity.class);
+                break;
+            case R.id.setting_tv_modification:
+                startActivity(ModificationActivity.class);
                 break;
         }
 

@@ -36,7 +36,7 @@ public class ImageModel implements Serializable{
         private String a_content;
         private String create_time;
         private List<String> a_img;
-
+        private int collect;
         public int getCollect() {
             return collect;
         }
@@ -45,7 +45,6 @@ public class ImageModel implements Serializable{
             this.collect = collect;
         }
 
-        private int collect;
 
         public int getA_id() {
             return a_id;

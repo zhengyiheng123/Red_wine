@@ -18,6 +18,7 @@ import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.evaluate.EvaluateActivity;
+import com.xyd.red_wine.orderdetail.OrderDetailActivity;
 import com.xyd.red_wine.winedetail.WineDetailActivity;
 
 import java.io.Serializable;
@@ -35,7 +36,8 @@ import butterknife.ButterKnife;
  */
 
 public class OrderFinishFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener {
+        BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener,
+BaseQuickAdapter.OnItemClickListener{
     @Bind(R.id.order_rv)
     RecyclerView orderRv;
     @Bind(R.id.order_srl)
@@ -50,6 +52,11 @@ public class OrderFinishFragment extends BaseFragment implements SwipeRefreshLay
         return R.layout.fragment_order;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        onRefresh();
+    }
     @Override
     protected void initView() {
 
@@ -99,9 +106,12 @@ public class OrderFinishFragment extends BaseFragment implements SwipeRefreshLay
 
         adapter = new OrderAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, orderRv);
+        View view= LayoutInflater.from(getActivity()).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         orderRv.setAdapter(adapter);
         adapter.setOnItemChildClickListener(this);
+        adapter.setOnItemClickListener(this);
         adapter.setEnableLoadMore(true);
     }
 
@@ -145,5 +155,12 @@ public class OrderFinishFragment extends BaseFragment implements SwipeRefreshLay
                 break;
         }
 
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
+        Bundle bundle=new Bundle();
+        bundle.putString(OrderDetailActivity.ORDER_NUM,adapter.getData().get(position).getOrder_num());
+        startActivity(OrderDetailActivity.class,bundle);
     }
 }

@@ -38,37 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp">
-
-                <TextView
-                    android:id="@+id/activity_benefit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
-                    android:text="公益活动"
-
-                    android:textColor="@color/material_textWhite_black"
-                    android:textSize="@dimen/text_16" />
-
-                <TextView
-                    android:id="@+id/activity_benefit_line"
-                    android:layout_width="wrap_content"
-                    android:layout_height="1dp"
-                    android:layout_alignLeft="@id/activity_benefit"
-                    android:layout_alignRight="@id/activity_benefit"
-                    android:layout_below="@id/activity_benefit"
-                    android:background="#fff" />
-            </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,8 +65,38 @@
                     android:layout_alignLeft="@id/activity_business"
                     android:layout_alignRight="@id/activity_business"
                     android:layout_below="@id/activity_business"
+                    android:background="#FFF" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp">
+
+                <TextView
+                    android:id="@+id/activity_benefit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="公益活动"
+
+                    android:textColor="@color/material_textWhite_black"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:id="@+id/activity_benefit_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_alignLeft="@id/activity_benefit"
+                    android:layout_alignRight="@id/activity_benefit"
+                    android:layout_below="@id/activity_benefit"
                     android:background="#00000000" />
             </RelativeLayout>
+
         </LinearLayout>
 
         <FrameLayout

@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -22,6 +23,7 @@ import com.xyd.red_wine.R;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.main.home.HomeModel;
+import com.xyd.red_wine.utils.ConvertUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -232,10 +234,12 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             if (imageView == null) {
                 imageView = new ImageView(context);
             }
+
             imageView.setScaleType(ScaleType.FIT_XY);
+
 //            ViewPager.LayoutParams params=new ViewPager.LayoutParams();
 //            params.gravity=10;
-            imageView.setPadding(20, 10, 20, 10);
+            imageView.setPadding(60, 10, 60, 10);
             String url = null;
             if (i == 0) {
                 url = imagesUrl.get(count - 1).getAdv_imgs();
@@ -244,6 +248,8 @@ public class Banner extends FrameLayout implements OnPageChangeListener {
             } else {
                 url = imagesUrl.get(i - 1).getAdv_imgs();
             }
+            ViewGroup.LayoutParams params=new LinearLayout.LayoutParams(300,150);
+            imageView.setLayoutParams(params);
             imageViews.add(imageView);
             // imageView.setImageResource(R.mipmap.tu2);
             ///加载图片

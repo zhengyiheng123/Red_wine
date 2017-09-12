@@ -16,9 +16,23 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMWeb;
 import com.xyd.red_wine.R;
+import com.xyd.red_wine.api.CollectApi;
+import com.xyd.red_wine.base.BaseApi;
+import com.xyd.red_wine.base.BaseModel;
+import com.xyd.red_wine.base.BaseObserver;
+import com.xyd.red_wine.base.EmptyModel;
+import com.xyd.red_wine.base.RxSchedulers;
+import com.xyd.red_wine.newsdetail.DetailActivity;
 import com.xyd.red_wine.utils.StatusBarUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,6 +47,7 @@ import butterknife.ButterKnife;
 public class VideoActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String VIDEO_ID = "video_id";
     public static final String VIDEO_URL = "video_url";
+    public static final String COLLECT = "collect";
     @Bind(R.id.video_horizontal)
     FrameLayout videoHorizontal;
     @Bind(R.id.base_title_back)
@@ -43,13 +58,19 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     ImageView baseTitleMenu;
     @Bind(R.id.video_wb)
     WebView wv;
+
     @Bind(R.id.video_ll)
     LinearLayout videoLl;
+    @Bind(R.id.detail_collect)
+    ImageView detailCollect;
+    @Bind(R.id.detail_share)
+    ImageView detailShare;
     private View xCustomView;
     private WebChromeClient.CustomViewCallback xCustomViewCallback;
     private MyWebChromeClient xwebchromeclient;
     private String content;
     private int id;
+    private int isCollect;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,16 +78,24 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_video);
         StatusBarUtil.setTranslucentForImageViewInFragment(this, 0, null);
         id = getIntent().getIntExtra(VIDEO_ID, 0);
+        isCollect = getIntent().getIntExtra(COLLECT, 0);
         content = getIntent().getStringExtra(VIDEO_URL);
         ButterKnife.bind(this);
         initView();
     }
 
     private void initView() {
+        if (isCollect == 0)
+            detailCollect.setImageResource(R.mipmap.pingjia_weixuanzhong);
+        else
+            detailCollect.setImageResource(R.mipmap.pingjia_xuanzhong);
 
+        detailCollect.setOnClickListener(this);
+        detailShare.setOnClickListener(this);
         baseTitleBack.setOnClickListener(this);
         baseTitleTitle.setText("播放");
         baseTitleMenu.setVisibility(View.INVISIBLE);
+
         WebSettings ws = wv.getSettings();
         ws.setBuiltInZoomControls(true);// 隐藏缩放按钮
         ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);// 排版适应屏幕
@@ -105,6 +134,58 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.base_title_back:
                 finish();
+                break;
+            case R.id.detail_share:
+                UMWeb web = new UMWeb(content);
+                web.setTitle("酒瀚");//标题
+//                web.setThumb(thumb);  //缩略图
+                web.setDescription("红酒资讯");//描述
+                new ShareAction(this)
+                        .withMedia(web)
+                        .withText("乔治金瀚资讯")
+//                        .withMedia(thumb)
+                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
+                        .setCallback(new UMShareListener() {
+                            @Override
+                            public void onStart(SHARE_MEDIA share_media) {
+
+                            }
+
+                            @Override
+                            public void onResult(SHARE_MEDIA share_media) {
+                                Toast.makeText(VideoActivity.this, "成功了", Toast.LENGTH_LONG).show();
+                            }
+
+                            @Override
+                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
+                                    if (UMShareAPI.get(VideoActivity.this).isInstall(VideoActivity.this,SHARE_MEDIA.WEIXIN))
+                                        Toast.makeText(VideoActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                                    else
+                                        Toast.makeText(VideoActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
+
+                                }
+                                if (share_media==SHARE_MEDIA.QQ){
+                                    if (UMShareAPI.get(VideoActivity.this).isInstall(VideoActivity.this,SHARE_MEDIA.QQ))
+                                        Toast.makeText(VideoActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                                    else
+                                        Toast.makeText(VideoActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancel(SHARE_MEDIA share_media) {
+                                Toast.makeText(VideoActivity.this, "分享取消了", Toast.LENGTH_LONG).show();
+                            }
+                        })
+                        .open();
+                break;
+            case R.id.detail_collect:
+                if (isCollect == 0) {
+                    addCollect();
+                } else {
+                    delCollect();
+                }
                 break;
         }
 
@@ -214,5 +295,47 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         return false;
+    }
+
+    private void addCollect() {
+        BaseApi.getRetrofit()
+                .create(CollectApi.class)
+                .addCollect(id + "")
+                .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
+                .subscribe(new BaseObserver<EmptyModel>() {
+                    @Override
+                    protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
+                        isCollect = 1;
+                        detailCollect.setImageResource(R.mipmap.pingjia_xuanzhong);
+                        ToastUtils.show(msg);
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        ToastUtils.show(msg);
+                    }
+                });
+
+    }
+
+
+    private void delCollect() {
+        BaseApi.getRetrofit()
+                .create(CollectApi.class)
+                .delCollect(id + "")
+                .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
+                .subscribe(new BaseObserver<EmptyModel>() {
+                    @Override
+                    protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
+                        isCollect = 0;
+                        detailCollect.setImageResource(R.mipmap.pingjia_weixuanzhong);
+                        ToastUtils.show(msg);
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        ToastUtils.show(msg);
+                    }
+                });
     }
 }

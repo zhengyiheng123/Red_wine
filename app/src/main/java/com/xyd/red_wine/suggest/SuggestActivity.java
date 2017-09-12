@@ -52,7 +52,10 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
     private ChateauFragment chateauFragment;
     private ImageFragment imageFragment;
     private VideoFragment videoFragment;
-    private int index=0;
+    public static int index=0;
+
+    //当前页
+    public static String CURRENT_PAGE="current_page";
 
     @Override
     protected int getLayoutId() {
@@ -61,17 +64,34 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
 
     @Override
     protected void initView() {
+        index=getIntent().getIntExtra(CURRENT_PAGE,-1);
+        if (index == -1){
+            index = 0;
+        }
         baseTitleTitle.setText("资讯");
         baseTitleMenu.setVisibility(View.INVISIBLE);
         introductionFragment = new IntroductionFragment();
         chateauFragment = new ChateauFragment();
         imageFragment = new ImageFragment();
         videoFragment = new VideoFragment();
-        fragments = new Fragment[]{introductionFragment,imageFragment,videoFragment, chateauFragment};
-        suggestRg.check(R.id.suggest_rg_introduction);
+        fragments = new Fragment[]{imageFragment,videoFragment, chateauFragment,introductionFragment};
+        switch (index){
+            case 0:
+                suggestRg.check(R.id.suggest_rg_image);
+                break;
+            case 1:
+                suggestRg.check(R.id.suggest_rg_video);
+                break;
+            case 2:
+                suggestRg.check(R.id.suggest_rg_chateau);
+                break;
+            case 3:
+                suggestRg.check(R.id.suggest_rg_introduction);
+                break;
+        }
 
         MyViewPagerAdapter adapter=new MyViewPagerAdapter(getSupportFragmentManager());
-        suggestVp.setOffscreenPageLimit(3);
+        suggestVp.setOffscreenPageLimit(4);
         suggestVp.setAdapter(adapter);
         suggestVp.setCurrentItem(index,true);
 
@@ -117,16 +137,17 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
     public void onPageSelected(int position) {
         switch (position){
             case 0:
-                suggestRg.check(R.id.suggest_rg_introduction);
+                suggestRg.check(R.id.suggest_rg_image);
+
                 break;
             case 1:
-                suggestRg.check(R.id.suggest_rg_image);
-                break;
-            case 2:
                 suggestRg.check(R.id.suggest_rg_video);
                 break;
-            case 3:
+            case 2:
                 suggestRg.check(R.id.suggest_rg_chateau);
+                break;
+            case 3:
+                suggestRg.check(R.id.suggest_rg_introduction);
                 break;
         }
 
@@ -152,16 +173,16 @@ public class SuggestActivity extends BaseActivity implements RadioGroup.OnChecke
     public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
         switch (checkedId) {
             case R.id.suggest_rg_introduction:
-                index=0;
-                break;
-            case R.id.suggest_rg_chateau:
                 index=3;
                 break;
+            case R.id.suggest_rg_chateau:
+                index=2;
+                break;
             case R.id.suggest_rg_image:
-                index=1;
+                index=0;
                 break;
             case R.id.suggest_rg_video:
-                index=2;
+                index=1;
                 break;
         }
         suggestVp.setCurrentItem(index,true);

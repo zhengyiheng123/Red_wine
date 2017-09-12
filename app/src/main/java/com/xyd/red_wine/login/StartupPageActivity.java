@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -19,7 +20,11 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.main.MainActivity;
+import com.xyd.red_wine.permissions.PermissionUtils;
+import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.personinformation.InfromationModel;
+import com.xyd.red_wine.utils.FileUtils;
+import com.xyd.red_wine.utils.LogUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,6 +44,14 @@ public class StartupPageActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_up);
+//        PermissionUtils.storage(this, new PermissionUtils.OnPermissionResult() {
+//            @Override
+//            public void onGranted() {
+//                LogUtil log=new LogUtil();
+//                log.startWriteLogToSdcard(FileUtils.imagePath()+"test.txt",true);
+//                initView();
+//            }
+//        });
         initView();
     }
 
@@ -79,6 +92,17 @@ public class StartupPageActivity extends Activity {
 
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionsManager.getInstance().notifyPermissionsChange(permissions,grantResults);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 
     private void login(final String uname, final String upwd) {
 

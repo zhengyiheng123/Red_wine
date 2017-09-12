@@ -42,7 +42,7 @@ public class BusinessFragment extends BaseFragment implements SwipeRefreshLayout
     private int page = 1;
     private int num = 10;
     private List<BenefitModel.ActiveBean> list;
-    private BenefitAdapter adapter;
+    private BusinessAdapter adapter;
     @Override
     protected int getLayoutId() {
         return R.layout.base_srl_rv;
@@ -62,9 +62,8 @@ public class BusinessFragment extends BaseFragment implements SwipeRefreshLayout
 
         list = new ArrayList<>();
 
-        adapter = new BenefitAdapter(list, getActivity());
+        adapter = new BusinessAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, baseRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         baseRv.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }

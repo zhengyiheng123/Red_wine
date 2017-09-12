@@ -17,6 +17,7 @@ import com.xyd.red_wine.base.BaseFragment;
 import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.RxSchedulers;
+import com.xyd.red_wine.newsdetail.DetailActivity;
 import com.xyd.red_wine.video.VideoActivity;
 
 import java.util.ArrayList;
@@ -127,6 +128,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         Bundle b=new Bundle();
         b.putInt(VideoActivity.VIDEO_ID,adapter.getData().get(position).getA_id());
         b.putString(VideoActivity.VIDEO_URL,adapter.getData().get(position).getA_content());
+        b.putInt(VideoActivity.COLLECT, adapter.getData().get(position).getCollect());
         startActivity(VideoActivity.class,b);
     }
 }

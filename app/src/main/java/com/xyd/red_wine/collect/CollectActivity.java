@@ -1,10 +1,13 @@
 package com.xyd.red_wine.collect;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +19,11 @@ import com.xyd.red_wine.base.BaseActivity;
 import com.xyd.red_wine.base.BaseApi;
 import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.BaseObserver;
+import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.newsdetail.DetailActivity;
+import com.xyd.red_wine.utils.ToastUtils;
+import com.xyd.red_wine.video.VideoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +38,7 @@ import butterknife.Bind;
  */
 
 public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener,
-        BaseQuickAdapter.RequestLoadMoreListener ,BaseQuickAdapter.OnItemClickListener{
+        BaseQuickAdapter.RequestLoadMoreListener ,BaseQuickAdapter.OnItemClickListener, BaseQuickAdapter.OnItemChildClickListener {
 
     @Bind(R.id.base_title_back)
     TextView baseTitleBack;
@@ -44,9 +50,12 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
     RecyclerView newsRv;
     @Bind(R.id.news_srl)
     SwipeRefreshLayout newsSrl;
+    @Bind(R.id.base_title_headline)
+    ImageView mHeadLine;
     private List<CollectModel.MyCollectBean> list;
-    private CollectAdapter adapter;
+    private CollectAdapterDelete adapter;
     private int page = 1, num = 10;
+    private List<CollectModel.MyCollectBean> mCollectModel;
 
     @Override
     protected int getLayoutId() {
@@ -55,6 +64,7 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
 
     @Override
     protected void initView() {
+        mHeadLine.setVisibility(View.GONE);
         baseTitleBack.setText("");
         baseTitleTitle.setText("我的收藏");
         baseTitleMenu.setVisibility(View.INVISIBLE);
@@ -76,6 +86,7 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
                     @Override
                     protected void onHandleSuccess(CollectModel collectModel, String msg, int code) {
                         adapter.loadMoreComplete();
+                        mCollectModel = collectModel.getMy_collect();
                         newsSrl.setRefreshing(false);
                         if (page==1){
                             adapter.setNewData(collectModel.getMy_collect());
@@ -98,10 +109,13 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
 
     private void initAdapter() {
         list = new ArrayList<>();
-        adapter = new CollectAdapter(list, this);
+        adapter = new CollectAdapterDelete(list, this);
         adapter.setOnLoadMoreListener(this, newsRv);
+        View view= LayoutInflater.from(this).inflate(R.layout.empty_view,null);
+        adapter.setEmptyView(view);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         adapter.setOnItemClickListener(this);
+        adapter.setOnItemChildClickListener(this);
         newsRv.setAdapter(adapter);
 
 
@@ -111,6 +125,7 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
     protected void initEvent() {
         baseTitleBack.setOnClickListener(this);
         baseTitleMenu.setOnClickListener(this);
+        adapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -143,15 +158,63 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
     public void onLoadMoreRequested() {
         page++;
         getData();
-
     }
     @Override
     public void onItemClick(BaseQuickAdapter adapter1, View view, int position) {
-        Bundle b = new Bundle();
-        b.putInt(DetailActivity.NEWS_ID, adapter.getData().get(position).getA_id());
-        b.putInt(DetailActivity.COLLECT, 1);
-        b.putString(DetailActivity.NEWS_URL,adapter.getData().get(position).getA_content());
-        startActivity(DetailActivity.class,b);
+        Bundle b ;
+            if (adapter.getData().get(position).getT_id() == 5){
+                b= new Bundle();
+                b.putInt(VideoActivity.VIDEO_ID, adapter.getData().get(position).getA_id());
+                b.putInt(VideoActivity.COLLECT, 1);
+                b.putString(VideoActivity.VIDEO_URL,adapter.getData().get(position).getA_content());
+                startActivity(VideoActivity.class,b);
+            }else {
+                b= new Bundle();
+                b.putInt(DetailActivity.NEWS_ID, adapter.getData().get(position).getA_id());
+                b.putInt(DetailActivity.COLLECT, 1);
+                b.putString(DetailActivity.NEWS_URL,adapter.getData().get(position).getA_content());
+                startActivity(DetailActivity.class,b);
+            }
+    }
 
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        initDialog(position);
+    }
+    private void initDialog(final int data){
+        AlertDialog.Builder builder = new AlertDialog.Builder(CollectActivity.this);
+        builder.setTitle("是否删除");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+//                adapter.remove(data);
+                delCollect(data);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+    private void delCollect(final int data) {
+        BaseApi.getRetrofit()
+                .create(CollectApi.class)
+                .delCollect(adapter.getData().get(data).getA_id()+"")
+                .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
+                .subscribe(new BaseObserver<EmptyModel>() {
+                    @Override
+                    protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
+                        ToastUtils.show(msg);
+                        adapter.remove(data);
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        showToast(msg);
+                    }
+                });
     }
 }

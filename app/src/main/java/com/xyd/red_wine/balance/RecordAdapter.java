@@ -33,7 +33,7 @@ public class RecordAdapter extends BaseQuickAdapter<CashValueModel.CashValueBean
         if (item.getRl_type() == 1) {
             helper.setVisible(R.id.item_record_user, true);
             helper.setText(R.id.item_record_num, "订单号：" + item.getRecharge_num());
-            helper.setText(R.id.item_record_money, "充值金额：" + item.getWe_price().replace("-", ""));
+            helper.setText(R.id.item_record_money, "充值金额：" + item.getWe_price());
             helper.setText(R.id.item_record_time, "时间：" + TimeUtils.millis2String(item.getCreate_time() * 1000, "yyyy-MM-dd HH:mm"));
             helper.setText(R.id.item_record_user, "充值账号：" + item.getPay_account());
             String s = item.getRl_state() == 1 ? "支付取消" : "已支付";
@@ -41,7 +41,7 @@ public class RecordAdapter extends BaseQuickAdapter<CashValueModel.CashValueBean
         } else {
             helper.setVisible(R.id.item_record_user, false);
             helper.setText(R.id.item_record_num, "订单号：" + item.getRecharge_num());
-            helper.setText(R.id.item_record_money, "提现金额：" + item.getWe_price().replace("-", ""));
+            helper.setText(R.id.item_record_money, "提现金额：" + item.getWe_price());
             helper.setText(R.id.item_record_time, "时间：" + TimeUtils.millis2String(item.getCreate_time() * 1000, "yyyy-MM-dd HH:mm"));
             if (item.getRl_state() == 1)
 

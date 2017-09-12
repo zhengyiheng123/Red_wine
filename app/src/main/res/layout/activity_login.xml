@@ -18,14 +18,15 @@
         android:background="@mipmap/logo1" />
 
     <RelativeLayout
+        android:layout_alignRight="@+id/login_rl_other"
+        android:layout_alignLeft="@+id/login_rl_other"
         android:id="@+id/login_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login_iv_head"
-        android:layout_marginLeft="@dimen/margin_36"
-        android:layout_marginRight="@dimen/margin_36"
         android:background="@drawable/bg_radius_5"
-        android:elevation="10dp">
+        android:elevation="10dp"
+        android:layout_below="@+id/login_iv_head"
+        >
 
         <EditText
             android:id="@+id/login_edt_user"
@@ -54,7 +55,7 @@
             android:drawableLeft="@mipmap/mima"
             android:drawablePadding="@dimen/padding_12"
             android:hint="请输入密码"
-            android:paddingLeft="@dimen/padding_12"
+            android:paddingLeft="@dimen/padding_20"
             android:textSize="@dimen/text_14" />
 
         <CheckBox

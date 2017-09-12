@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.glide.GlideUtil;
+import com.xyd.red_wine.utils.TimeUtils;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class EarningAdapter extends BaseQuickAdapter<EarningModel.DeductBean, Ba
 
         helper.setText(R.id.earnings_tv_name, item.getNickname());
 
-        helper.setText(R.id.earnings_tv_level, strings[item.getPid_status()]);
-        helper.setText(R.id.earnings_tv_sign, item.getSignature());
+        helper.setText(R.id.earnings_tv_level, item.getPhone());
+        helper.setText(R.id.earnings_tv_sign, TimeUtils.millis2String(item.getCreate_time()*1000,"yyyy-MM-dd HH:mm"));
         }
     }
 }

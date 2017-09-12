@@ -17,4 +17,5 @@ public interface HomeApi {
 
     @POST("index/index")
     Observable<BaseModel<HomeModel>>  home();
+
 }

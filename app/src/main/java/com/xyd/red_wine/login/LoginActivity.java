@@ -239,5 +239,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        closeApp();
+        super.onBackPressed();
 
+    }
 }

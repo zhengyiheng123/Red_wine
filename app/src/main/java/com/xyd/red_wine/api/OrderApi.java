@@ -9,6 +9,7 @@ import com.xyd.red_wine.commitorder.PayFinishActivity;
 import com.xyd.red_wine.commitorder.WxModel;
 import com.xyd.red_wine.logistics.LogisticsModel;
 import com.xyd.red_wine.order.OrderModel;
+import com.xyd.red_wine.orderdetail.OrderDetailModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.POST;
@@ -88,4 +89,10 @@ public interface OrderApi {
      */
     @POST("sundry/pay_msg")
     Observable<BaseModel<PayFinishActivity.PayMsg>> payMsg();
+
+    /**
+     * 订单详情
+     */
+    @POST("orders/order_detail")
+    Observable<BaseModel<OrderDetailModel>> orderDetail(@Query("order_num") String order_num);
 }

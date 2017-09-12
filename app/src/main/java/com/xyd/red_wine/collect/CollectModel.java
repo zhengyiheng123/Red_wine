@@ -37,12 +37,22 @@ public class CollectModel implements Serializable {
          * a_img : ["/uploads/20170711/65d044f6e7ebad1576192ab9bc269c67.jpg"]
          * create_time : 1970-01-01 08:00:00
          * collect :是否收藏1已收藏0未收藏   collect
+         * t_id://类型4：图文。5:视频
          */
 
         private String a_title;
         private String create_time;
         private List<String> a_img;
         private int a_id;
+        private int t_id;
+
+        public int getT_id() {
+            return t_id;
+        }
+
+        public void setT_id(int t_id) {
+            this.t_id = t_id;
+        }
 
         public int getA_id() {
             return a_id;
