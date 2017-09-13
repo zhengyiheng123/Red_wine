@@ -21,6 +21,9 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.api.GeneralizeApi;
 import com.xyd.red_wine.base.BaseActivity;
@@ -41,6 +44,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -86,6 +90,8 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
     private File myCaptureFile;
     private String qr_code;
 
+    private UMShareListener mShareListener;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_generalize;
@@ -93,6 +99,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
 
     @Override
     protected void initView() {
+        mShareListener = new CustomShareListener(GeneralizeActivity.this);
         baseTitleTitle.setText("推广");
         baseTitleMenu.setVisibility(View.INVISIBLE);
         getData();
@@ -213,43 +220,72 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                 break;
             case R.id.generalize_share:
                 new ShareAction(this)
-                        .withText("酒瀚")
-                        .withMedia(new UMImage(GeneralizeActivity.this,qr_code))
-                        .setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
-                        .setCallback(new UMShareListener() {
+                        .setDisplayList(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)
+                        .setShareboardclickCallback(new ShareBoardlistener() {
                             @Override
-                            public void onStart(SHARE_MEDIA share_media) {
-
-                            }
-
-                            @Override
-                            public void onResult(SHARE_MEDIA share_media) {
-                                Toast.makeText(GeneralizeActivity.this, "成功了", Toast.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
-                                    if (UMShareAPI.get(GeneralizeActivity.this).isInstall(GeneralizeActivity.this,SHARE_MEDIA.WEIXIN))
-                                        Toast.makeText(GeneralizeActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                                    else
-                                        Toast.makeText(GeneralizeActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
-
-                                }
-                                if (share_media==SHARE_MEDIA.QQ){
-                                    if (UMShareAPI.get(GeneralizeActivity.this).isInstall(GeneralizeActivity.this,SHARE_MEDIA.QQ))
-                                        Toast.makeText(GeneralizeActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                                    else
-                                        Toast.makeText(GeneralizeActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
+                            public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                                if (share_media == SHARE_MEDIA.QQ || share_media== SHARE_MEDIA.QZONE){
+                                    UMWeb web = new UMWeb(qr_code);
+                                    web.setTitle("酒瀚");
+                                    web.setDescription("酒瀚二维码");
+//                                    web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
+                                    new ShareAction(GeneralizeActivity.this).withMedia(web)
+                                            .setPlatform(share_media)
+                                            .setCallback(mShareListener)
+                                            .share();
+                                }else {
+                                    UMImage umImage=new UMImage(getApplicationContext(),qr_code);
+                                    umImage.setThumb(new UMImage(GeneralizeActivity.this, R.mipmap.logo000));
+                                    UMImage thum=new UMImage(getApplicationContext(),R.mipmap.logo000);
+                                    umImage.setThumb(thum);
+                                    new ShareAction(GeneralizeActivity.this).withMedia(umImage)
+                                            .setPlatform(share_media)
+                                            .setCallback(mShareListener)
+                                            .share();
                                 }
                             }
+                        }).open();
 
-                            @Override
-                            public void onCancel(SHARE_MEDIA share_media) {
-                                Toast.makeText(GeneralizeActivity.this, "取消了", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .open();
+
+
+//                new ShareAction(this)
+//                        .withText("酒瀚")
+//                        .withMedia(new UMImage(GeneralizeActivity.this,qr_code))
+//                        .setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
+//                        .setCallback(new UMShareListener() {
+//                            @Override
+//                            public void onStart(SHARE_MEDIA share_media) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onResult(SHARE_MEDIA share_media) {
+//                                Toast.makeText(GeneralizeActivity.this, "成功了", Toast.LENGTH_LONG).show();
+//                            }
+//
+//                            @Override
+//                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+//                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
+//                                    if (UMShareAPI.get(GeneralizeActivity.this).isInstall(GeneralizeActivity.this,SHARE_MEDIA.WEIXIN))
+//                                        Toast.makeText(GeneralizeActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+//                                    else
+//                                        Toast.makeText(GeneralizeActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
+//
+//                                }
+//                                if (share_media==SHARE_MEDIA.QQ){
+//                                    if (UMShareAPI.get(GeneralizeActivity.this).isInstall(GeneralizeActivity.this,SHARE_MEDIA.QQ))
+//                                        Toast.makeText(GeneralizeActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+//                                    else
+//                                        Toast.makeText(GeneralizeActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancel(SHARE_MEDIA share_media) {
+//                                Toast.makeText(GeneralizeActivity.this, "取消了", Toast.LENGTH_LONG).show();
+//                            }
+//                        })
+//                        .open();
 //                if (myCaptureFile.getTotalSpace() == 0)
 //                    return;
 //                Uri uri = Uri.fromFile(myCaptureFile);
@@ -395,5 +431,78 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
     protected void onDestroy() {
         super.onDestroy();
         UMShareAPI.get(this).release();
+    }
+
+    private static class CustomShareListener implements UMShareListener {
+
+        private WeakReference<GeneralizeActivity> mActivity;
+
+        private CustomShareListener(GeneralizeActivity activity) {
+            mActivity = new WeakReference(activity);
+        }
+
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
+                        && platform != SHARE_MEDIA.EMAIL
+                        && platform != SHARE_MEDIA.FLICKR
+                        && platform != SHARE_MEDIA.FOURSQUARE
+                        && platform != SHARE_MEDIA.TUMBLR
+                        && platform != SHARE_MEDIA.POCKET
+                        && platform != SHARE_MEDIA.PINTEREST
+
+                        && platform != SHARE_MEDIA.INSTAGRAM
+                        && platform != SHARE_MEDIA.GOOGLEPLUS
+                        && platform != SHARE_MEDIA.YNOTE
+                        && platform != SHARE_MEDIA.EVERNOTE) {
+                    Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
+                    && platform != SHARE_MEDIA.EMAIL
+                    && platform != SHARE_MEDIA.FLICKR
+                    && platform != SHARE_MEDIA.FOURSQUARE
+                    && platform != SHARE_MEDIA.TUMBLR
+                    && platform != SHARE_MEDIA.POCKET
+                    && platform != SHARE_MEDIA.PINTEREST
+
+                    && platform != SHARE_MEDIA.INSTAGRAM
+                    && platform != SHARE_MEDIA.GOOGLEPLUS
+                    && platform != SHARE_MEDIA.YNOTE
+                    && platform != SHARE_MEDIA.EVERNOTE) {
+                Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+                if (t != null) {
+                    com.umeng.socialize.utils.Log.d("throw", "throw:" + t.getMessage());
+                }
+            }
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+
+            Toast.makeText(mActivity.get(), platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

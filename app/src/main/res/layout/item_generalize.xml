@@ -7,8 +7,7 @@
         android:id="@+id/generalize_gv_iv"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         />
 
     <TextView

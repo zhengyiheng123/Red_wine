@@ -23,7 +23,7 @@ android {
     defaultConfig {
         applicationId "com.xyd.red_wine"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 2
         versionName "2.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

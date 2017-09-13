@@ -150,11 +150,14 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                             informationCbWomen.setChecked(true);
                         else
                             informationCbMen.setChecked(true);
-//                        if (TextUtils.isEmpty(infromationModel.getPhone())){
-//                            tv_bangding.setText("绑定");
-//                        }else {
-//                            tv_bangding.setText("更换手机号");
-//                        }
+                        if (TextUtils.isEmpty(infromationModel.getPhone())){
+                            tv_bangding.setText("绑定");
+                            tv_bangding.setTextColor(getResources().getColor(R.color.material_white));
+                            tv_bangding.setBackgroundResource(R.drawable.bg_btn_quit);
+                        }else {
+                            tv_bangding.setText("");
+                            tv_bangding.setBackgroundResource(R.drawable.pen);
+                        }
                         EventBus.getDefault().post(new InformationMessage());
                     }
 

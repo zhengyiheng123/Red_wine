@@ -58,12 +58,10 @@ public class MyApplication extends Application {
         config.isSinaAuthWithWebView();
         config.setSinaAuthType(UMShareConfig.AUTH_TYPE_SSO);
         UMShareAPI.get(this).setShareConfig(config);
+
         PlatformConfig.setWeixin("wxdb713d24bde112f2","5312576688a2a85b0d104586a0b6deb8");
         PlatformConfig.setQQZone("1106221519","Omc31VQxqHWnFaNl");
         PlatformConfig.setSinaWeibo("1866127300","a2222661f38e596049e64e660ae569f4","http://open.weibo.com/apps/1866127300/privilege/oauth");
-
-
-
     }
 
     public static MyApplication getInstance(){

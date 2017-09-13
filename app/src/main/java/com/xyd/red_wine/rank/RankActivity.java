@@ -48,7 +48,7 @@ public class RankActivity extends BaseActivity {
     @Bind(R.id.base_title_headline)
     ImageView mHeadLine;
     private Fragment[] fragments;
-    private int index = 0, currentTabIndex = -1;
+    private int index = 1, currentTabIndex = -1;
 
     @Override
     protected int getLayoutId() {
@@ -85,7 +85,7 @@ public class RankActivity extends BaseActivity {
                 rankBenefitLine.setBackgroundResource(R.color.material_white);
                 rankBusiness.setTextColor(getResources().getColor(R.color.material_textWhite_text));
                 rankBusinessLine.setBackgroundResource(R.color.touming);
-                index = 0;
+                index = 1;
                 onTextClicked();
                 break;
             case R.id.rank_business:
@@ -93,7 +93,7 @@ public class RankActivity extends BaseActivity {
                 rankBenefitLine.setBackgroundResource(R.color.touming);
                 rankBusiness.setTextColor(getResources().getColor(R.color.material_textWhite_black));
                 rankBusinessLine.setBackgroundResource(R.color.material_white);
-                index = 1;
+                index = 0;
                 onTextClicked();
                 break;
         }

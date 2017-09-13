@@ -19,6 +19,8 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.editorpage.ShareActivity;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.api.CollectApi;
 import com.xyd.red_wine.base.BaseActivity;
@@ -29,6 +31,8 @@ import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.generalize.GeneralizeActivity;
 import com.xyd.red_wine.utils.ToastUtils;
+
+import java.lang.ref.WeakReference;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -60,6 +64,7 @@ public class DetailActivity extends BaseActivity {
     private int id;
     private int isCollect;
 
+    private UMShareListener mShareListener;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_news_detail;
@@ -67,11 +72,11 @@ public class DetailActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mShareListener = new CustomShareListener(this);
         id = getIntent().getIntExtra(NEWS_ID, 0);
         Log.e("newsid:" ,id+"");
         content = getIntent().getStringExtra(NEWS_URL);
-      //  content="http://m.wine-world.com/winery/chateau-lafite-rothschild/ad679838-5304-4973-be95-0162fa5d2d7c";
+        //  content="http://m.wine-world.com/winery/chateau-lafite-rothschild/ad679838-5304-4973-be95-0162fa5d2d7c";
         isCollect = getIntent().getIntExtra(COLLECT, 0);
         if (isCollect == 0)
             detailCollect.setImageResource(R.mipmap.pingjia_weixuanzhong);
@@ -121,7 +126,7 @@ public class DetailActivity extends BaseActivity {
             }
         });
         detailWv.loadUrl(content);
-       // detailWv.loadUrl("file:///android_asset/show.html");
+        // detailWv.loadUrl("file:///android_asset/show.html");
         //detailWv.loadUrl("https://m.baidu.com/?from=2001a#iact=wiseindex%2Ftabs%2Fnews%2Factivity%2Fnewsdetail%3D%257B%2522linkData%2522%253A%257B%2522name%2522%253A%2522iframe%252Fmib-iframe%2522%252C%2522id%2522%253A%2522feed%2522%252C%2522index%2522%253A0%252C%2522url%2522%253A%2522https%253A%252F%252Ffeed.baidu.com%252Ffeed%252Fdata%252Fwise%252Flandingpage%253Fs_type%253Dnews%2526nid%253D17203467375904090668%2526n_type%253D0%2526p_from%253D2%2522%252C%2522title%2522%253A%2522%25E8%2585%25BE%25E8%25AE%25AF%25E6%2596%25B0%25E9%2597%25BB%2522%257D%257D");
 
     }
@@ -143,56 +148,86 @@ public class DetailActivity extends BaseActivity {
 
                 break;
             case R.id.detail_share:
+                new ShareAction(this)
+                        .setDisplayList(SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)
+                        .setShareboardclickCallback(new ShareBoardlistener() {
+                            @Override
+                            public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+                                if (share_media == SHARE_MEDIA.QQ || share_media== SHARE_MEDIA.QZONE){
+                                    UMWeb web = new UMWeb(content);
+                                    web.setTitle("乔治金瀚");
+                                    web.setDescription("乔治金瀚资讯");
+//                                    web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
+                                    new ShareAction(DetailActivity.this).withMedia(web)
+                                            .setPlatform(share_media)
+                                            .setCallback(mShareListener)
+                                            .share();
+                                }else {
+                                    UMWeb web = new UMWeb(content);
+                                    web.setTitle("乔治金瀚");
+                                    web.setDescription("乔治金瀚资讯");
+                                    web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
+                                    new ShareAction(DetailActivity.this).withMedia(web)
+                                            .setPlatform(share_media)
+                                            .setCallback(mShareListener)
+                                            .share();
+                                }
+                            }
+                        }).open();
+
+
+
+
 //                Intent shareIntent = new Intent(Intent.ACTION_SEND);
 //                shareIntent.setType("text/plain");
 //                shareIntent.putExtra(Intent.EXTRA_TEXT, content);
 //                //自定义选择框的标题
 //                startActivity(Intent.createChooser(shareIntent, "资讯"));
 //                UMImage thumb =  new UMImage(this, R.mipmap.logo000);
-                UMWeb  web = new UMWeb(content);
-                web.setTitle("酒瀚");//标题
+//                UMWeb  web = new UMWeb(content);
+//                web.setTitle("酒瀚");//标题
 //                web.setThumb(thumb);  //缩略图
-                web.setDescription("红酒资讯");//描述
-                new ShareAction(this)
-                        .withMedia(web)
-                        .withText("乔治金瀚资讯")
-//                        .withMedia(thumb)
-                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
-                        .setCallback(new UMShareListener() {
-                            @Override
-                            public void onStart(SHARE_MEDIA share_media) {
-
-                            }
-
-                            @Override
-                            public void onResult(SHARE_MEDIA share_media) {
-                                Toast.makeText(DetailActivity.this, "成功了", Toast.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
-                                    if (UMShareAPI.get(DetailActivity.this).isInstall(DetailActivity.this,SHARE_MEDIA.WEIXIN))
-                                        Toast.makeText(DetailActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                                    else
-                                        Toast.makeText(DetailActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
-
-                                }
-                                if (share_media==SHARE_MEDIA.QQ){
-                                    if (UMShareAPI.get(DetailActivity.this).isInstall(DetailActivity.this,SHARE_MEDIA.QQ))
-                                        Toast.makeText(DetailActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                                    else
-                                        Toast.makeText(DetailActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onCancel(SHARE_MEDIA share_media) {
-                                Toast.makeText(DetailActivity.this, "分享取消了", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .open();
-                break;
+//                web.setDescription("红酒资讯");//描述
+//                new ShareAction(this)
+//                        .withMedia(web)
+//                        .withText("乔治金瀚资讯")
+////                        .withMedia(thumb)
+//                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
+//                        .setCallback(new UMShareListener() {
+//                            @Override
+//                            public void onStart(SHARE_MEDIA share_media) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onResult(SHARE_MEDIA share_media) {
+//                                Toast.makeText(DetailActivity.this, "成功了", Toast.LENGTH_LONG).show();
+//                            }
+//
+//                            @Override
+//                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+//                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
+//                                    if (UMShareAPI.get(DetailActivity.this).isInstall(DetailActivity.this,SHARE_MEDIA.WEIXIN))
+//                                        Toast.makeText(DetailActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+//                                    else
+//                                        Toast.makeText(DetailActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
+//
+//                                }
+//                                if (share_media==SHARE_MEDIA.QQ){
+//                                    if (UMShareAPI.get(DetailActivity.this).isInstall(DetailActivity.this,SHARE_MEDIA.QQ))
+//                                        Toast.makeText(DetailActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+//                                    else
+//                                        Toast.makeText(DetailActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancel(SHARE_MEDIA share_media) {
+//                                Toast.makeText(DetailActivity.this, "分享取消了", Toast.LENGTH_LONG).show();
+//                            }
+//                        })
+//                        .open();
+//                break;
         }
 
     }
@@ -245,5 +280,79 @@ public class DetailActivity extends BaseActivity {
                         showToast(msg);
                     }
                 });
+    }
+
+
+    private static class CustomShareListener implements UMShareListener {
+
+        private WeakReference<DetailActivity> mActivity;
+
+        private CustomShareListener(DetailActivity activity) {
+            mActivity = new WeakReference(activity);
+        }
+
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+
+            if (platform.name().equals("WEIXIN_FAVORITE")) {
+                Toast.makeText(mActivity.get(), platform + " 收藏成功啦", Toast.LENGTH_SHORT).show();
+            } else {
+                if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
+                        && platform != SHARE_MEDIA.EMAIL
+                        && platform != SHARE_MEDIA.FLICKR
+                        && platform != SHARE_MEDIA.FOURSQUARE
+                        && platform != SHARE_MEDIA.TUMBLR
+                        && platform != SHARE_MEDIA.POCKET
+                        && platform != SHARE_MEDIA.PINTEREST
+
+                        && platform != SHARE_MEDIA.INSTAGRAM
+                        && platform != SHARE_MEDIA.GOOGLEPLUS
+                        && platform != SHARE_MEDIA.YNOTE
+                        && platform != SHARE_MEDIA.EVERNOTE) {
+                    Toast.makeText(mActivity.get(), platform + " 分享成功啦", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            if (platform != SHARE_MEDIA.MORE && platform != SHARE_MEDIA.SMS
+                    && platform != SHARE_MEDIA.EMAIL
+                    && platform != SHARE_MEDIA.FLICKR
+                    && platform != SHARE_MEDIA.FOURSQUARE
+                    && platform != SHARE_MEDIA.TUMBLR
+                    && platform != SHARE_MEDIA.POCKET
+                    && platform != SHARE_MEDIA.PINTEREST
+
+                    && platform != SHARE_MEDIA.INSTAGRAM
+                    && platform != SHARE_MEDIA.GOOGLEPLUS
+                    && platform != SHARE_MEDIA.YNOTE
+                    && platform != SHARE_MEDIA.EVERNOTE) {
+                Toast.makeText(mActivity.get(), platform + " 分享失败啦", Toast.LENGTH_SHORT).show();
+                if (t != null) {
+                    com.umeng.socialize.utils.Log.d("throw", "throw:" + t.getMessage());
+                }
+            }
+
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+
+            Toast.makeText(mActivity.get(), platform + " 分享取消了", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /** attention to this below ,must add this**/
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

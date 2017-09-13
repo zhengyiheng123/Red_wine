@@ -74,7 +74,6 @@ public class PaymentsActivity extends BaseActivity implements SwipeRefreshLayout
         list = new ArrayList<>();
         adapter = new PaymentsAdapter(list, this);
         adapter.setOnLoadMoreListener(this, paymentsRv);
-        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         paymentsRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);
 

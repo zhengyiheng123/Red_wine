@@ -33,21 +33,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_gravity="center_vertical"
                 android:id="@+id/commission_tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="---"
-                android:textColor="@color/material_textBlack_black"
+                android:textColor="@color/material_grey_800"
                 android:textSize="@dimen/text_16" />
 
-            <TextView
-                android:id="@+id/commission_tv_level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text=""
-                android:textColor="@color/material_red_A400"
-                android:textSize="@dimen/text_14" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,7 +56,7 @@
                 android:layout_marginTop="4dp"
                 android:gravity="end"
                 android:text="提成"
-                android:textColor="@color/material_textBlack_black"
+                android:textColor="@color/material_grey_800"
                 android:textSize="@dimen/text_14" />
 
             <TextView
@@ -94,8 +87,7 @@
             android:layout_width="118dp"
             android:layout_height="82dp"
             android:layout_margin="8dp"
-            android:scaleType="fitXY"
-             />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/commission_tv_title"
@@ -118,26 +110,27 @@
             android:textSize="@dimen/text_14" />
 
 
-
         <TextView
             android:id="@+id/commission_item_tv_price"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/commission_tv_title1"
             android:layout_marginTop="4dp"
             android:layout_toRightOf="@id/commission_iv"
             android:text="￥200.00  x1"
-            android:textColor="@color/material_textBlack_black"
+            android:textColor="@color/material_grey_800"
             android:textSize="@dimen/text_14" />
+
         <TextView
             android:id="@+id/commission_tv_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_below="@id/commission_item_tv_price"
-            android:layout_toRightOf="@id/commission_iv"
+            android:layout_below="@id/commission_tv_title1"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
             android:text="2017.05.26"
-            android:textColor="@color/material_textBlack_secondaryText"
+            android:textColor="@color/material_grey_800"
             android:textSize="@dimen/text_14" />
 
     </RelativeLayout>

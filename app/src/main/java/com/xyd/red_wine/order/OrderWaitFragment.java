@@ -211,6 +211,7 @@ BaseQuickAdapter.OnItemClickListener{
                     @Override
                     protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
                         showToast(msg);
+                        onRefresh();
                     }
 
                     @Override
