@@ -110,7 +110,42 @@
 
 
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/margin_12"
+        android:layout_marginLeft="@dimen/margin_12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:inputType="number"
+            android:layout_weight="0.65"
+            android:background="@drawable/shape_getcode"
+            android:id="@+id/register_edt_code"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginTop="@dimen/margin_16"
+            android:drawablePadding="@dimen/padding_12"
+            android:hint="请输入手机验证码"
+            android:paddingLeft="@dimen/padding_12"
+            android:textSize="@dimen/text_14" />
 
+        <TextView
+            android:layout_marginTop="@dimen/margin_16"
+            android:layout_weight="0.35"
+            android:layout_centerVertical="true"
+            android:id="@+id/register_tv_code"
+            android:layout_width="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="40dp"
+            android:background="#f6ba62"
+            android:gravity="center"
+            android:textColor="@color/material_white"
+            android:text="获取验证码"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:textSize="@dimen/text_12"
+            />
+    </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xyd.red_wine.R;
@@ -15,6 +16,7 @@ import com.xyd.red_wine.base.BaseApi;
 import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.EmptyModel;
+import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.utils.ToastUtils;
 
@@ -38,6 +40,14 @@ public class BindActivity extends BaseActivity {
     @Bind(R.id.register_btn)
     TextView register_btn;
     private int downTime = 60;
+    private int userId;
+    @Bind(R.id.base_title_title)
+    TextView mBaseTitle;
+    @Bind(R.id.base_title_back)
+    TextView mBaseback;
+    @Bind(R.id.base_title_menu)
+    ImageView mImageMenu;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_bind_password;
@@ -45,18 +55,24 @@ public class BindActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        mImageMenu.setVisibility(View.INVISIBLE);
+        mBaseTitle.setText("绑定手机号");
+        userId = PublicStaticData.sharedPreferences.getInt("id",0);
     }
 
     @Override
     protected void initEvent() {
         register_btn.setOnClickListener(this);
         register_tv_code.setOnClickListener(this);
+        mBaseback.setOnClickListener(this);
     }
 
     @Override
     public void widgetClick(View v) {
         switch (v.getId()){
+            case R.id.base_title_back:
+                finish();
+                break;
             case R.id.register_btn:
                 if (TextUtils.isEmpty(register_edt_user.getText().toString())){
                     ToastUtils.show("请输入手机号");
@@ -123,7 +139,7 @@ public class BindActivity extends BaseActivity {
     private void bind(String phone,String code,String password,String repassword){
                         BaseApi.getRetrofit()
                                 .create(MineApi.class)
-                                .bind(phone,code,password,repassword)
+                                .bind(phone,code,password,repassword,userId)
                                 .compose(RxSchedulers.<BaseModel>compose())
                                 .subscribe(new BaseObserver() {
                                     @Override

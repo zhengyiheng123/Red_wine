@@ -104,7 +104,7 @@ public interface MineApi {
      */
     @POST("ali_transfer/transfer")
     Observable<BaseModel<EmptyModel>> ali_transfer(@Query("recharge_money") String recharge_money,
-                                                 @Query("pay_account") String pay_account
+                                                 @Query("pay_account") String pay_account,@Query("code")String code
     );
 
     /**
@@ -137,7 +137,7 @@ public interface MineApi {
      * 绑定手机号
      */
     @POST("user/edit_phone")
-    Observable<BaseModel> bind(@Query("phone")String phone,@Query("code")String code,@Query("password")String password,@Query("repassword")String repassword);
+    Observable<BaseModel> bind(@Query("phone")String phone,@Query("code")String code,@Query("password")String password,@Query("repassword")String repassword,@Query("userId")int userId);
 
     /**
      * 修改手机号

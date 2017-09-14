@@ -1,6 +1,11 @@
 package com.xyd.red_wine.balance;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -15,6 +20,12 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.glide.GlideUtil;
+import com.xyd.red_wine.login.LoginActivity;
+import com.xyd.red_wine.login.StartupPageActivity;
+import com.xyd.red_wine.main.MainActivity;
+import com.xyd.red_wine.personinformation.BindActivity;
+import com.xyd.red_wine.personinformation.InfromationModel;
+import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.view.DrawImageView;
 
 import java.util.Random;
@@ -134,10 +145,7 @@ public class BalanceActivity extends BaseActivity {
 //                balanceIvMoney.setAngel(random.nextInt(360));
                 break;
             case R.id.balance_tv_withdraw:
-                Bundle bundle=new Bundle();
-                bundle.putDouble(TixianActivity.AVAILAVLE_MONEY,model.getAccount_balance());
-                startActivity(TixianActivity.class,bundle);
-
+                getUserInfo();
                 break;
             case R.id.balance_tv_top_up:
 
@@ -149,6 +157,50 @@ public class BalanceActivity extends BaseActivity {
         }
 
     }
+    //获取用户信息
+private void getUserInfo(){
+    final PromptDialog dialog=new PromptDialog(BalanceActivity.this);
+    dialog.showLoading("请稍后",false);
+    BaseApi.getRetrofit()
+            .create(MineApi.class)
+            .information()
+            .compose(RxSchedulers.<BaseModel<InfromationModel>>compose())
+            .subscribe(new BaseObserver<InfromationModel>() {
+                @Override
+                protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
+                    dialog.dismissImmediately();
+                    //  login("qiaozhijinhan" + infromationModel.getUserid(), "123456");
+                    if (!TextUtils.isEmpty(infromationModel.getPhone())){
+                        Bundle bundle=new Bundle();
+                        bundle.putDouble(TixianActivity.AVAILAVLE_MONEY,model.getAccount_balance());
+                        bundle.putString(TixianActivity.PHONENUM,infromationModel.getPhone());
+                        startActivity(TixianActivity.class,bundle);
+                    }else {
+                        AlertDialog.Builder builder=new AlertDialog.Builder(BalanceActivity.this);
+                        builder.setTitle("提示");
+                        builder.setMessage("请先绑定手机号码，才能进行提现。");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(BindActivity.class);
+                            }
+                        });
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        builder.show();
+                    }
+                }
 
+                @Override
+                protected void onHandleError(String msg) {
+                    showTestToast(msg);
+                    dialog.dismissImmediately();
+                }
+            });
+}
 
 }

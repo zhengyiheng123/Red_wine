@@ -3,6 +3,7 @@ package com.xyd.red_wine.balance;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xyd.red_wine.R;
+import com.xyd.red_wine.api.LoginApi;
 import com.xyd.red_wine.api.MineApi;
 import com.xyd.red_wine.base.BaseActivity;
 import com.xyd.red_wine.base.BaseApi;
@@ -23,6 +25,8 @@ import com.xyd.red_wine.base.BaseObserver;
 import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.utils.CashierInputFilter;
+import com.xyd.red_wine.utils.RegexUtils;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,9 +57,16 @@ public class TixianActivity extends BaseActivity {
     TextView chongzhiNum;
     @Bind(R.id.tixian_btn)
     TextView tixianBtn;
+    @Bind(R.id.register_tv_code)
+    TextView forgetTvCode;
+
+    @Bind(R.id.register_edt_code)
+    EditText getCode;
 
     public static String AVAILAVLE_MONEY="available_money";
+    public static String PHONENUM="phonenum";
     private Double available;
+    private String phonenum;
 
     @Override
     protected int getLayoutId() {
@@ -64,6 +75,7 @@ public class TixianActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        phonenum = getIntent().getStringExtra(PHONENUM);
         available=getIntent().getDoubleExtra(AVAILAVLE_MONEY,0);
         baseTitleTitle.setText("提现");
         baseTitleMenu.setVisibility(View.INVISIBLE);
@@ -75,6 +87,7 @@ public class TixianActivity extends BaseActivity {
 
     @Override
     protected void initEvent() {
+        forgetTvCode.setOnClickListener(this);
         baseTitleBack.setOnClickListener(this);
         tixianBtn.setOnClickListener(this);
         tixianEdt.addTextChangedListener(new TextWatcher() {
@@ -104,6 +117,17 @@ public class TixianActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.base_title_back:
                 finish();
+                break;
+            case R.id.register_tv_code:
+
+                if (downTime == 60){
+                    if (TextUtils.isEmpty(phonenum)){
+                        ToastUtils.show("手机号不能为空");
+                    }
+                    else{
+                        getCode(phonenum);
+                    }
+                }
                 break;
             case R.id.tixian_btn:
                 if (TextUtils.isEmpty(tixianEdt.getText().toString())) {
@@ -151,7 +175,7 @@ public class TixianActivity extends BaseActivity {
     private void tixian() {
         BaseApi.getRetrofit()
                 .create(MineApi.class)
-                .ali_transfer(tixianEdt.getText().toString(), tixianEdtUser.getText().toString())
+                .ali_transfer(tixianEdt.getText().toString(), tixianEdtUser.getText().toString(),getCode.getText().toString())
                 .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
                 .subscribe(new BaseObserver<EmptyModel>() {
                     @Override
@@ -166,5 +190,41 @@ public class TixianActivity extends BaseActivity {
                     }
                 });
     }
+    private int downTime = 60;
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (downTime > 0) {
+                downTime--;
+                forgetTvCode.setText("还剩" + downTime + "秒");
+                handler.postDelayed(this, 1000);
+            } else {
+                forgetTvCode.setText("重新获取验证码");
+                downTime = 60;
+            }
+        }
+    };
 
+    /**
+     *  获取验证码
+     */
+    private void getCode(String phone) {
+        BaseApi.getRetrofit()
+                .create(LoginApi.class)
+                .sendCode(phone, 2)
+                .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
+                .subscribe(new BaseObserver<EmptyModel>() {
+                    @Override
+                    protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
+                        ToastUtils.show(msg);
+                        handler.postDelayed(runnable, 1000);
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        ToastUtils.show(msg);
+                    }
+                });
+    }
 }

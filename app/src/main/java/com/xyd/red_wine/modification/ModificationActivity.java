@@ -49,7 +49,7 @@ public class ModificationActivity extends BaseActivity {
     @Override
     protected void initView() {
         mBaseTitle.setText("修改密码");
-        mBaseTitleMenu.setVisibility(View.GONE);
+        mBaseTitleMenu.setVisibility(View.INVISIBLE);
     }
 
     @Override
