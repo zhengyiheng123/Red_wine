@@ -225,17 +225,15 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                             @Override
                             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
                                 if (share_media == SHARE_MEDIA.QQ || share_media== SHARE_MEDIA.QZONE){
-                                    UMWeb web = new UMWeb(qr_code);
-                                    web.setTitle("酒瀚");
-                                    web.setDescription("酒瀚二维码");
+                                    UMImage umImage=new UMImage(getApplicationContext(),qr_code);
+                                    umImage.setThumb(new UMImage(GeneralizeActivity.this, R.mipmap.logo000));
 //                                    web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
-                                    new ShareAction(GeneralizeActivity.this).withMedia(web)
+                                    new ShareAction(GeneralizeActivity.this).withMedia(umImage)
                                             .setPlatform(share_media)
                                             .setCallback(mShareListener)
                                             .share();
                                 }else {
                                     UMImage umImage=new UMImage(getApplicationContext(),qr_code);
-                                    umImage.setThumb(new UMImage(GeneralizeActivity.this, R.mipmap.logo000));
                                     UMImage thum=new UMImage(getApplicationContext(),R.mipmap.logo000);
                                     umImage.setThumb(thum);
                                     new ShareAction(GeneralizeActivity.this).withMedia(umImage)

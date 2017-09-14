@@ -129,15 +129,15 @@
 
 #--------------------------------------------第三方依赖库---------------------------------
 # butterknife混淆------------------------------------------------------------------------
--keep class butterknife.** { *; }
--dontwarn butterknife.internal.**
--keep class **$$ViewBinder { *; }
--keepclasseswithmembernames class * {
-    @butterknife.* <fields>;
-}
--keepclasseswithmembernames class * {
-    @butterknife.* <methods>;
-}
+#-keep class butterknife.** { *; }
+#-dontwarn butterknife.internal.**
+#-keep class **$$ViewBinder { *; }
+#-keepclasseswithmembernames class * {
+#    @butterknife.* <fields>;
+#}
+#-keepclasseswithmembernames class * {
+#    @butterknife.* <methods>;
+#}
 
 
 ## New rules for EventBus 3.0.x ##
@@ -158,6 +158,7 @@
 -dontoptimize
 -dontwarn com.google.android.maps.**
 -dontwarn android.webkit.WebView
+-dontwarn android.webkit.**
 -dontwarn com.umeng.**
 -dontwarn com.tencent.weibo.sdk.**
 -dontwarn com.facebook.**
