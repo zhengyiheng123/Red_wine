@@ -50,7 +50,6 @@ public class EvaluateAdapter extends BaseQuickAdapter<EvaluateModel.CommentsBean
                     );
         }
 
-
         if (TextUtils.isEmpty(item.getImg_2())){
             helper.setVisible(R.id.evaluate_ll_iv2,false);
         }else {
@@ -69,7 +68,7 @@ public class EvaluateAdapter extends BaseQuickAdapter<EvaluateModel.CommentsBean
         helper.setText(R.id.evaluate_time, TimeUtils.millis2String(time*1000,"yyyy-MM-dd")+"\u3000\u3000");
 
         //    酒名+数量
-
+        helper.addOnClickListener(R.id.evaluate_ll);
 
     }
 }

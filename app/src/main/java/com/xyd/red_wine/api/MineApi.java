@@ -137,7 +137,7 @@ public interface MineApi {
      * 绑定手机号
      */
     @POST("user/edit_phone")
-    Observable<BaseModel> bind(@Query("phone")String phone,@Query("code")String code,@Query("password")String password,@Query("repassword")String repassword,@Query("userId")int userId);
+    Observable<BaseModel> bind(@Query("phone")String phone,@Query("code")String code,@Query("password")String password,@Query("repassword")String repassword,@Query("userid")int userId);
 
     /**
      * 修改手机号

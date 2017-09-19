@@ -50,7 +50,7 @@ public abstract class BaseObserver<T> implements Observer<BaseModel<T>> {
 
         }else if(value.getCode()==2){
             Intent intent=new Intent(MyApplication.context,LoginActivity.class);
-            //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             MyApplication.context.startActivity(intent);
             ToastUtils.show("登录状态已过期，您需要重新登录");
         } else {

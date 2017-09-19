@@ -240,6 +240,7 @@
         <activity android:name=".personinformation.ChangePhoneActivity" />
         <activity android:name=".register.ProtocolActivity" />
         <activity android:name=".modification.ModificationActivity"></activity>
+        <activity android:name=".view_img.ReviewImageActivity" />
     </application>
 
 </manifest>

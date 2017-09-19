@@ -1,9 +1,11 @@
 package com.xyd.red_wine.winedetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,9 @@ import com.xyd.red_wine.base.BaseApi;
 import com.xyd.red_wine.base.BaseFragment;
 import com.xyd.red_wine.base.BaseModel;
 import com.xyd.red_wine.base.BaseObserver;
+import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
+import com.xyd.red_wine.view_img.ReviewImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +37,7 @@ import butterknife.ButterKnife;
  */
 
 public class WineEvaluateFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener,
-        BaseQuickAdapter.RequestLoadMoreListener {
+        BaseQuickAdapter.RequestLoadMoreListener,BaseQuickAdapter.OnItemChildClickListener {
 
     @Bind(R.id.wine_evaluate_rg)
     RadioGroup wineEvaluateRg;
@@ -51,7 +55,7 @@ public class WineEvaluateFragment extends BaseFragment implements RadioGroup.OnC
     private int page = 1, num = 10, type = 0;
     private List<EvaluateModel.CommentsBean> list;
     private EvaluateAdapter adapter;
-
+    ArrayList<String> imgList=new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -99,6 +103,7 @@ public class WineEvaluateFragment extends BaseFragment implements RadioGroup.OnC
         list = new ArrayList<>();
         adapter = new EvaluateAdapter(list, getActivity());
         adapter.setOnLoadMoreListener(this, wineEvaluateRv);
+        adapter.setOnItemChildClickListener(this);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         wineEvaluateRv.setAdapter(adapter);
     }
@@ -142,5 +147,22 @@ public class WineEvaluateFragment extends BaseFragment implements RadioGroup.OnC
     public void onLoadMoreRequested() {
         page++;
         getData();
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adaptera, View view, int position) {
+        switch (view.getId()){
+            case R.id.evaluate_ll:
+                if (!TextUtils.isEmpty(adapter.getData().get(position).getImg_1())){
+                    imgList.add(PublicStaticData.baseUrl+adapter.getData().get(position).getImg_1());
+                }
+                if (!TextUtils.isEmpty(adapter.getData().get(position).getImg_2())){
+                    imgList.add(PublicStaticData.baseUrl+adapter.getData().get(position).getImg_2());
+                }
+                Intent intent=new Intent(getActivity(), ReviewImageActivity.class);
+                intent.putStringArrayListExtra("imgList",imgList);
+                startActivity(intent);
+                break;
+        }
     }
 }

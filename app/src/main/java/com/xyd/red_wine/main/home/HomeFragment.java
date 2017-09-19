@@ -24,6 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +99,8 @@ public class HomeFragment extends BaseFragment {
     FrameLayout homeFrame;
     @Bind(R.id.home_rv)
     RecyclerView mHomeLV;
+    @Bind(R.id.scroll_view)
+    ScrollView mScrollview;
 //    @Bind(R.id.id_viewpager)
 //    InfiniteViewPager minfinatePager;
 
@@ -334,8 +337,21 @@ public class HomeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         homeNewsNotice.start();
-
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+        }else {
+            if (mHomeLV!=null){
+                mScrollview.scrollTo(0,0);
+                mHomeLV.setFocusable(false);
+                mHomeLV.setFocusableInTouchMode(false);
+            }
+        }
+    }
+
 
     @Override
     public void onStop() {
