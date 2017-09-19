@@ -153,6 +153,7 @@ public class WineEvaluateFragment extends BaseFragment implements RadioGroup.OnC
     public void onItemChildClick(BaseQuickAdapter adaptera, View view, int position) {
         switch (view.getId()){
             case R.id.evaluate_ll:
+                imgList.clear();
                 if (!TextUtils.isEmpty(adapter.getData().get(position).getImg_1())){
                     imgList.add(PublicStaticData.baseUrl+adapter.getData().get(position).getImg_1());
                 }

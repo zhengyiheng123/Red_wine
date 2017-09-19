@@ -62,8 +62,8 @@ public class BaseApi {
                 // 有网络时 设置缓存超时时间0个小时
                 newBuilder.header("Cache-Control", "public, max-age=" + maxAge);
                 // 无网络时，设置超时为4周
-                // int maxStale = 60 * 60 * 24 * 28;
-                // newBuilder.header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale);
+                 int maxStale = 60 * 60 * 24 * 28;
+                 newBuilder.header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale);
 
                 return newBuilder.build();
             }
