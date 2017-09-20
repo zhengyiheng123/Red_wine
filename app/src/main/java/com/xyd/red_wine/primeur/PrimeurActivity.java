@@ -63,9 +63,15 @@ public class PrimeurActivity extends BaseActivity implements SwipeRefreshLayout.
         newsSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         newsRv.setLayoutManager(new LinearLayoutManager(this));
         initAdapter();
-        data();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onRefresh();
+    }
+
     private void data() {
         BaseApi.getRetrofit()
                 .create(SuggestApi.class)

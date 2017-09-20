@@ -187,16 +187,16 @@
 </android.support.v4.widget.SwipeRefreshLayout>
 
 
-<com.xyd.red_wine.view.DragFloatActionButton
-    android:id="@+id/iv_service"
-    android:layout_margin="32dp"
-    android:layout_gravity="bottom|right"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:fabSize="normal"
-    android:src="@mipmap/kefu0000"
-    android:background="#FFFFFF"
-    app:backgroundTint="#FFFFFF"
-    android:alpha="0.9"
-    />
+    <com.xyd.red_wine.view.DragFloatActionButton
+        android:id="@+id/iv_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="32dp"
+        android:alpha="0.9"
+        android:background="#FFFFFF"
+        android:src="@mipmap/kefu0000"
+        app:backgroundTint="#FFFFFF"
+        app:fabSize="normal"
+        />
 </FrameLayout>

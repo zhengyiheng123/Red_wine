@@ -196,11 +196,13 @@ public class HomeFragment extends BaseFragment {
     //  初始化首页轮播图
     private void initBanner() {
         bannerList.clear();
-        for (int i =0 ;i<model.getCarousel().size();i++){
-            bannerList.add(PublicStaticData.baseUrl+model.getCarousel().get(i).getAdv_imgs());
+        if (!(model.getCarousel()==null || model.getCarousel().size() == 0)){
+            for (int i =0 ;i<model.getCarousel().size();i++){
+                bannerList.add(PublicStaticData.baseUrl+model.getCarousel().get(i).getAdv_imgs());
+            }
+            ivBanner.setImagesUrl(bannerList);
+            ivBanner.startAutoPlay();
         }
-        ivBanner.setImagesUrl(bannerList);
-        ivBanner.startAutoPlay();
     }
 
     @Override

@@ -80,7 +80,7 @@ public class ChateauFragment extends BaseFragment implements SwipeRefreshLayout.
     private void getChateauData() {
         BaseApi.getRetrofit()
                 .create(SuggestApi.class)
-                .chateau_msg(page, num, id, chateauEdt.getText().toString())
+                .chateau_msg(page, num, id, chateauEdt.getText().toString().trim())
                 .compose(RxSchedulers.<BaseModel<ChateauModel>>compose())
                 .subscribe(new BaseObserver<ChateauModel>() {
                     @Override

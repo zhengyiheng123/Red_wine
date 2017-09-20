@@ -2,6 +2,7 @@ package com.xyd.red_wine;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v4.util.LogWriter;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -13,6 +14,7 @@ import com.umeng.socialize.common.QueuedWork;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.utils.FileUtils;
 import com.xyd.red_wine.utils.LogUtil;
+import com.xyd.red_wine.utils.MyCrashHandler;
 import com.xyd.red_wine.utils.Utils;
 
 import static android.R.attr.data;
@@ -49,7 +51,12 @@ public class MyApplication extends Application {
         PublicStaticData.sharedPreferences=getSharedPreferences("wine",MODE_PRIVATE);
         initShare();
         EMHelper.getInstance().init(this);
+        initLog();
+    }
 
+    private void initLog() {
+        MyCrashHandler crashHandler=new MyCrashHandler();
+        crashHandler.init(getApplicationContext());
     }
 
     private void initShare() {

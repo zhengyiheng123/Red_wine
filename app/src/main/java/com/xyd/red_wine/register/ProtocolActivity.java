@@ -44,7 +44,7 @@ public class ProtocolActivity extends BaseActivity {
     @Override
     protected void initView() {
         getProtocol();
-        base_title_menu.setVisibility(View.GONE);
+        base_title_menu.setVisibility(View.INVISIBLE);
         base_title_title.setText("注册协议");
     }
 
@@ -63,7 +63,7 @@ public class ProtocolActivity extends BaseActivity {
     }
     private void initWebView() {
         WebSettings ws = detail_wv.getSettings();
-        ws.setSupportZoom(true);
+        ws.setSupportZoom(false);
         ws.setBuiltInZoomControls(true);// 隐藏缩放按钮
         ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);// 排版适应屏幕
         //ws.setUseWideViewPort(true);// 可任意比例缩放
