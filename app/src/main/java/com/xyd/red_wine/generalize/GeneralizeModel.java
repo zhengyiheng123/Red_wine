@@ -61,7 +61,6 @@ public class GeneralizeModel {
              * a_img : ["/uploads/20170711/65d044f6e7ebad1576192ab9bc269c67.jpg"]
              * a_title : qq
              */
-
             private int a_id;
             private String a_title;
             private List<String> a_img;
@@ -122,7 +121,15 @@ public class GeneralizeModel {
             private int a_id;
             private String a_title;
             private List<String> a_img;
+            private int collect;
 
+            public int getCollect() {
+                return collect;
+            }
+
+            public void setCollect(int collect) {
+                this.collect = collect;
+            }
 
             public String getA_content() {
                 return a_content;

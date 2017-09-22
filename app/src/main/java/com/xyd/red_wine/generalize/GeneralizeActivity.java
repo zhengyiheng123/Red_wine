@@ -93,6 +93,12 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
     private UMShareListener mShareListener;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_generalize;
     }
@@ -102,7 +108,6 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
         mShareListener = new CustomShareListener(GeneralizeActivity.this);
         baseTitleTitle.setText("推广");
         baseTitleMenu.setVisibility(View.INVISIBLE);
-        getData();
         videos = new ArrayList<>();
         images = new ArrayList<>();
         ivAdapter = new IvAdapter();
@@ -143,7 +148,6 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
 
 
     }
-
     private void getData() {
         BaseApi.getRetrofit()
                 .create(GeneralizeApi.class)
@@ -154,6 +158,8 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                     protected void onHandleSuccess(GeneralizeModel generalizeModel, String msg, int code) {
                         GlideUtil.getInstance()
                                 .loadCornerImage(GeneralizeActivity.this, generalizeQrCode, PublicStaticData.baseUrl + generalizeModel.getQr_code(), 10);
+                        images.clear();
+                        videos.clear();
                         images.addAll(generalizeModel.getArticles().getPhoto_msg());
                         videos.addAll(generalizeModel.getArticles().getVideo_msg());
                         ivAdapter.notifyDataSetChanged();
@@ -327,6 +333,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
         Bundle b = new Bundle();
         b.putInt(VideoActivity.VIDEO_ID, videos.get(i).getA_id());
         b.putString(VideoActivity.VIDEO_URL, videos.get(i).getA_content());
+        b.putInt(VideoActivity.COLLECT, videos.get(i).getCollect());
 
         startActivity(VideoActivity.class, b);
     }

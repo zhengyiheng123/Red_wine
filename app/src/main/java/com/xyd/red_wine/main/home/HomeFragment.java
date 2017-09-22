@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -45,6 +48,8 @@ import com.xyd.red_wine.kefu.ChatActivity;
 import com.xyd.red_wine.main.home.infiniteViewPager.InfinitePagerAdapter;
 import com.xyd.red_wine.main.home.infiniteViewPager.InfiniteViewPager;
 import com.xyd.red_wine.newsdetail.DetailActivity;
+import com.xyd.red_wine.permissions.PermissionUtils;
+import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.utils.LogUtil;
 import com.xyd.red_wine.view.DragFloatActionButton;
@@ -101,6 +106,8 @@ public class HomeFragment extends BaseFragment {
     RecyclerView mHomeLV;
     @Bind(R.id.scroll_view)
     ScrollView mScrollview;
+    @Bind(R.id.ll_service_mobile)
+    LinearLayout ll_service_mobile;
 //    @Bind(R.id.id_viewpager)
 //    InfiniteViewPager minfinatePager;
 
@@ -210,6 +217,7 @@ public class HomeFragment extends BaseFragment {
         homeIvIntroduce.setOnClickListener(this);
         homeIvManage.setOnClickListener(this);
         homeIvRecommend.setOnClickListener(this);
+        ll_service_mobile.setOnClickListener(this);
 //        ivBanner.setOnClickListener(this);
         homeNewsLl.setOnClickListener(this);
         iv_service.setOnClickListener(this);
@@ -259,9 +267,30 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+    }
+
+    @Override
     public void widgetClick(View v) {
         Bundle b;
         switch (v.getId()) {
+            case R.id.ll_service_mobile:
+                if (Build.VERSION.SDK_INT>=23){
+                    PermissionUtils.phone(getActivity(), new PermissionUtils.OnPermissionResult() {
+                        @Override
+                        public void onGranted() {
+                            Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:40015181111" ));
+                            startActivity(intent);
+                        }
+                    });
+                }else {
+                    Intent intent = new Intent("android.intent.action.CALL", Uri.parse("tel:40015181111" ));
+                    startActivity(intent);
+                }
+
+                break;
             case R.id.home_iv_introduce:
                 b = new Bundle();
                 b.putString(WebViewActivity.TITLE, "小酒详情");
