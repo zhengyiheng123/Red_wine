@@ -108,6 +108,8 @@ public class HomeFragment extends BaseFragment {
     ScrollView mScrollview;
     @Bind(R.id.ll_service_mobile)
     LinearLayout ll_service_mobile;
+    @Bind(R.id.iv_service_tel)
+    ImageView mIvservicetel;
 //    @Bind(R.id.id_viewpager)
 //    InfiniteViewPager minfinatePager;
 
@@ -218,6 +220,7 @@ public class HomeFragment extends BaseFragment {
         homeIvManage.setOnClickListener(this);
         homeIvRecommend.setOnClickListener(this);
         ll_service_mobile.setOnClickListener(this);
+        mIvservicetel.setOnClickListener(this);
 //        ivBanner.setOnClickListener(this);
         homeNewsLl.setOnClickListener(this);
         iv_service.setOnClickListener(this);
@@ -276,7 +279,7 @@ public class HomeFragment extends BaseFragment {
     public void widgetClick(View v) {
         Bundle b;
         switch (v.getId()) {
-            case R.id.ll_service_mobile:
+            case R.id.iv_service_tel:
                 if (Build.VERSION.SDK_INT>=23){
                     PermissionUtils.phone(getActivity(), new PermissionUtils.OnPermissionResult() {
                         @Override

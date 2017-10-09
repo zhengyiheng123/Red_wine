@@ -140,7 +140,49 @@
                 android:layout_below="@id/home_rv"
                 android:layout_marginTop="16dp">
             </com.xyd.red_wine.view.banner.Banner>
+            <ImageView
+                android:id="@+id/iv_service_tel"
+                android:layout_below="@+id/home_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bg_service_phone"
+                android:layout_marginTop="@dimen/margin_8"
+                />
             <LinearLayout
+                android:id="@+id/ll_service"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_below="@+id/iv_service_tel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@mipmap/bg_service_time"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@mipmap/bg_sercice_wechat"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@mipmap/bg_service"
+                    />
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bg_back_info"
+                android:layout_below="@+id/ll_service"
+                />
+            <LinearLayout
+                android:visibility="gone"
                 android:layout_marginTop="8dp"
                 android:layout_below="@+id/home_rv"
                 android:layout_width="match_parent"
@@ -148,6 +190,7 @@
                 android:orientation="vertical"
                 >
                 <TextView
+                    android:visibility="gone"
                     android:textSize="16sp"
                     android:gravity="center"
                     android:textColor="@color/material_white"
@@ -251,6 +294,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp" />
                 <LinearLayout
+                    android:elevation="1dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/bg_home"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -287,14 +333,15 @@
                         android:text="产品没有拆开，不影响二次销售的情况下，\n拍下货物15天内可以无条件退货；\n非质量问题退货，需承担发货和退货产生的快递费用；\n系统确认收货后，非质量原因概不办理退款退货；\n如因质量问题需退货，请拍照联系客服。"
                         />
                     <TextView
+                        android:textColor="#f6ba62"
                         android:drawablePadding="8dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
                         android:gravity="start"
-                        android:drawableLeft="@mipmap/ic_home_location"
+                        android:drawableTop="@mipmap/ic_home_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="北京市东城区朝阳门内大街288号\n凯德华玺大厦B105-1"
+                        android:text="北京市东城区朝阳门内大街288号凯德华玺大厦B105-1"
                         />
                 </LinearLayout>
             </LinearLayout>
