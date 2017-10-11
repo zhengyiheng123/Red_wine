@@ -10,6 +10,7 @@ import com.xyd.red_wine.R;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.view.ProgressView;
+import com.xyd.red_wine.view.SmartImageveiw;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class BusinessAdapter extends BaseQuickAdapter<BenefitModel.ActiveBean, BaseViewHolder> {
     private Context context;
+    private SmartImageveiw smartImageveiw;
 
     public BusinessAdapter(@Nullable List<BenefitModel.ActiveBean> data, Context context) {
         super(R.layout.item_business, data);
@@ -33,6 +35,8 @@ public class BusinessAdapter extends BaseQuickAdapter<BenefitModel.ActiveBean, B
         GlideUtil.getInstance()
                 .loadImage(context, (ImageView) helper.getView(R.id.item_activity_iv), PublicStaticData.baseUrl + item.getAc_img(), true);
         helper.setText(R.id.item_activity_title, item.getAc_title());
+        smartImageveiw = helper.getView(R.id.item_activity_iv);
+        smartImageveiw.setRatio(2.0f);
         helper.setText(R.id.item_activity_content, item.getAc_slogan());
         helper.setText(R.id.item_activity_tv_progress, item.getAc_title());
         helper.setText(R.id.item_activity_tv_num, item.getHave_support() + "人");

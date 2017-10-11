@@ -64,7 +64,7 @@ public class StartupPageActivity extends Activity {
                 .subscribe(new BaseObserver<InfromationModel>() {
                     @Override
                     protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
-                        PublicStaticData.sharedPreferences.edit().putInt("id", infromationModel.getUserid()).commit();
+                        PublicStaticData.sharedPreferences.edit().putInt("id", Integer.valueOf(infromationModel.getUserid())).commit();
                       //  login("qiaozhijinhan" + infromationModel.getUserid(), "123456");
                         new Handler().postDelayed(new Runnable() {
                             @Override

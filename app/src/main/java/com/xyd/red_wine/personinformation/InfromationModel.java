@@ -20,9 +20,10 @@ public class InfromationModel {
      * alipay_id :支付宝账号
      * signature :个性签名
      * s_nickname :推荐人
+     * is_buyed:0未购买1购买
      */
     private String s_nickname;
-    private int userid;
+    private String userid;
     private String phone;
     private String nickname;
     private String sex;
@@ -30,6 +31,15 @@ public class InfromationModel {
     private String wechat_id;
     private String alipay_id;
     private String signature;
+    private int is_buyed;
+
+    public int getIs_buyed() {
+        return is_buyed;
+    }
+
+    public void setIs_buyed(int is_buyed) {
+        this.is_buyed = is_buyed;
+    }
 
     public String getS_nickname() {
         return s_nickname;
@@ -39,11 +49,11 @@ public class InfromationModel {
         this.s_nickname = s_nickname;
     }
 
-    public int getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 

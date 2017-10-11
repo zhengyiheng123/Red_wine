@@ -1,6 +1,7 @@
 package com.xyd.red_wine.main.mine;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -98,7 +99,8 @@ public class MineFragment extends BaseFragment {
         GlideUtil.getInstance()
                 .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
         mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
-        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
+
+//        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
     }
 
     @Override
@@ -130,7 +132,7 @@ public class MineFragment extends BaseFragment {
         GlideUtil.getInstance()
                 .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
         mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
-        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
+//        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
     }
 
     @Override
@@ -214,6 +216,7 @@ public class MineFragment extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden){
+            getData();
             queryMessage();
         }
     }
@@ -247,6 +250,7 @@ public class MineFragment extends BaseFragment {
             }
         });
     }
+
     //查询是否有未读消息
     private void queryMessage(){
         BaseApi.getRetrofit().create(MineApi.class)
@@ -278,5 +282,34 @@ public class MineFragment extends BaseFragment {
         public void setIs_read(int is_read) {
             this.is_read = is_read;
         }
+    }
+
+    /**
+     * 获取个人信息
+     */
+    private void getData() {
+        BaseApi.getRetrofit()
+                .create(MineApi.class)
+                .information()
+                .compose(RxSchedulers.<BaseModel<InfromationModel>>compose())
+                .subscribe(new BaseObserver<InfromationModel>() {
+                    @Override
+                    protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
+                        if (infromationModel.getIs_buyed() == 1){
+                            mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
+                        }else {
+                            mintv_id.setText("");
+                        }
+
+                    }
+
+                    @Override
+                    protected void onHandleError(String msg) {
+                        showTestToast(msg);
+
+                    }
+                });
+
+
     }
 }

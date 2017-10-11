@@ -136,6 +136,12 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                         }else {
                             information_edt_tuijianren.setText(infromationModel.getS_nickname());
                         }
+                        if (infromationModel.getIs_buyed() == 2){
+                            informationTvId.setText(infromationModel.getUserid());
+                        }else {
+                            informationTvId.setText("******");
+                        }
+
                         PublicStaticData.sharedPreferences.edit().putString("signature",infromationModel.getSignature()).commit();
                         PublicStaticData.sharedPreferences.edit().putString("nickname",infromationModel.getNickname()).commit();
                         PublicStaticData.sharedPreferences.edit().putString("head",infromationModel.getHead_img()).commit();
@@ -145,7 +151,6 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                         informationEdtWx.setText(infromationModel.getWechat_id());
                         informationEdtAlipay.setText(infromationModel.getAlipay_id());
                         informationEdtSignature.setText(infromationModel.getSignature());
-                        informationTvId.setText(infromationModel.getUserid()+"");
                         if (infromationModel.getSex().equals("0"))
                             informationCbWomen.setChecked(true);
                         else

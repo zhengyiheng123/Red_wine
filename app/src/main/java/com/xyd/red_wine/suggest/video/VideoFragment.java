@@ -62,7 +62,6 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Override
     public void onResume() {
         super.onResume();
-        onRefresh();
     }
 
     private void getData() {
