@@ -154,13 +154,11 @@ public class VersionUpdateService extends Service {
      */
     public void doCheckUpdateTask() {
         final String currentBuild = AppUtils.getAppVersionName(this);
-        String client = "android";
-        String q = "needUpgrade";
 
 
         BaseApi.getRetrofit()
                 .create(VersionApi.class)
-                .versions(1)
+                .versions(AppUtils.getAppVersionName(this))
                 .compose(RxSchedulers.<BaseModel<VersionUpdateModel>>compose())
                 .subscribe(new BaseObserver<VersionUpdateModel>() {
                     @Override

@@ -50,6 +50,7 @@ public class DetailActivity extends BaseActivity {
     public static final String NEWS_ID = "news_id";
     public static final String NEWS_URL = "news_url";
     public static final String COLLECT = "collect";
+    public static final String TITLE = "title";
     @Bind(R.id.detail_back)
     TextView detailBack;
     @Bind(R.id.detail_title)
@@ -65,6 +66,8 @@ public class DetailActivity extends BaseActivity {
     private int isCollect;
 
     private UMShareListener mShareListener;
+    private String title;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_news_detail;
@@ -76,6 +79,7 @@ public class DetailActivity extends BaseActivity {
         id = getIntent().getIntExtra(NEWS_ID, 0);
         Log.e("newsid:" ,id+"");
         content = getIntent().getStringExtra(NEWS_URL);
+        title = getIntent().getStringExtra(TITLE);
         //  content="http://m.wine-world.com/winery/chateau-lafite-rothschild/ad679838-5304-4973-be95-0162fa5d2d7c";
         isCollect = getIntent().getIntExtra(COLLECT, 0);
         if (isCollect == 0)
@@ -155,17 +159,16 @@ public class DetailActivity extends BaseActivity {
                             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
                                 if (share_media == SHARE_MEDIA.QQ || share_media== SHARE_MEDIA.QZONE){
                                     UMWeb web = new UMWeb(content);
-                                    web.setTitle("乔治金瀚");
-                                    web.setDescription("乔治金瀚资讯");
-//                                    web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
+                                    web.setTitle(title);
+                                    web.setDescription(title);
                                     new ShareAction(DetailActivity.this).withMedia(web)
                                             .setPlatform(share_media)
                                             .setCallback(mShareListener)
                                             .share();
                                 }else {
                                     UMWeb web = new UMWeb(content);
-                                    web.setTitle("乔治金瀚");
-                                    web.setDescription("乔治金瀚资讯");
+                                    web.setTitle(title);
+                                    web.setDescription(title);
                                     web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
                                     new ShareAction(DetailActivity.this).withMedia(web)
                                             .setPlatform(share_media)
@@ -178,56 +181,6 @@ public class DetailActivity extends BaseActivity {
 
 
 
-//                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                shareIntent.setType("text/plain");
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, content);
-//                //自定义选择框的标题
-//                startActivity(Intent.createChooser(shareIntent, "资讯"));
-//                UMImage thumb =  new UMImage(this, R.mipmap.logo000);
-//                UMWeb  web = new UMWeb(content);
-//                web.setTitle("酒瀚");//标题
-//                web.setThumb(thumb);  //缩略图
-//                web.setDescription("红酒资讯");//描述
-//                new ShareAction(this)
-//                        .withMedia(web)
-//                        .withText("乔治金瀚资讯")
-////                        .withMedia(thumb)
-//                        .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
-//                        .setCallback(new UMShareListener() {
-//                            @Override
-//                            public void onStart(SHARE_MEDIA share_media) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onResult(SHARE_MEDIA share_media) {
-//                                Toast.makeText(DetailActivity.this, "成功了", Toast.LENGTH_LONG).show();
-//                            }
-//
-//                            @Override
-//                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-//                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
-//                                    if (UMShareAPI.get(DetailActivity.this).isInstall(DetailActivity.this,SHARE_MEDIA.WEIXIN))
-//                                        Toast.makeText(DetailActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-//                                    else
-//                                        Toast.makeText(DetailActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
-//
-//                                }
-//                                if (share_media==SHARE_MEDIA.QQ){
-//                                    if (UMShareAPI.get(DetailActivity.this).isInstall(DetailActivity.this,SHARE_MEDIA.QQ))
-//                                        Toast.makeText(DetailActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-//                                    else
-//                                        Toast.makeText(DetailActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onCancel(SHARE_MEDIA share_media) {
-//                                Toast.makeText(DetailActivity.this, "分享取消了", Toast.LENGTH_LONG).show();
-//                            }
-//                        })
-//                        .open();
-//                break;
         }
 
     }

@@ -175,7 +175,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="温馨提示：请确保输入的账号正确，如因账号输入有误，需自行承担损失"/>
+        android:text="温馨提示：请确保输入的账号正确，如因账号输入有误，需自行承担损失，每十天只能提现一次。"/>
 
 
 </LinearLayout>

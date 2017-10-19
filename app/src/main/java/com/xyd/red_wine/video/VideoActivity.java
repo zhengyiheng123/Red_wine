@@ -48,6 +48,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     public static final String VIDEO_ID = "video_id";
     public static final String VIDEO_URL = "video_url";
     public static final String COLLECT = "collect";
+    public static final String TITLE="title";
     @Bind(R.id.video_horizontal)
     FrameLayout videoHorizontal;
     @Bind(R.id.base_title_back)
@@ -71,6 +72,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
     private String content;
     private int id;
     private int isCollect;
+    private String title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
         id = getIntent().getIntExtra(VIDEO_ID, 0);
         isCollect = getIntent().getIntExtra(COLLECT, 0);
         content = getIntent().getStringExtra(VIDEO_URL);
+        title = getIntent().getStringExtra(TITLE);
         ButterKnife.bind(this);
         initView();
     }
@@ -137,12 +140,12 @@ public class VideoActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.detail_share:
                 UMWeb web = new UMWeb(content);
-                web.setTitle("酒瀚");//标题
+                web.setTitle(title);//标题
 //                web.setThumb(thumb);  //缩略图
-                web.setDescription("红酒资讯");//描述
+                web.setDescription(title);//描述
                 new ShareAction(this)
                         .withMedia(web)
-                        .withText("乔治金瀚资讯")
+                        .withText(title)
 //                        .withMedia(thumb)
                         .setDisplayList(SHARE_MEDIA.QQ,SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
                         .setCallback(new UMShareListener() {

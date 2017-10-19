@@ -38,6 +38,7 @@ import com.xyd.red_wine.member.EarningActivity;
 import com.xyd.red_wine.member.InputDialog;
 import com.xyd.red_wine.permissions.PermissionUtils;
 import com.xyd.red_wine.permissions.PermissionsManager;
+import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.utils.FileUtils;
 import com.xyd.red_wine.utils.GetImagePath;
 import com.xyd.red_wine.utils.ToastUtils;
@@ -104,6 +105,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     //手机号
     private String phoneNum;
     private InfromationModel model;
+    private PromptDialog dialog;
 
     @Override
     protected int getLayoutId() {
@@ -112,17 +114,19 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
 
     @Override
     protected void initView() {
+        dialog = new PromptDialog(InfromationActivity.this);
         mHeadLine.setVisibility(View.GONE);
         baseTitleMenu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("个人信息");
         EventBus.getDefault().register(this);
-
+        getData();
     }
 
     /**
      * 获取个人信息
      */
     private void getData() {
+        dialog.showLoading("加载中");
         BaseApi.getRetrofit()
                 .create(MineApi.class)
                 .information()
@@ -130,13 +134,14 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                 .subscribe(new BaseObserver<InfromationModel>() {
                     @Override
                     protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
+                        dialog.dismissImmediately();
                         model = infromationModel;
                         if (TextUtils.isEmpty(infromationModel.getS_nickname())){
                             information_edt_tuijianren.setText("无推荐人");
                         }else {
                             information_edt_tuijianren.setText(infromationModel.getS_nickname());
                         }
-                        if (infromationModel.getIs_buyed() == 2){
+                        if (infromationModel.getIs_buyed() == 1){
                             informationTvId.setText(infromationModel.getUserid());
                         }else {
                             informationTvId.setText("******");
@@ -168,6 +173,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
 
                     @Override
                     protected void onHandleError(String msg) {
+                        dialog.dismissImmediately();
                         showTestToast(msg);
 
                     }
@@ -252,6 +258,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
      * 提交修改的信息
      */
     private void commitData() {
+        dialog.showLoading("修改中");
         //构建body
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
@@ -278,12 +285,14 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
                 .subscribe(new BaseObserver<EmptyModel>() {
                     @Override
                     protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
+                        dialog.dismissImmediately();
                         showToast(msg);
-                        getData();
+                        finish();
                     }
 
                     @Override
                     protected void onHandleError(String msg) {
+                        dialog.dismissImmediately();
                         showTestToast(msg);
                     }
                 });
@@ -314,7 +323,6 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     @Override
     protected void onResume() {
         super.onResume();
-        getData();
     }
 
     private void showPictureDialog() {
@@ -467,8 +475,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
             BitmapFactory.decodeFile(outputFile.getAbsolutePath());
             Glide.with(this).load(outputFile).error(R.mipmap.head)
                     .crossFade()
-                    .priority(Priority.NORMAL) //下载的优先级
-                    .diskCacheStrategy(DiskCacheStrategy.ALL) //缓存策略
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) //缓存策略
                     .bitmapTransform(new GlideCircleTransform(this)).into(informationIvHead);
             // dataCivHead.setImageBitmap(BitmapFactory.decodeFile(outputFile.getAbsolutePath()));
         } else if (requestCode == 1009 & RESULT_CANCELED == resultCode){

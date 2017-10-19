@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.Spannable;
 import android.view.View;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hyphenate.chat.EMTextMessageBody;
@@ -17,6 +18,7 @@ import com.hyphenate.helpdesk.easeui.util.SmileUtils;
 public class ChatRowText extends ChatRow{
 
     private TextView contentView;
+    private ImageView ivHeadView;
 
     public ChatRowText(Context context, Message message, int position, BaseAdapter adapter) {
         super(context, message, position, adapter);
@@ -31,6 +33,7 @@ public class ChatRowText extends ChatRow{
     @Override
     protected void onFindViewById() {
         contentView = (TextView) findViewById(R.id.tv_chatcontent);
+        ivHeadView = (ImageView) findViewById(R.id.iv_userhead);
     }
 
     @Override
@@ -39,7 +42,8 @@ public class ChatRowText extends ChatRow{
         Spannable span = SmileUtils.getSmiledText(context, txtBody.getMessage());
         // 设置内容
         contentView.setText(span, TextView.BufferType.SPANNABLE);
-
+        ivHeadView.setImageResource(R.drawable.hd_default_avatar);
+        ivHeadView.setVisibility(VISIBLE);
         handleTextMessage();
     }
 

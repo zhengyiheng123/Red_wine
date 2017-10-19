@@ -113,7 +113,6 @@ public class ChatFragment extends BaseFragment implements ChatManager.MessageLis
     private QueueIdentityInfo queueIdentityInfo;
     private String titleName;
     protected TextView tvTipWaitCount;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.hd_fragment_chat, container, false);

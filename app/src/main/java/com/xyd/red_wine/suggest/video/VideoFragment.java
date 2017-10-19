@@ -134,6 +134,7 @@ public class VideoFragment extends BaseFragment implements SwipeRefreshLayout.On
         b.putInt(VideoActivity.VIDEO_ID,adapter.getData().get(position).getA_id());
         b.putString(VideoActivity.VIDEO_URL,adapter.getData().get(position).getA_content());
         b.putInt(VideoActivity.COLLECT, adapter.getData().get(position).getCollect());
+        b.putString(DetailActivity.TITLE,adapter.getData().get(position).getA_title());
         startActivity(VideoActivity.class,b);
     }
 }

@@ -71,7 +71,6 @@ public abstract class ChatRow extends LinearLayout {
         userAvatarView = (ImageView) findViewById(R.id.iv_userhead);
         bubbleLayout = findViewById(R.id.bubble);
         usernickView = (TextView) findViewById(R.id.tv_userid);
-
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         statusView = (ImageView) findViewById(R.id.msg_status);
 //        ackedView = (TextView) findViewById(R.id.tv_ack);
@@ -118,7 +117,6 @@ public abstract class ChatRow extends LinearLayout {
         //设置头像和nick
 
         UIProvider.UserProfileProvider userInfoProvider = UIProvider.getInstance().getUserProfileProvider();
-
         if (userInfoProvider != null) {
             userInfoProvider.setNickAndAvatar(context, message, userAvatarView, usernickView);
         }else{

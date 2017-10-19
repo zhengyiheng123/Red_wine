@@ -167,12 +167,15 @@ public class CollectActivity extends BaseActivity implements SwipeRefreshLayout.
                 b.putInt(VideoActivity.VIDEO_ID, adapter.getData().get(position).getA_id());
                 b.putInt(VideoActivity.COLLECT, 1);
                 b.putString(VideoActivity.VIDEO_URL,adapter.getData().get(position).getA_content());
+                b.putString(VideoActivity.TITLE,adapter.getData().get(position).getA_title());
                 startActivity(VideoActivity.class,b);
             }else {
                 b= new Bundle();
+                b.putString(DetailActivity.TITLE,adapter.getData().get(position).getA_title());
                 b.putInt(DetailActivity.NEWS_ID, adapter.getData().get(position).getA_id());
                 b.putInt(DetailActivity.COLLECT, 1);
                 b.putString(DetailActivity.NEWS_URL,adapter.getData().get(position).getA_content());
+                b.putString(DetailActivity.TITLE,adapter.getData().get(position).getA_title());
                 startActivity(DetailActivity.class,b);
             }
     }

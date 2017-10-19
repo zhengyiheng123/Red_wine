@@ -33,6 +33,7 @@ import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.personinformation.InformationMessage;
 import com.xyd.red_wine.personinformation.InfromationActivity;
 import com.xyd.red_wine.personinformation.InfromationModel;
+import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.rank.RankActivity;
 import com.xyd.red_wine.setting.SettingActivity;
 import com.xyd.red_wine.utils.LogUtil;
@@ -86,6 +87,7 @@ public class MineFragment extends BaseFragment {
     View view_circle;
     @Bind(R.id.mine_tv_message)
     RelativeLayout mineTvMessage;
+    private PromptDialog promptDialog;
 
     @Override
     protected int getLayoutId() {
@@ -94,10 +96,11 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        promptDialog = new PromptDialog(getActivity());
         EventBus.getDefault().register(this);
         menu.setVisibility(View.INVISIBLE);
-        GlideUtil.getInstance()
-                .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
+//        GlideUtil.getInstance()
+//                .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
         mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
 
 //        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
@@ -107,6 +110,7 @@ public class MineFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         queryMessage();
+        getData();
     }
 
     @Override
@@ -131,7 +135,6 @@ public class MineFragment extends BaseFragment {
     public void onEventBus(InformationMessage message) {
         GlideUtil.getInstance()
                 .loadCircleImage(getActivity(), mineIvHead, PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""));
-        mineTvName.setText(PublicStaticData.sharedPreferences.getString("nickname", ""));
 //        mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
     }
 
@@ -166,10 +169,14 @@ public class MineFragment extends BaseFragment {
                 startActivity(InfromationActivity.class);
                 break;
             case R.id.mine_iv_service:
-                if (ChatClient.getInstance().isLoggedInBefore())
+
+                if (ChatClient.getInstance().isLoggedInBefore()){
                     startActivity(ChatActivity.class);
-                else
-                    loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
+                }
+                else{
+                loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
+
+            }
 
                 break;
             case R.id.mine_tv_gongyi:
@@ -212,14 +219,6 @@ public class MineFragment extends BaseFragment {
                 });
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden){
-            getData();
-            queryMessage();
-        }
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -228,17 +227,19 @@ public class MineFragment extends BaseFragment {
     }
 
     private void loginHx(final String uname, final String upwd) {
-
+        promptDialog.showLoading("加载中");
 
         // login huanxin server
         ChatClient.getInstance().login(uname, upwd, new Callback() {
             @Override
             public void onSuccess() {
+                promptDialog.dismissImmediately();
                 startActivity(ChatActivity.class);
             }
 
             @Override
             public void onError(int code, String error) {
+                promptDialog.dismissImmediately();
                 LogUtil.e(code+error);
                // loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
             }
@@ -295,6 +296,8 @@ public class MineFragment extends BaseFragment {
                 .subscribe(new BaseObserver<InfromationModel>() {
                     @Override
                     protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
+                        mineTvName.setText(infromationModel.getNickname());
+                        GlideUtil.getInstance().loadCircleImage(getActivity(),mineIvHead,PublicStaticData.baseUrl+infromationModel.getHead_img());
                         if (infromationModel.getIs_buyed() == 1){
                             mintv_id.setText("ID："+PublicStaticData.sharedPreferences.getInt("id", 0));
                         }else {

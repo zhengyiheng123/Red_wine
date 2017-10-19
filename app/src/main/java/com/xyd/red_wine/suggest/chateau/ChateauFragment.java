@@ -215,7 +215,6 @@ public class ChateauFragment extends BaseFragment implements SwipeRefreshLayout.
     }
 
     /**
-     * gv
      *
      * @param parent
      * @param view

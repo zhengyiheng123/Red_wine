@@ -60,7 +60,7 @@ public class PaymentsActivity extends BaseActivity implements SwipeRefreshLayout
         mHaedLine.setVisibility(View.GONE);
         presenter = new PaymentsPresenter(this);
         baseTitleTitle.setText("公益金");
-        baseTitleMenu.setVisibility(View.GONE);
+        baseTitleMenu.setVisibility(View.INVISIBLE);
         paymentsSrl.setOnRefreshListener(this);
         paymentsSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         paymentsRv.setLayoutManager(new LinearLayoutManager(this));
@@ -132,7 +132,7 @@ public class PaymentsActivity extends BaseActivity implements SwipeRefreshLayout
 
     @Override
     public void refreshData(PaymentsModel model) {
-        money.setText(model.getChest());
+        money.setText(model.getChest()+"元");
         adapter.setNewData(model.getWelfare_list());
         paymentsSrl.setRefreshing(false);
         adapter.setEnableLoadMore(true);

@@ -32,7 +32,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * @author: zhaoxiaolei
  * @date: 2017/8/29
  * @time: 17:07
  * @description: 订单详情
@@ -97,6 +96,8 @@ public class OrderDetailActivity extends BaseActivity {
     TextView orderDetailTvFukuanTime;
     @Bind(R.id.order_detail_tv_fahuo_time)
     TextView orderDetailTvFahuoTime;
+    @Bind(R.id.order_detail_wuliu)
+    TextView orderWuliu;
     private PromptDialog waitDialog;
     private OrderDetailModel model;
 
@@ -111,7 +112,6 @@ public class OrderDetailActivity extends BaseActivity {
         baseTitleTitle.setText("订单详情");
         waitDialog = new PromptDialog(this);
         waitDialog.showLoading("");
-        getData();
 
     }
 
@@ -137,7 +137,6 @@ public class OrderDetailActivity extends BaseActivity {
                         showToast(msg);
                     }
                 });
-
     }
 
     private void setData() {
@@ -185,6 +184,7 @@ public class OrderDetailActivity extends BaseActivity {
                 orderDetailOrderType.setText("订单状态：已退款");
                 break;
             case 7:
+                orderWuliu.setVisibility(View.VISIBLE);
                 orderDetailTvRight.setVisibility(View.VISIBLE);
                 orderDetailTvRight.setText("再次购买");
                 orderDetailTvLeft.setVisibility(View.GONE);
@@ -230,6 +230,7 @@ public class OrderDetailActivity extends BaseActivity {
         orderDetailLlWuliu.setOnClickListener(this);
         orderDetailTvRight.setOnClickListener(this);
         orderDetailTvLeft.setOnClickListener(this);
+        orderWuliu.setOnClickListener(this);
 
     }
 
@@ -237,6 +238,13 @@ public class OrderDetailActivity extends BaseActivity {
     public void widgetClick(View v) {
         Bundle bundle;
         switch (v.getId()) {
+            case R.id.order_detail_wuliu:
+                bundle = new Bundle();
+                bundle.putString(LogisticsActivity.ORDER_NUM, model.getOrder_num());
+                bundle.putString(LogisticsActivity.ORDER_URL, model.getG_img());
+                bundle.putInt(LogisticsActivity.ORDER_STATUS, model.getOrder_status());
+                startActivity(LogisticsActivity.class, bundle);
+                break;
             case R.id.base_title_back:
                 finish();
                 break;
@@ -321,6 +329,12 @@ public class OrderDetailActivity extends BaseActivity {
 
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void commitOrder(String num) {

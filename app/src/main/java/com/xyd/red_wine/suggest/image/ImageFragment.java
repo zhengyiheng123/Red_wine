@@ -136,6 +136,7 @@ public class ImageFragment extends BaseFragment implements SwipeRefreshLayout.On
         b.putInt(DetailActivity.NEWS_ID, adapter.getData().get(position).getA_id());
         b.putInt(DetailActivity.COLLECT, adapter.getData().get(position).getCollect());
         b.putString(DetailActivity.NEWS_URL,adapter.getData().get(position).getA_content());
+        b.putString(DetailActivity.TITLE,adapter.getData().get(position).getA_title());
         startActivity(DetailActivity.class,b);
 
     }

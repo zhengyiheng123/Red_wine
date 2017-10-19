@@ -64,7 +64,7 @@ public abstract class BaseObserver<T> implements Observer<BaseModel<T>> {
     public void onError(Throwable e) {
         LogUtil.e(e.toString());
         if (e instanceof SocketTimeoutException) {
-            onHandleError("连接超时");
+            onHandleError("连接超时,请稍后重试");
         } else if (e instanceof ConnectException) {
             onHandleError("连接异常");
         } else if (e instanceof UnknownHostException) {

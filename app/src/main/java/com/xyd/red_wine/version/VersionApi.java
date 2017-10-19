@@ -16,6 +16,6 @@ import retrofit2.http.Query;
 public interface VersionApi {
 
     @POST("versions/index")
-    Observable<BaseModel<VersionUpdateModel>>  versions(@Query("version") int version);
+    Observable<BaseModel<VersionUpdateModel>>  versions(@Query("version") String version);
 
 }

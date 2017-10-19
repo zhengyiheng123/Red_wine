@@ -59,6 +59,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label"
+        android:debuggable="true"
         >
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -20,6 +20,7 @@ import com.hyphenate.helpdesk.easeui.Notifier;
 import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.hyphenate.helpdesk.easeui.util.CommonUtils;
 import com.hyphenate.helpdesk.easeui.util.IntentBuilder;
+import com.hyphenate.helpdesk.easeui.util.UserUtil;
 import com.hyphenate.helpdesk.model.AgentInfo;
 import com.hyphenate.helpdesk.util.Log;
 import com.xyd.red_wine.glide.GlideCircleTransform;
@@ -30,12 +31,6 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-/**
- * @author: zhaoxiaolei
- * @date: 2017/8/4
- * @time: 13:46
- * @description:
- */
 
 public class EMHelper {
     private static final String TAG = "EMHelper";
@@ -83,7 +78,6 @@ public class EMHelper {
         options.setMipushConfig("2882303761517507836", "5631750729836");
         //在华为手机上当APP被kill时使用华为推送进行消息提示, SDK已支持,可选
         options.setHuaweiPushAppId("10663060");
-
 //        options.setKefuServerAddress("http://sandbox.kefu.easemob.com");
         // 环信客服 SDK 初始化, 初始化成功后再调用环信下面的内容
         if (ChatClient.getInstance().init(context, options)) {
@@ -110,7 +104,7 @@ public class EMHelper {
             public void setNickAndAvatar(Context context, Message message, ImageView userAvatarView, TextView usernickView) {
                 if (message.direct() == Message.Direct.RECEIVE) {
                     //设置接收方的昵称和头像
-//                    UserUtil.setAgentNickAndAvatar(context, message, userAvatarView, usernickView);
+                    UserUtil.setAgentNickAndAvatar(context, message, userAvatarView, usernickView);
                     AgentInfo agentInfo = com.hyphenate.helpdesk.model.MessageHelper.getAgentInfo(message);
                     if (usernickView != null) {
                         usernickView.setText(message.getFrom());

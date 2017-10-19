@@ -87,10 +87,10 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
     private List<GeneralizeModel.ArticlesBean.PhotoMsgBean> images;
     private IvAdapter ivAdapter;
     private VideoAdapter videoAdapter;
-    private File myCaptureFile;
     private String qr_code;
 
     private UMShareListener mShareListener;
+    private String share_url;
 
     @Override
     protected void onResume() {
@@ -118,35 +118,6 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
         generalizeImageGv.setOnItemClickListener(this);
 
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    myBitmap = Glide.with(GeneralizeActivity.this)
-//                            .load(PublicStaticData.baseUrl + PublicStaticData.sharedPreferences.getString("head", ""))
-//                            .asBitmap()
-//                            .centerCrop()
-//                            .into(100, 100)
-//                            .get();
-//
-//                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-//                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
-//                    bos.flush();
-//                    bos.close();
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-
-
     }
     private void getData() {
         BaseApi.getRetrofit()
@@ -165,8 +136,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                         ivAdapter.notifyDataSetChanged();
                         videoAdapter.notifyDataSetChanged();
                         qr_code = PublicStaticData.baseUrl + generalizeModel.getQr_code();
-                        //saveQrCode(PublicStaticData.baseUrl + generalizeModel.getQr_code());
-
+                        share_url = generalizeModel.getShare_url();
                     }
 
                     @Override
@@ -176,38 +146,6 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                 });
     }
 
-//    private void saveQrCode(final String s) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    myCaptureFile = FileUtils.createImageFile("generalize.png");
-//                    Bitmap myBitmap = Glide.with(GeneralizeActivity.this)
-//                            .load(s)
-//                            .asBitmap()
-//                            .centerCrop()
-//                            .into(300, 300)
-//                            .get();
-//
-//                    BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
-//                    myBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-//                    bos.flush();
-//                    bos.close();
-//
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                } catch (ExecutionException e) {
-//                    e.printStackTrace();
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//
-//
-//    }
 
 
     @Override
@@ -231,18 +169,18 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                             @Override
                             public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
                                 if (share_media == SHARE_MEDIA.QQ || share_media== SHARE_MEDIA.QZONE){
-                                    UMImage umImage=new UMImage(getApplicationContext(),qr_code);
-                                    umImage.setThumb(new UMImage(GeneralizeActivity.this, R.mipmap.logo000));
-//                                    web.setThumb(new UMImage(DetailActivity.this, R.mipmap.logo000));
-                                    new ShareAction(GeneralizeActivity.this).withMedia(umImage)
+                                    UMWeb web = new UMWeb(share_url);
+                                    web.setTitle("酒瀚注册二维码");
+                                    web.setDescription("");
+                                    new ShareAction(GeneralizeActivity.this).withMedia(web)
                                             .setPlatform(share_media)
                                             .setCallback(mShareListener)
                                             .share();
                                 }else {
-                                    UMImage umImage=new UMImage(getApplicationContext(),qr_code);
-                                    UMImage thum=new UMImage(getApplicationContext(),R.mipmap.logo000);
-                                    umImage.setThumb(thum);
-                                    new ShareAction(GeneralizeActivity.this).withMedia(umImage)
+                                    UMWeb web = new UMWeb(share_url);
+                                    web.setTitle("酒瀚注册二维码");
+                                    web.setDescription("");
+                                    new ShareAction(GeneralizeActivity.this).withMedia(web)
                                             .setPlatform(share_media)
                                             .setCallback(mShareListener)
                                             .share();
@@ -250,61 +188,6 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                             }
                         }).open();
 
-
-
-//                new ShareAction(this)
-//                        .withText("酒瀚")
-//                        .withMedia(new UMImage(GeneralizeActivity.this,qr_code))
-//                        .setDisplayList(SHARE_MEDIA.WEIXIN_CIRCLE, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN,SHARE_MEDIA.QZONE,SHARE_MEDIA.SINA)
-//                        .setCallback(new UMShareListener() {
-//                            @Override
-//                            public void onStart(SHARE_MEDIA share_media) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onResult(SHARE_MEDIA share_media) {
-//                                Toast.makeText(GeneralizeActivity.this, "成功了", Toast.LENGTH_LONG).show();
-//                            }
-//
-//                            @Override
-//                            public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-//                                if (share_media==SHARE_MEDIA.WEIXIN||share_media==SHARE_MEDIA.WEIXIN_CIRCLE){
-//                                    if (UMShareAPI.get(GeneralizeActivity.this).isInstall(GeneralizeActivity.this,SHARE_MEDIA.WEIXIN))
-//                                        Toast.makeText(GeneralizeActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-//                                    else
-//                                        Toast.makeText(GeneralizeActivity.this, "请安装微信客户端", Toast.LENGTH_LONG).show();
-//
-//                                }
-//                                if (share_media==SHARE_MEDIA.QQ){
-//                                    if (UMShareAPI.get(GeneralizeActivity.this).isInstall(GeneralizeActivity.this,SHARE_MEDIA.QQ))
-//                                        Toast.makeText(GeneralizeActivity.this, "失败" + throwable.getMessage(), Toast.LENGTH_LONG).show();
-//                                    else
-//                                        Toast.makeText(GeneralizeActivity.this, "请安装QQ客户端", Toast.LENGTH_LONG).show();
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onCancel(SHARE_MEDIA share_media) {
-//                                Toast.makeText(GeneralizeActivity.this, "取消了", Toast.LENGTH_LONG).show();
-//                            }
-//                        })
-//                        .open();
-//                if (myCaptureFile.getTotalSpace() == 0)
-//                    return;
-//                Uri uri = Uri.fromFile(myCaptureFile);
-//                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                if (uri != null) {
-//                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-//                    shareIntent.setType("image/*");
-//                    //当用户选择短信时使用sms_body取得文字
-//                    shareIntent.putExtra("sms_body", "乔治金瀚");
-//                } else {
-//                    shareIntent.setType("text/plain");
-//                }
-//                shareIntent.putExtra(Intent.EXTRA_TEXT, "乔治金瀚");
-//                //自定义选择框的标题
-//                startActivity(Intent.createChooser(shareIntent, "乔治金瀚"));
 
                 break;
             case R.id.generalize_image_more:
@@ -326,6 +209,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
         b.putInt(DetailActivity.NEWS_ID, images.get(i).getA_id());
         b.putString(DetailActivity.NEWS_URL, images.get(i).getA_content());
         b.putInt(DetailActivity.COLLECT, images.get(i).getCollect());
+        b.putString(DetailActivity.TITLE,images.get(i).getA_title());
         startActivity(DetailActivity.class, b);
     }
 
@@ -334,7 +218,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
         b.putInt(VideoActivity.VIDEO_ID, videos.get(i).getA_id());
         b.putString(VideoActivity.VIDEO_URL, videos.get(i).getA_content());
         b.putInt(VideoActivity.COLLECT, videos.get(i).getCollect());
-
+        b.putString(VideoActivity.TITLE,videos.get(i).getA_title());
         startActivity(VideoActivity.class, b);
     }
 

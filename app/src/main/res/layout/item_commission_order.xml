@@ -84,8 +84,8 @@
 
         <ImageView
             android:id="@+id/commission_iv"
-            android:layout_width="118dp"
-            android:layout_height="82dp"
+            android:layout_width="150dp"
+            android:layout_height="75dp"
             android:layout_margin="8dp"
             android:scaleType="fitXY" />
 

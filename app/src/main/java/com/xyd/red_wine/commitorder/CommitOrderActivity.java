@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -167,10 +168,11 @@ public class CommitOrderActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        waitDialog.dismissImmediately();
     }
 
     private void defalutAddress() {
-
+        waitDialog.showLoading("请稍后",false);
         BaseApi.getRetrofit()
                 .create(AddressApi.class)
                 .address("1")
@@ -178,6 +180,7 @@ public class CommitOrderActivity extends BaseActivity {
                 .subscribe(new BaseObserver<AddressModel>() {
                     @Override
                     protected void onHandleSuccess(AddressModel addressModel, String msg, int code) {
+                        waitDialog.dismissImmediately();
                         if (addressModel.getMy_address().size() > 0) {
                             commitTvAddressNone.setVisibility(View.GONE);
                             commitLlAddress.setVisibility(View.VISIBLE);
@@ -197,6 +200,7 @@ public class CommitOrderActivity extends BaseActivity {
 
                     @Override
                     protected void onHandleError(String msg) {
+                        waitDialog.dismissImmediately();
                         showToast(msg);
                     }
                 });
@@ -268,14 +272,20 @@ public class CommitOrderActivity extends BaseActivity {
                         ToastUtils.show("微信未安装");
                         return;
                     }
-                    commitWxBuy();
+                    if(model!=null){
+                        commitWxBuy();
+                    }else {
+                        showTestToast("参数错误");
+                    }
+
                 }
                 else if (rb_alipay.isChecked()){
-//                    if (!UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.ALIPAY)){
-//                        ToastUtils.show("支付宝未安装");
-//                        return;
-//                    }
-                    commitAlipay();
+                    if (model!=null){
+                        commitAlipay();
+                    }else {
+                        showTestToast("参数错误");
+                    }
+
                 }
                 break;
             case R.id.commit_type:
@@ -302,6 +312,8 @@ public class CommitOrderActivity extends BaseActivity {
     }
 
     private void commitAlipay() {
+        waitDialog.showLoading("加载中");
+        Log.e("zyh","支付宝a_id："+a_id+" ,g_id："+model.getGood().getG_id()+" ,num："+num+" ,价格："+num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight())+" ,留言："+commitEdtMessage.getText().toString());
         BaseApi.getRetrofit()
                 .create(OrderApi.class)
                 .buyAliPay(a_id + "", model.getGood().getG_id() + "", num + "", num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight()) + "", commitEdtMessage.getText().toString())
@@ -310,24 +322,30 @@ public class CommitOrderActivity extends BaseActivity {
                     @Override
                     protected void onHandleSuccess(AliModel model, String msg, int code) {
                         LogUtil.e(model.getOrderInfo());
+                        waitDialog.dismissImmediately();
                         new AliPay(CommitOrderActivity.this, model.getOrderInfo(),1);
                     }
 
                     @Override
                     protected void onHandleError(String msg) {
-
+                        waitDialog.dismissImmediately();
+                        showToast(msg);
                     }
                 });
     }
 
     private void commitWxBuy() {
+        waitDialog.showLoading("请稍后");
+        Log.e("zyh","微信a_id："+a_id+" ,g_id："+model.getGood().getG_id()+" ,num："+num+" ,价格："+num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight())+" ,留言："+commitEdtMessage.getText().toString());
+        String price=num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight())+"";
         BaseApi.getRetrofit()
                 .create(OrderApi.class)
-                .buy(a_id + "", model.getGood().getG_id() + "", num + "", num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight()) + "", commitEdtMessage.getText().toString())
+                .buy(a_id + "", model.getGood().getG_id() + "", num + "",price , commitEdtMessage.getText().toString())
                 .compose(RxSchedulers.<BaseModel<WxModel>>compose())
                 .subscribe(new BaseObserver<WxModel>() {
                     @Override
                     protected void onHandleSuccess(WxModel model, String msg, int code) {
+                        waitDialog.dismissImmediately();
                         new WXPay(CommitOrderActivity.this,
                                 model.getAppid(),
                                 model.getPartnerid(),
@@ -341,6 +359,7 @@ public class CommitOrderActivity extends BaseActivity {
 
                     @Override
                     protected void onHandleError(String msg) {
+                        waitDialog.dismissImmediately();
                         showToast(msg);
                     }
                 });

@@ -83,7 +83,7 @@ public class CommissionOrderActivity extends BaseActivity implements SwipeRefres
                     protected void onHandleSuccess(CommissionOrderModel commissionOrderModel, String msg, int code) {
                         commissionSrl.setRefreshing(false);
                         adapter.loadMoreComplete();
-                        money.setText(commissionOrderModel.getTotal_revenue());
+                        money.setText(commissionOrderModel.getTotal_revenue()+"元");
                         if (page == 1) {
                             adapter.setNewData(commissionOrderModel.getDeduct());
                         }else if (commissionOrderModel.getDeduct().size()>0){
