@@ -122,27 +122,6 @@ public class CustomChatFragment extends ChatFragment implements ChatFragment.Eas
         });
         Dialog dialog=builder.create();
         dialog.show();
-//        FragmentTransaction mFragTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-//        String fragmentTag = "dialogFragment";
-//        Fragment fragment =  getActivity().getSupportFragmentManager().findFragmentByTag(fragmentTag);
-//        if(fragment!=null){
-//            //为了不重复显示dialog，在显示对话框之前移除正在显示的对话框
-//            mFragTransaction.remove(fragment);
-//        }
-//        final AlertDialogFragment dialogFragment = new AlertDialogFragment();
-//        dialogFragment.setTitleText(getString(R.string.prompt));
-//        dialogFragment.setContentText(getString(R.string.Whether_to_empty_all_chats));
-//        dialogFragment.setupLeftButton(null, null);
-//        dialogFragment.setupRightBtn(null, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ChatClient.getInstance().chatManager().clearConversation(toChatUsername);
-//                messageList.refresh();
-//                dialogFragment.dismiss();
-//                MediaManager.release();
-//            }
-//        });
-//        dialogFragment.show(mFragTransaction, fragmentTag);
     }
 
     @Override

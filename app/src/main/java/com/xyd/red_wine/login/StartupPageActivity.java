@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.callback.Callback;
+import com.xyd.red_wine.MyApplication;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.api.MineApi;
 import com.xyd.red_wine.base.BaseApi;
@@ -25,9 +26,12 @@ import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.personinformation.InfromationModel;
 import com.xyd.red_wine.utils.FileUtils;
 import com.xyd.red_wine.utils.LogUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * @author: zhaoxiaolei
@@ -44,14 +48,6 @@ public class StartupPageActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_up);
-//        PermissionUtils.storage(this, new PermissionUtils.OnPermissionResult() {
-//            @Override
-//            public void onGranted() {
-//                LogUtil log=new LogUtil();
-//                log.startWriteLogToSdcard(FileUtils.imagePath()+"test.txt",true);
-//                initView();
-//            }
-//        });
         initView();
     }
 
@@ -61,24 +57,35 @@ public class StartupPageActivity extends Activity {
                 .create(MineApi.class)
                 .information()
                 .compose(RxSchedulers.<BaseModel<InfromationModel>>compose())
-                .subscribe(new BaseObserver<InfromationModel>() {
+                .subscribe(new Observer<BaseModel<InfromationModel>>() {
                     @Override
-                    protected void onHandleSuccess(InfromationModel infromationModel, String msg, int code) {
-                        PublicStaticData.sharedPreferences.edit().putInt("id", Integer.valueOf(infromationModel.getUserid())).commit();
-                      //  login("qiaozhijinhan" + infromationModel.getUserid(), "123456");
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                startActivity(new Intent(StartupPageActivity.this, MainActivity.class));
-                                finish();
+                    public void onSubscribe(Disposable d) {
 
-                            }
-                        }, 2000);
                     }
 
                     @Override
-                    protected void onHandleError(String msg) {
+                    public void onNext(BaseModel<InfromationModel> infromationModelBaseModel) {
+                        if (infromationModelBaseModel.getCode() == 1){
+                            InfromationModel model=infromationModelBaseModel.getData();
+                            PublicStaticData.sharedPreferences.edit().putInt("id", Integer.valueOf(model.getUserid())).commit();
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(new Intent(StartupPageActivity.this, MainActivity.class));
+                                    finish();
 
+                                }
+                            }, 2000);
+                        }else if (infromationModelBaseModel.getCode() == 2){
+                            Intent intent=new Intent(MyApplication.context,LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            MyApplication.context.startActivity(intent);
+                            ToastUtils.show("登录状态已过期，您需要重新登录");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -88,7 +95,13 @@ public class StartupPageActivity extends Activity {
                             }
                         }, 2000);
                     }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
+
 
     }
 

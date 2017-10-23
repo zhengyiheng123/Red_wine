@@ -17,7 +17,7 @@ import com.hyphenate.helpdesk.easeui.util.SmileUtils;
 
 public class ChatRowText extends ChatRow{
 
-    private TextView contentView;
+    private TextView contentView,tv_userid;
     private ImageView ivHeadView;
 
     public ChatRowText(Context context, Message message, int position, BaseAdapter adapter) {
@@ -34,6 +34,7 @@ public class ChatRowText extends ChatRow{
     protected void onFindViewById() {
         contentView = (TextView) findViewById(R.id.tv_chatcontent);
         ivHeadView = (ImageView) findViewById(R.id.iv_userhead);
+        tv_userid= (TextView) findViewById(R.id.tv_userid);
     }
 
     @Override

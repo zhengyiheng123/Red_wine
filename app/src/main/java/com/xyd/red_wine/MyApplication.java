@@ -51,7 +51,7 @@ public class MyApplication extends Application {
         PublicStaticData.sharedPreferences=getSharedPreferences("wine",MODE_PRIVATE);
         initShare();
         EMHelper.getInstance().init(this);
-        initLog();
+//        initLog();
     }
 
     private void initLog() {
