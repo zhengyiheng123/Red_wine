@@ -22,6 +22,7 @@ import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.glide.GlideUtil;
 import com.xyd.red_wine.order.OrderActivity;
 import com.xyd.red_wine.order.OrderModel;
+import com.xyd.red_wine.promptdialog.PromptDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +75,7 @@ public class LogisticsActivity extends BaseActivity {
     private List<LogisticsModel.CheckBean> logisticsLists;
 
     private LogisticsAdapter adapter;
+    private PromptDialog dialog;
 
     @Override
     protected int getLayoutId() {
@@ -82,7 +84,7 @@ public class LogisticsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        dialog = new PromptDialog(LogisticsActivity.this);
         GlideUtil.getInstance()
                 .loadImage(this, logisticsIv, PublicStaticData.baseUrl + getIntent().getStringExtra(ORDER_URL), true);
         baseTitleTitle.setText("查看物流");
@@ -99,6 +101,7 @@ public class LogisticsActivity extends BaseActivity {
     }
 
     private void getLogisticsData() {
+        dialog.showLoading("加载中");
         BaseApi.getRetrofit()
                 .create(OrderApi.class)
                 .logistics(getIntent().getStringExtra(ORDER_NUM))
@@ -106,6 +109,7 @@ public class LogisticsActivity extends BaseActivity {
                 .subscribe(new BaseObserver<LogisticsModel>() {
                     @Override
                     protected void onHandleSuccess(LogisticsModel logisticsModel, String msg, int code) {
+                        dialog.dismissImmediately();
                         logisticsTvState.setText(logisticsModel.getState());
                         logisticsTvSource.setText(logisticsModel.getOrders().getPostcom());
                         logisticsTvNums.setText(logisticsModel.getOrders().getExpress());
@@ -121,6 +125,7 @@ public class LogisticsActivity extends BaseActivity {
 
                     @Override
                     protected void onHandleError(String msg) {
+                        dialog.dismissImmediately();
                         showToast(msg);
                     }
                 });

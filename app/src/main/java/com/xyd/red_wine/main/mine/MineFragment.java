@@ -227,19 +227,16 @@ public class MineFragment extends BaseFragment {
     }
 
     private void loginHx(final String uname, final String upwd) {
-        promptDialog.showLoading("加载中");
 
         // login huanxin server
         ChatClient.getInstance().login(uname, upwd, new Callback() {
             @Override
             public void onSuccess() {
-                promptDialog.dismissImmediately();
                 startActivity(ChatActivity.class);
             }
 
             @Override
             public void onError(int code, String error) {
-                promptDialog.dismissImmediately();
                 LogUtil.e(code+error);
                // loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
             }
