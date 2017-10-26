@@ -43,11 +43,11 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     @Override
     public void getCode(String phone) {
         if (!RegexUtils.isMobilePhoneNumber(phone))
+
             registerView.showError("请输入正确的手机号");
+
         else
             code(phone);
-
-
     }
 
     @Override

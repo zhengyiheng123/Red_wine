@@ -120,7 +120,6 @@
                 android:background="@color/line" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -146,7 +145,7 @@
                     android:paddingLeft="13dp"
                     android:paddingRight="12dp"
                     android:paddingTop="8dp"
-                    android:text="v 1.0.1"
+                    android:text=""
                     android:textColor="@color/material_textBlack_secondaryText"
                     android:textSize="@dimen/text_14" />
             </LinearLayout>

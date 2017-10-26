@@ -28,6 +28,7 @@
         android:elevation="10dp">
 
         <EditText
+            android:inputType="phone"
             android:id="@+id/register_edt_user"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_40"
@@ -74,6 +75,7 @@
             android:textSize="@dimen/text_14" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/register_edt_recommend"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_40"

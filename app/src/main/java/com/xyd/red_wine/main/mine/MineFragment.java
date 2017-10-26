@@ -1,6 +1,8 @@
 package com.xyd.red_wine.main.mine;
 
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -214,7 +216,15 @@ public class MineFragment extends BaseFragment {
 
                     @Override
                     protected void onHandleError(String msg) {
-                        showToast("您需购买商品后才能拥有分享二维码！");
+                        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                        builder.setMessage("您需购买商品后才能拥有分享二维码！");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        });
+                        builder.show();
                     }
                 });
     }

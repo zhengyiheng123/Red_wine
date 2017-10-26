@@ -162,7 +162,7 @@ RegisterActivity extends BaseActivity implements RegisterContract.View {
 
     @Override
     public void downTime() {
-        handler.postDelayed(runnable, 1000);
+        handler.post(runnable);
 
     }
 

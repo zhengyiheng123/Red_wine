@@ -3,7 +3,10 @@ package com.xyd.red_wine.commitorder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.icu.text.DecimalFormat;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -124,6 +127,7 @@ public class CommitOrderActivity extends BaseActivity {
         return R.layout.activity_commit_order;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void initView() {
         EventBus.getDefault().register(this);
@@ -144,8 +148,12 @@ public class CommitOrderActivity extends BaseActivity {
         commitTvNum.setText("x" + num);
         commitTvNum1.setText("共" + num + "件商品\u3000小计");
         commitEdtNum.setText(num + "");
-        commitTvMoneyBottom.setText("合计：￥" + (num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight())));
-        commitTvMoney.setText("￥" + (num * model.getGood().getG_price() + Double.valueOf(model.getGood().getG_freight())));
+        double freignht=Double.valueOf(model.getGood().getG_freight());
+        double totalPrice=(model.getGood().getG_price()*num)+freignht;
+        DecimalFormat df=new DecimalFormat("#.##");
+
+        commitTvMoneyBottom.setText("合计：￥" +  df.format(totalPrice));
+        commitTvMoney.setText("￥" + df.format(totalPrice));
 
     }
 

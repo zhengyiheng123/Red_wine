@@ -171,7 +171,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                                 if (share_media == SHARE_MEDIA.QQ || share_media== SHARE_MEDIA.QZONE){
                                     UMWeb web = new UMWeb(share_url);
                                     web.setTitle("酒瀚注册二维码");
-                                    web.setDescription("");
+                                    web.setDescription("酒瀚注册");
                                     new ShareAction(GeneralizeActivity.this).withMedia(web)
                                             .setPlatform(share_media)
                                             .setCallback(mShareListener)
@@ -179,7 +179,7 @@ public class GeneralizeActivity extends BaseActivity implements AdapterView.OnIt
                                 }else {
                                     UMWeb web = new UMWeb(share_url);
                                     web.setTitle("酒瀚注册二维码");
-                                    web.setDescription("");
+                                    web.setDescription("酒瀚注册");
                                     new ShareAction(GeneralizeActivity.this).withMedia(web)
                                             .setPlatform(share_media)
                                             .setCallback(mShareListener)

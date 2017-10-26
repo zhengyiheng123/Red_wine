@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="4dp"
-            android:text="￥200.00"
+            android:text=""
             android:layout_weight="1"
             android:textColor="@color/material_textBlack_black"
             android:textSize="@dimen/text_16" />
@@ -144,7 +144,7 @@
                 android:layout_below="@id/wine_iv"
                 android:layout_marginRight="12dp"
                 android:gravity="center_vertical"
-                android:text="￥200"
+                android:text=""
                 android:textColor="@color/material_textBlack_black"
                 android:textSize="@dimen/text_16" />
 

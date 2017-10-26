@@ -1,8 +1,12 @@
 package com.xyd.red_wine.winedetail;
 
 import android.content.DialogInterface;
+import android.icu.math.BigDecimal;
+import android.icu.text.DecimalFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -134,6 +138,7 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
                 .goods(g_id)
                 .compose(RxSchedulers.<BaseModel<WineModel>>compose())
                 .subscribe(new BaseObserver<WineModel>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     protected void onHandleSuccess(WineModel wineModel, String msg, int code) {
                         model = wineModel;
@@ -142,12 +147,17 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
                         wineName.setText(wineModel.getGood().getG_name());
                         price = wineModel.getGood().getG_price();
                         winePrice.setText("￥" + price);
-                        wineCost.setText("￥" + (price * num + Double.valueOf(wineModel.getGood().getG_freight())));
+                        double freignht=Double.valueOf(wineModel.getGood().getG_freight());
+                        double goodPrice=price*num;
+                        double totalPrice=goodPrice+freignht;
+                        DecimalFormat df=new DecimalFormat("#.##");
+
+                        wineCost.setText("￥" + df.format(totalPrice));
                         wineType.setText("规格："+wineModel.getGood().getG_kind());
-//                        if (wineModel.getGood().getG_freight().equals("0.00"))
-//                            wineState.setText("免运费");
-//                        else
-//                            wineState.setText("运费：￥" + wineModel.getGood().getG_freight());
+                        if (wineModel.getGood().getG_freight().equals("0.00"))
+                            wineState.setText("免运费");
+                        else
+                            wineState.setText("运费：￥" + wineModel.getGood().getG_freight());
 
                         wineNameBottom.setText(wineModel.getGood().getG_sname());
                         wineDetailFragment.setWebView(wineModel.getG_con());

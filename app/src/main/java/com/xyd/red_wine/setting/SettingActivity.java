@@ -89,16 +89,16 @@ public class SettingActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.setting_tv_updata:
-                PermissionUtils.storage(this, new PermissionUtils.OnPermissionResult() {
-                    @Override
-                    public void onGranted() {
-                        VersionUpdateHelper helper = new VersionUpdateHelper(SettingActivity.this);
-                        helper.setShowDialogOnStart(true);
-                        helper.setToastInfo(true);
-                        VersionUpdateHelper.resetCancelFlag();
-                        helper.startUpdateVersion();
-                    }
-                });
+//                PermissionUtils.storage(this, new PermissionUtils.OnPermissionResult() {
+//                    @Override
+//                    public void onGranted() {
+//                        VersionUpdateHelper helper = new VersionUpdateHelper(SettingActivity.this);
+//                        helper.setShowDialogOnStart(true);
+//                        helper.setToastInfo(true);
+//                        VersionUpdateHelper.resetCancelFlag();
+//                        helper.startUpdateVersion();
+//                    }
+//                });
 
                 break;
             case R.id.setting_tv_quit:
