@@ -1,7 +1,10 @@
 package com.xyd.red_wine.login;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -34,14 +37,18 @@ import com.xyd.red_wine.register.RegisterMessage;
 import com.xyd.red_wine.utils.FileUtils;
 import com.xyd.red_wine.utils.LogUtil;
 import com.xyd.red_wine.utils.StatusBarUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.reactivex.annotations.NonNull;
 
 /**
  * @author: zhaoxiaolei
@@ -161,7 +168,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 loginLlRegister.setVisibility(View.VISIBLE);
                 break;
             case R.id.login_tv_wb:
-                presenter.loginWb(this);
+                if (isWeiboInstalled(getApplicationContext())){
+                    presenter.loginWb(this);
+                }else {
+                    ToastUtils.show("微博未安装");
+                }
                 break;
             case R.id.login_tv_wx:
                 if (!UMShareAPI.get(this).isInstall(this, SHARE_MEDIA.WEIXIN))
@@ -244,5 +255,19 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
         closeApp();
         super.onBackPressed();
 
+    }
+    public static boolean isWeiboInstalled(@NonNull Context context) {
+        PackageManager pm;
+        if ((pm = context.getApplicationContext().getPackageManager()) == null) {
+            return false;
+        }
+        List<PackageInfo> packages = pm.getInstalledPackages(0);
+        for (PackageInfo info : packages) {
+            String name = info.packageName.toLowerCase(Locale.ENGLISH);
+            if ("com.sina.weibo".equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -66,7 +66,7 @@ public class WebViewActivity extends BaseActivity {
     private void initWebView() {
         WebSettings ws = baseWebView.getSettings();
         ws.setSupportZoom(false);
-        ws.setBuiltInZoomControls(false);// 隐藏缩放按钮
+        ws.setBuiltInZoomControls(true);// 隐藏缩放按钮
         ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);// 排版适应屏幕
         //ws.setUseWideViewPort(true);// 可任意比例缩放
         ws.setLoadWithOverviewMode(true);// setUseWideViewPort方法设置webview推荐使用的窗口。setLoadWithOverviewMode方法是设置webview加载的页面的模式。

@@ -58,7 +58,7 @@ public class DetailActivity extends BaseActivity {
     @Bind(R.id.detail_collect)
     ImageView detailCollect;
     @Bind(R.id.detail_share)
-    ImageView detailShare;
+    TextView detailShare;
     @Bind(R.id.detail_wv)
     WebView detailWv;
     private String content;

@@ -43,7 +43,6 @@ public class ChatRowText extends ChatRow{
         Spannable span = SmileUtils.getSmiledText(context, txtBody.getMessage());
         // 设置内容
         contentView.setText(span, TextView.BufferType.SPANNABLE);
-        ivHeadView.setImageResource(R.drawable.hd_default_avatar);
         ivHeadView.setVisibility(VISIBLE);
         handleTextMessage();
     }

@@ -36,7 +36,7 @@
             android:id="@+id/wine_jian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="8dp"
             android:src="@mipmap/jian" />
 
         <EditText
@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
+            android:paddingLeft="4dp"
             android:text="合计："
             android:textColor="@color/material_textBlack_black"
             android:textSize="@dimen/text_14" />

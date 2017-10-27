@@ -125,7 +125,7 @@ public class ChatFragment extends BaseFragment implements ChatManager.MessageLis
         // IM服务号
         toChatUsername = fragmentArgs.getString(Config.EXTRA_SERVICE_IM_NUMBER);
         // 是否显示用户昵称
-        showUserNick = fragmentArgs.getBoolean(Config.EXTRA_SHOW_NICK, false);
+        showUserNick = fragmentArgs.getBoolean(Config.EXTRA_SHOW_NICK, true);
         //指定技能组
         queueIdentityInfo = fragmentArgs.getParcelable(Config.EXTRA_QUEUE_INFO);
         //指定客服

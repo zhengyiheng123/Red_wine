@@ -10,6 +10,7 @@ import com.xyd.red_wine.base.EmptyModel;
 import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.utils.RegexUtils;
+import com.xyd.red_wine.utils.ToastUtils;
 
 import io.reactivex.subjects.AsyncSubject;
 import io.reactivex.subjects.PublishSubject;
@@ -128,7 +129,8 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
                     @Override
                     protected void onHandleError(String msg) {
-                        registerView.showError(msg);
+//                        registerView.showError(msg);
+                        ToastUtils.show(msg);
                     }
                 });
 

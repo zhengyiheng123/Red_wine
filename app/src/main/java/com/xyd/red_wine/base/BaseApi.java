@@ -78,16 +78,14 @@ public class BaseApi {
         //设置重连
         builder.retryOnConnectionFailure(true);
         sOkHttpClient = builder.build();
-
+//        http://hj.jiangliping.com/index/
         LogUtil.e("cookieJar",sOkHttpClient.cookieJar().toString());
         sRetrofit = new Retrofit.Builder()
-                .baseUrl("http://hj.jiangliping.com/index/")
+                .baseUrl("http://app.george-wine.com/index/")
                 .client(sOkHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-
     }
 
     /**

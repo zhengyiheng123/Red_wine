@@ -1,6 +1,8 @@
 package com.xyd.red_wine.orderdetail;
 
 import android.app.Dialog;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +28,7 @@ import com.xyd.red_wine.logistics.LogisticsActivity;
 import com.xyd.red_wine.order.OrderModel;
 import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.utils.TimeUtils;
+import com.xyd.red_wine.utils.ToastUtils;
 import com.xyd.red_wine.winedetail.WineDetailActivity;
 
 import butterknife.Bind;
@@ -98,6 +101,8 @@ public class OrderDetailActivity extends BaseActivity {
     TextView orderDetailTvFahuoTime;
     @Bind(R.id.order_detail_wuliu)
     TextView orderWuliu;
+    @Bind(R.id.tv_copy)
+    TextView tvCopy;
     private PromptDialog waitDialog;
     private OrderDetailModel model;
 
@@ -231,13 +236,24 @@ public class OrderDetailActivity extends BaseActivity {
         orderDetailTvRight.setOnClickListener(this);
         orderDetailTvLeft.setOnClickListener(this);
         orderWuliu.setOnClickListener(this);
-
+        tvCopy.setOnClickListener(this);
     }
-
+    //复制内容到剪切板
+    public void onClickCopy(View v) {
+        // 从API11开始android推荐使用android.content.ClipboardManager
+        // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        // 将文本内容放到系统剪贴板里。
+        cm.setText(model.getOrder_num());
+        ToastUtils.show("复制成功");
+    }
     @Override
     public void widgetClick(View v) {
         Bundle bundle;
         switch (v.getId()) {
+            case R.id.tv_copy:
+                onClickCopy(tvCopy);
+                break;
             case R.id.order_detail_wuliu:
                 bundle = new Bundle();
                 bundle.putString(LogisticsActivity.ORDER_NUM, model.getOrder_num());

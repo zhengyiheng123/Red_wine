@@ -335,10 +335,10 @@
                         android:text="微信支付"
                         />
                     <CheckBox
+                        android:clickable="false"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:id="@+id/cb_webchat"
-                        android:enabled="false"
                         android:layout_marginRight="16dp"
                         android:button="@null"
                         android:layout_alignParentRight="true"
@@ -379,10 +379,10 @@
                         android:text="支付宝支付"/>
 
                     <CheckBox
+                        android:clickable="false"
                         android:focusableInTouchMode="false"
                         android:focusable="false"
                         android:id="@+id/rb_alipay"
-                        android:enabled="false"
                         android:layout_marginRight="16dp"
                         android:button="@null"
                         android:layout_alignParentRight="true"

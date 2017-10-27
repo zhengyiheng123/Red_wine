@@ -70,7 +70,6 @@ public class MyApplication extends Application {
         PlatformConfig.setQQZone("1106221519","Omc31VQxqHWnFaNl");
         PlatformConfig.setSinaWeibo("1866127300","a2222661f38e596049e64e660ae569f4","http://open.weibo.com/apps/1866127300/privilege/oauth");
     }
-
     public static MyApplication getInstance(){
        return application;
     }

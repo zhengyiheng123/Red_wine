@@ -2,6 +2,7 @@ package com.xyd.red_wine.main.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -173,6 +174,7 @@ public class HomeFragment extends BaseFragment {
                     protected void onHandleSuccess(HomeModel homeModel, String msg, int code) {
 
                         model = homeModel;
+                        PublicStaticData.sharedPreferences.edit().putString("introduce",model.getList().getManage_rule()).commit();
                         banner.clear();
                         banner.addAll(homeModel.getCarousel());
                         homeBanner.update(homeModel.getCarousel());
@@ -312,7 +314,7 @@ public class HomeFragment extends BaseFragment {
             case R.id.home_iv_manage:
                 b = new Bundle();
                 b.putString(WebViewActivity.TITLE, "企业介绍");
-                 b.putString(WebViewActivity.URL, model.getList().getManage_rule());
+                b.putString(WebViewActivity.URL, model.getList().getManage_rule());
               //  b.putString(WebViewActivity.URL, "http://m.wine-world.com/winery/chateau-lafite-rothschild/ad679838-5304-4973-be95-0162fa5d2d7c");
                 startActivity(WebViewActivity.class, b);
                 break;
