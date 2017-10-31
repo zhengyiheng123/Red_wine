@@ -248,6 +248,7 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onError(int code, String error) {
                 LogUtil.e(code+error);
+                ToastUtils.show("环信登录失败："+error);
                // loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
             }
 

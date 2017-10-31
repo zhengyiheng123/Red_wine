@@ -150,10 +150,10 @@ public class CommitOrderActivity extends BaseActivity {
         commitEdtNum.setText(num + "");
         double freignht=Double.valueOf(model.getGood().getG_freight());
         double totalPrice=(model.getGood().getG_price()*num)+freignht;
-        DecimalFormat df=new DecimalFormat("#.##");
+//        DecimalFormat df=new DecimalFormat("#.##");
 
-        commitTvMoneyBottom.setText("合计：￥" +  df.format(totalPrice));
-        commitTvMoney.setText("￥" + df.format(totalPrice));
+        commitTvMoneyBottom.setText("合计：￥" +  totalPrice);
+        commitTvMoney.setText("￥" + totalPrice);
 
     }
 

@@ -7,6 +7,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.xyd.red_wine.R;
@@ -33,6 +34,8 @@ public class WebViewActivity extends BaseActivity {
     ImageView baseTitleMenu;
     @Bind(R.id.base_webView)
     WebView baseWebView;
+    @Bind(R.id.progress)
+    ProgressBar progress;
     private String url;
     private String title;
 
@@ -75,7 +78,16 @@ public class WebViewActivity extends BaseActivity {
         ws.setJavaScriptEnabled(true);
         ws.setDomStorageEnabled(true);
 
-        baseWebView.setWebChromeClient(new WebChromeClient());
+        baseWebView.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100){
+                    progress.setVisibility(View.GONE);
+                }else {
+                    progress.setProgress(newProgress);
+                }
+            }
+        });
         baseWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

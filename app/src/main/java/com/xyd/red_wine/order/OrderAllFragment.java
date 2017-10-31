@@ -165,7 +165,7 @@ BaseQuickAdapter.OnItemClickListener{
                 }else if (adapter.getData().get(position).getOrder_status()==2){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("温馨提醒");
-                    builder.setMessage("确定提醒商家发货！！！");
+                    builder.setMessage("确定提醒商家发货");
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -188,7 +188,7 @@ BaseQuickAdapter.OnItemClickListener{
                 else if(adapter.getData().get(position).getOrder_status()==3){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("温馨提醒");
-                    builder.setMessage("确定收货！！！");
+                    builder.setMessage("确定收货");
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

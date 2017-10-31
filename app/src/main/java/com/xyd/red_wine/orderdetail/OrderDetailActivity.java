@@ -275,7 +275,7 @@ public class OrderDetailActivity extends BaseActivity {
                 if (model.getOrder_status() == 2) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
                     builder.setTitle("温馨提醒");
-                    builder.setMessage("确定提醒商家发货！！！");
+                    builder.setMessage("确定提醒商家发货");
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -296,7 +296,7 @@ public class OrderDetailActivity extends BaseActivity {
                 } else if (model.getOrder_status() == 3) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(OrderDetailActivity.this);
                     builder.setTitle("温馨提醒");
-                    builder.setMessage("确定收货！！！");
+                    builder.setMessage("确定收货");
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

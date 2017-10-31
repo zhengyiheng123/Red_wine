@@ -53,6 +53,7 @@ import com.xyd.red_wine.permissions.PermissionUtils;
 import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.promptdialog.PromptDialog;
 import com.xyd.red_wine.utils.LogUtil;
+import com.xyd.red_wine.utils.ToastUtils;
 import com.xyd.red_wine.view.DragFloatActionButton;
 import com.xyd.red_wine.view.FloatTouchListener;
 import com.xyd.red_wine.view.MenuPopWindow;
@@ -346,18 +347,21 @@ public class HomeFragment extends BaseFragment {
     }
     //登录环信
     private void loginHx(final String uname, final String upwd) {
-
+//            dialog.showLoading("登录中");
 
         // login huanxin server
         ChatClient.getInstance().login(uname, upwd, new Callback() {
             @Override
             public void onSuccess() {
+//                dialog.dismissImmediately();
                 startActivity(ChatActivity.class);
             }
 
             @Override
             public void onError(int code, String error) {
-                LogUtil.e(code+error);
+//                dialog.dismissImmediately();
+//                LogUtil.e(code+error);
+                ToastUtils.show("环信登录失败："+error);
                 // loginHx("qiaozhijinhan"+PublicStaticData.sharedPreferences.getInt("id",0),"123456");
             }
 

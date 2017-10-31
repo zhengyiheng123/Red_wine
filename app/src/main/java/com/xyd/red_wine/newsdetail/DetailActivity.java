@@ -1,5 +1,6 @@
 package com.xyd.red_wine.newsdetail;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import java.lang.ref.WeakReference;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.R.attr.progress;
 import static android.R.attr.thumb;
 
 /**
@@ -61,6 +64,8 @@ public class DetailActivity extends BaseActivity {
     TextView detailShare;
     @Bind(R.id.detail_wv)
     WebView detailWv;
+    @Bind(R.id.progress)
+    ProgressBar progress;
     private String content;
     private int id;
     private int isCollect;
@@ -110,7 +115,16 @@ public class DetailActivity extends BaseActivity {
         ws.setJavaScriptEnabled(true);
         ws.setDomStorageEnabled(true);
 
-        detailWv.setWebChromeClient(new WebChromeClient());
+        detailWv.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100){
+                    progress.setVisibility(View.GONE);
+                }else {
+                    progress.setProgress(newProgress);
+                }
+            }
+        });
         detailWv.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

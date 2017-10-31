@@ -31,6 +31,7 @@
             android:layout_marginTop="12dp"
             />
         <TextView
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="您已经购买成功，我们会尽快发货"

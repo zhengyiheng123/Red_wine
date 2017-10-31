@@ -150,9 +150,9 @@ public class WineDetailActivity extends BaseActivity implements ViewPager.OnPage
                         double freignht=Double.valueOf(wineModel.getGood().getG_freight());
                         double goodPrice=price*num;
                         double totalPrice=goodPrice+freignht;
-                        DecimalFormat df=new DecimalFormat("#.##");
+//                        DecimalFormat df=new DecimalFormat("#.##");
 
-                        wineCost.setText("￥" + df.format(totalPrice));
+                        wineCost.setText("￥" + totalPrice);
                         wineType.setText("规格："+wineModel.getGood().getG_kind());
                         if (wineModel.getGood().getG_freight().equals("0.00"))
                             wineState.setText("免运费");

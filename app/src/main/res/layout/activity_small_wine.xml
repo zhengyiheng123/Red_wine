@@ -155,18 +155,19 @@
                 android:id="@+id/wine_state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/wine_name"
+                android:layout_below="@+id/wine_name_bottom"
                 android:layout_marginRight="12dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/margin_12"
                 android:gravity="center_vertical"
                 android:text=""
                 android:textColor="@color/material_textBlack_secondaryText"
                 android:textSize="@dimen/text_14" />
 
             <TextView
-                android:layout_marginRight="12dp"
+                android:layout_marginRight="24dp"
                 android:id="@+id/wine_name_bottom"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/wine_name"
                 android:layout_marginLeft="12dp"
