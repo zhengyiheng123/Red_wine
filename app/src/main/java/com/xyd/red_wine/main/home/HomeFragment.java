@@ -8,6 +8,8 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -52,8 +54,10 @@ import com.xyd.red_wine.newsdetail.DetailActivity;
 import com.xyd.red_wine.permissions.PermissionUtils;
 import com.xyd.red_wine.permissions.PermissionsManager;
 import com.xyd.red_wine.promptdialog.PromptDialog;
+import com.xyd.red_wine.setting.SettingActivity;
 import com.xyd.red_wine.utils.LogUtil;
 import com.xyd.red_wine.utils.ToastUtils;
+import com.xyd.red_wine.version.VersionUpdateHelper;
 import com.xyd.red_wine.view.DragFloatActionButton;
 import com.xyd.red_wine.view.FloatTouchListener;
 import com.xyd.red_wine.view.MenuPopWindow;
@@ -132,8 +136,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-//        addFloatBtn();
-//        setTouchListener();
         dialog=new PromptDialog(getActivity());
         dialog.showLoading("");
         getData();
@@ -151,6 +153,22 @@ public class HomeFragment extends BaseFragment {
             }
         });
         initAdapter();
+        //检车更新
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                PermissionUtils.storage(getActivity(), new PermissionUtils.OnPermissionResult() {
+                    @Override
+                    public void onGranted() {
+                        VersionUpdateHelper helper = new VersionUpdateHelper(getActivity());
+                        helper.setShowDialogOnStart(true);
+                        helper.setToastInfo(true);
+                        VersionUpdateHelper.resetCancelFlag();
+                        helper.startUpdateVersion();
+                    }
+                });
+            }
+        },2000);
     }
 
     private void initAdapter() {

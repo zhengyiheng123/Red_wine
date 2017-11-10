@@ -158,7 +158,7 @@ public class VersionUpdateService extends Service {
 
         BaseApi.getRetrofit()
                 .create(VersionApi.class)
-                .versions(AppUtils.getAppVersionName(this))
+                .versions(currentBuild)
                 .compose(RxSchedulers.<BaseModel<VersionUpdateModel>>compose())
                 .subscribe(new BaseObserver<VersionUpdateModel>() {
                     @Override
@@ -175,7 +175,10 @@ public class VersionUpdateService extends Service {
                             if (checkVersionCallBack != null)
                                 checkVersionCallBack.onSuccess();
                         } catch (Exception e) {
-                            ToastUtils.show( "获取版本信息失败");
+//                            ToastUtils.show(msg);
+//                            if (checkVersionCallBack != null) {
+//                                checkVersionCallBack.onError();
+//                            }
                         }
                     }
 

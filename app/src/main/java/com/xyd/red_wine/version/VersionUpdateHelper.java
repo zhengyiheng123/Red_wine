@@ -213,7 +213,7 @@ public class VersionUpdateHelper implements ServiceConnection {
             @Override
             public void onError() {
                 if (toastInfo) {
-                    ToastUtils.show( "检查失败,请检查网络设置");
+                    ToastUtils.show( "无可用更新");
                 }
                 unBindService();
                 if(checkCallBack != null){

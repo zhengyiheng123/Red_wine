@@ -64,14 +64,29 @@ public class EarningPresenter implements EarningContract.Presenter {
                 .subscribe(new BaseObserver<EarningModel>() {
                     @Override
                     protected void onHandleSuccess(EarningModel model, String msg, int code) {
-                        if (page == 1)
+                        view.loadmoreComplete();
+                        if (page == 1){
                             view.refreshData(model);
-                        else if (model.getDeduct().size()>0)
+                        }
+                        else if (model.getDeduct().size()>0){
                             view.loadMoreData(model,1);
-                        else
+                        }
+
+                        else{
                             view.loadMoreData(model,2);
+                        }
 
 
+//                        adapter.loadMoreComplete();
+//                        recordSrl.setRefreshing(false);
+//                        if (page == 1) {
+//                            adapter.setNewData(cashValueModel.getCash_value());
+//                        } else if (cashValueModel.getCash_value().size() > 0) {
+//                            adapter.addData(cashValueModel.getCash_value());
+//
+//                        } else {
+//                            adapter.loadMoreEnd();
+//                        }
                     }
 
                     @Override

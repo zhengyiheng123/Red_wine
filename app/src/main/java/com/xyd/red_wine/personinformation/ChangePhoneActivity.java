@@ -85,7 +85,7 @@ public class ChangePhoneActivity extends BaseActivity {
                     protected void onHandleSuccess(EmptyModel emptyModel, String msg, int code) {
 //                        registerView.downTime();
                         ToastUtils.show(msg);
-                        handler.postDelayed(runnable, 1000);
+                        handler.postDelayed(runnable, 0);
                     }
 
                     @Override

@@ -20,7 +20,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * @author: zhaoxiaolei

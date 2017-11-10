@@ -145,6 +145,7 @@
                         android:textSize="@dimen/text_16" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/balance_tv_top_up"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

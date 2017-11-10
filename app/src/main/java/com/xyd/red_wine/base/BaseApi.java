@@ -4,6 +4,7 @@ package com.xyd.red_wine.base;
 
 import com.xyd.red_wine.MyApplication;
 import com.xyd.red_wine.cookie.PersistentCookieStore;
+import com.xyd.red_wine.cookie.PersistentCookieStore;
 import com.xyd.red_wine.utils.LogUtil;
 
 import java.io.File;

@@ -29,6 +29,7 @@ import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.xyd.red_wine.R;
 import com.xyd.red_wine.base.BaseActivity;
+import com.xyd.red_wine.base.PublicStaticData;
 import com.xyd.red_wine.forgetpassword.ForgetPasswordActivity;
 import com.xyd.red_wine.main.MainActivity;
 import com.xyd.red_wine.promptdialog.PromptDialog;
@@ -97,6 +98,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void initView() {
+        String phoneNum= PublicStaticData.sharedPreferences.getString(LoginPresenter.PHONE_NUM,"");
+        String password=PublicStaticData.sharedPreferences.getString(LoginPresenter.PASSWORD,"");
+        loginEdtUser.setText(phoneNum);
+        loginEdtPassword.setText(password);
         EventBus.getDefault().register(this);
 //        if (Build.VERSION.SDK_INT >= 23) {
 //            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,

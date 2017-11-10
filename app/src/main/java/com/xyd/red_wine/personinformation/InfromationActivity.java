@@ -119,7 +119,6 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
         baseTitleMenu.setVisibility(View.INVISIBLE);
         baseTitleTitle.setText("个人信息");
         EventBus.getDefault().register(this);
-        getData();
     }
 
     /**
@@ -323,6 +322,7 @@ public class InfromationActivity extends BaseActivity implements CompoundButton.
     @Override
     protected void onResume() {
         super.onResume();
+        getData();
     }
 
     private void showPictureDialog() {

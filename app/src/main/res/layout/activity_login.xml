@@ -18,8 +18,8 @@
         android:background="@mipmap/logo1" />
 
     <RelativeLayout
-        android:layout_alignRight="@+id/login_rl_other"
-        android:layout_alignLeft="@+id/login_rl_other"
+        android:layout_marginRight="@dimen/margin_24"
+        android:layout_marginLeft="@dimen/margin_24"
         android:id="@+id/login_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

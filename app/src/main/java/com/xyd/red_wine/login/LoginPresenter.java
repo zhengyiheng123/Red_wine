@@ -35,6 +35,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LoginPresenter implements LoginContract.Presenter {
     private LoginContract.View loginView;
+    public static String PHONE_NUM="phone_num";
+    public static String PASSWORD="password";
 
     public LoginPresenter(LoginContract.View loginView) {
         this.loginView = loginView;
@@ -79,7 +81,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void loginTest(String phone, String password){
 
     }
-    private void login_(String phone, String password) {
+    private void login_(final String phone, final String password) {
         loginView.showDialog();
         BaseApi.getRetrofit()
                 .create(LoginApi.class)
@@ -94,6 +96,8 @@ public class LoginPresenter implements LoginContract.Presenter {
                         PublicStaticData.sharedPreferences.edit().putString("signature", loginModel.getSignature()).commit();
                         PublicStaticData.sharedPreferences.edit().putString("nickname", loginModel.getNickname()).commit();
                         PublicStaticData.sharedPreferences.edit().putInt("id", loginModel.getUserid()).commit();
+                        PublicStaticData.sharedPreferences.edit().putString(PHONE_NUM,phone).commit();
+                        PublicStaticData.sharedPreferences.edit().putString(PASSWORD,password).commit();
                         loginView.closeDialog();
                         loginView.success();
                     }
@@ -123,7 +127,8 @@ public class LoginPresenter implements LoginContract.Presenter {
             String iconurl = "";//头像
 
             if (SHARE_MEDIA.WEIXIN == share_media) {
-                uid = map.get("unionid");//用户ID
+//                uid = map.get("unionid");//用户ID
+                uid=map.get("openid");//用户id
                 name = map.get("screen_name");//昵称
                 gender = map.get("gender");//性别
                 iconurl = map.get("profile_image_url");//头像

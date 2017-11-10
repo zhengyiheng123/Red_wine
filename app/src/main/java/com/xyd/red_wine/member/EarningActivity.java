@@ -21,7 +21,12 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xyd.red_wine.R;
+import com.xyd.red_wine.api.MineApi;
 import com.xyd.red_wine.base.BaseActivity;
+import com.xyd.red_wine.base.BaseApi;
+import com.xyd.red_wine.base.BaseModel;
+import com.xyd.red_wine.base.BaseObserver;
+import com.xyd.red_wine.base.RxSchedulers;
 import com.xyd.red_wine.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -54,7 +59,7 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
     private List<EarningModel.DeductBean> list;
     private EarningAdapter adapter;
     private EarningPresenter presenter;
-    private int page=1,num=10;
+    private int page=1,num=6;
     private InputDialog.Builder dialogBuilder;
 
     @Override
@@ -71,7 +76,8 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
         earningsSrl.setColorSchemeColors(Color.rgb(241, 173, 74));
         earningsRv.setLayoutManager(new LinearLayoutManager(this));
         initAdapter();
-        presenter.getData(page,num);
+//        presenter.getData(page,num);
+        getNetData(page,num);
 
     }
 
@@ -79,6 +85,7 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
         list = new ArrayList<>();
         adapter = new EarningAdapter(list, this);
         adapter.setOnLoadMoreListener(this, earningsRv);
+        adapter.setOnItemClickListener(this);
 //        adapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         earningsRv.setAdapter(adapter);
         adapter.setEnableLoadMore(true);
@@ -108,8 +115,8 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
     @Override
     public void onRefresh() {
         page = 1;
-        presenter.getData(page, num);
-
+//        presenter.getData(page, num);
+        getNetData(page,num);
 
     }
 
@@ -119,34 +126,34 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
     @Override
     public void onLoadMoreRequested() {
         page++;
-        presenter.getData(page, num);
+//        presenter.getData(page, num);
+        getNetData(page,num);
     }
 
     @Override
     public void setPresenter(EarningContract.Presenter presenter) {
 
     }
-
+    //无用
     @Override
     public void refreshData(EarningModel model) {
 
         adapter.setNewData(model.getDeduct());
-        earningsSrl.setRefreshing(false);
-        adapter.setEnableLoadMore(true);
-        adapter.setOnItemClickListener(this);
+//        earningsSrl.setRefreshing(false);
+//        adapter.setEnableLoadMore(true);
+//        adapter.setOnItemClickListener(this);
     }
-
+    //无用
     @Override
     public void loadMoreData(EarningModel model, int type) {
         if (type == 1) {
             adapter.addData(list);
-            adapter.loadMoreComplete();
         } else {
             adapter.loadMoreEnd();
         }
 
     }
-
+    //无用
     @Override
     public void error(String msg) {
         showToast(msg);
@@ -154,8 +161,41 @@ public class EarningActivity extends BaseActivity implements SwipeRefreshLayout.
         adapter.loadMoreComplete();
 
     }
+    //无用
+    @Override
+    public void loadmoreComplete() {
+        adapter.loadMoreComplete();
+        earningsSrl.setRefreshing(false);
+    }
+    //  请求网络数据
+    private void getNetData(final int page, int num){
+        BaseApi.getRetrofit()
+                .create(MineApi.class)
+                .my_yield(page, num)
+                .compose(RxSchedulers.<BaseModel<EarningModel>>compose())
+                .subscribe(new BaseObserver<EarningModel>() {
+                    @Override
+                    protected void onHandleSuccess(EarningModel earningModel, String msg, int code) {
+                        adapter.loadMoreComplete();
+                        earningsSrl.setRefreshing(false);
+                        if (page == 1) {
+                            adapter.setNewData(earningModel.getDeduct());
+                        } else if (earningModel.getDeduct().size() > 0) {
+                            adapter.addData(earningModel.getDeduct());
 
+                        } else {
+                            adapter.loadMoreEnd();
+                        }
+                    }
 
+                    @Override
+                    protected void onHandleError(String msg) {
+                        adapter.loadMoreComplete();
+                        earningsSrl.setRefreshing(false);
+                        showToast(msg);
+                    }
+                });
+    }
     @Override
     public void onItemClick(final BaseQuickAdapter adapter1, View view, final int position) {
         dialogBuilder = new InputDialog.Builder(EarningActivity.this)
