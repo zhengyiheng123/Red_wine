@@ -8,7 +8,6 @@ import java.io.Serializable;
 import okhttp3.Cookie;
 
 /**
- * @author: zhaoxiaolei
  * @date: 2017/6/2
  * @time: 10:20
  * @description:

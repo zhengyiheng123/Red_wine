@@ -29,6 +29,7 @@ import okhttp3.HttpUrl;
  */
 
 public class PersistentCookieStore {
+
     private static final String LOG_TAG = "PersistentCookieStore";
     private static final String COOKIE_PREFS = "Cookies_Prefs";
 

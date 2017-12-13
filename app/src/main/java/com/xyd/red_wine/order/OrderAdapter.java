@@ -14,7 +14,6 @@ import com.xyd.red_wine.glide.GlideUtil;
 import java.util.List;
 
 /**
- * @author: zhaoxiaolei
  * @date: 2017/7/13
  * @time: 15:38
  * @description:

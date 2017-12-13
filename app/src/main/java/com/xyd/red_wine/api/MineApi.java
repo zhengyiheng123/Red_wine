@@ -104,7 +104,7 @@ public interface MineApi {
      */
     @POST("ali_transfer/transfer")
     Observable<BaseModel<EmptyModel>> ali_transfer(@Query("recharge_money") String recharge_money,
-                                                 @Query("pay_account") String pay_account,@Query("code")String code
+                                                 @Query("pay_account") String pay_account,@Query("code")String code,@Query("payee_real_name")String realName
     );
 
     /**

@@ -59,6 +59,8 @@ public class TixianActivity extends BaseActivity {
     TextView tixianBtn;
     @Bind(R.id.register_tv_code)
     TextView forgetTvCode;
+    @Bind(R.id.tixian_edt_username)
+    EditText realName;
 
     @Bind(R.id.register_edt_code)
     EditText getCode;
@@ -132,18 +134,17 @@ public class TixianActivity extends BaseActivity {
             case R.id.tixian_btn:
                 if (TextUtils.isEmpty(tixianEdt.getText().toString())) {
                     showToast("请输入提现金额");
+                    return;
 
-                } else if (TextUtils.isEmpty(tixianEdtUser.getText().toString())) {
-                    showToast("请输入提现账号");
-                }else if (Double.parseDouble(tixianEdt.getText().toString()) <10.00){
-                    showToast("提现金额最少应大于10元");
-                }
-
-                else {
+                } if (TextUtils.isEmpty(tixianEdtUser.getText().toString())) {
+                    showToast("请输入提现账号"); return;
+                }if (Double.parseDouble(tixianEdt.getText().toString()) <10.00){
+                    showToast("提现金额最少应大于10元"); return;
+                }if (TextUtils.isEmpty(realName.getText().toString())){
+                    showToast("请输入真实姓名"); return;
+                    }
                     showTixianDialog();
 
-
-                }
                 break;
 
         }
@@ -175,7 +176,7 @@ public class TixianActivity extends BaseActivity {
     private void tixian() {
         BaseApi.getRetrofit()
                 .create(MineApi.class)
-                .ali_transfer(tixianEdt.getText().toString(), tixianEdtUser.getText().toString(),getCode.getText().toString())
+                .ali_transfer(tixianEdt.getText().toString(), tixianEdtUser.getText().toString(),getCode.getText().toString(),realName.getText().toString())
                 .compose(RxSchedulers.<BaseModel<EmptyModel>>compose())
                 .subscribe(new BaseObserver<EmptyModel>() {
                     @Override
